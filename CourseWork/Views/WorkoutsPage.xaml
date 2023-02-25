@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CourseWork.Views.WorkoutsPage"
+             xmlns:local="clr-namespace:CourseWork.ViewModels"
+             
+             Title="Tracking - Workouts"
+             x:DataType="local:WorkoutPageViewModel">
+            
+    <Grid BackgroundColor="White"
+          HorizontalOptions="FillAndExpand"
+          RowDefinitions="0.80*,auto"
+          ColumnDefinitions="0.15*,0.15*,0.15*"
+          VerticalOptions="Center"
+          RowSpacing="30">
+
+        <StackLayout Grid.ColumnSpan="3"
+            HorizontalOptions="FillAndExpand">
+
+             <Image Source="fitness_guy.png" 
+                    HeightRequest="260"
+                    HorizontalOptions="Center"/>
+
+            <Label Text="Welcome to your workouts"
+                    HorizontalOptions="Center"
+                    FontSize="Large"
+                    FontAttributes="Bold"/>
+
+            <Label Text="Create new or view existing"
+                    HorizontalOptions="Center"
+                    FontSize="Body"
+                    FontAttributes="Bold"/>
+
+        </StackLayout>
+
+
+         <StackLayout Grid.Row="2"
+                      Grid.Column="1"
+                Spacing="8">
+
+                <Button Text="+ New Workout"
+                        FontAttributes="Bold"
+                        Style="{StaticResource Key=Primary}"
+                        Command="{Binding NavigateToCreateWorkoutPageCommand}"></Button>
+                <Button Text="Workout Library"
+                        BackgroundColor="CadetBlue"></Button>
+        </StackLayout>
+    </Grid>
+</ContentPage>
