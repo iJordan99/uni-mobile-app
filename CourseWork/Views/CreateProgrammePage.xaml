@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CourseWork.Views.CreateProgrammePage"
+             Title="Tracking - Programmes">
+
+
+    <Grid BackgroundColor="White"
+          HorizontalOptions="FillAndExpand"
+          ColumnDefinitions="0.6*, 0.2*, 0.2*"
+          RowDefinitions="Auto,Auto,Auto,Auto, 0.55*, 0.05*"
+          Padding="20"
+          ColumnSpacing="10"
+          RowSpacing="10">
+
+        
+
+            <Label Text="Programme"/>
+
+            <Entry Placeholder="Programme Name"
+                   Grid.ColumnSpan="3"
+                   Grid.Row="1"></Entry>
+
+            <Label Text="Exercises"
+                   Grid.Row="2"
+                />
+
+            <Entry Placeholder="Add Exercise"
+                   Grid.Row="3"></Entry>
+
+            <Button Text="QR"
+                   Grid.Row="3"
+                   Grid.Column="1"></Button>
+
+            <Button Text="+"
+                   Grid.Row="3"
+                   Grid.Column="2"></Button>
+
+            <CollectionView Grid.Row="4" Grid.ColumnSpan="3">
+
+                <CollectionView.ItemsSource>
+                       <x:Array Type="{x:Type x:String}">
+                           <x:String>Lunges</x:String>
+                           <x:String>DB Press</x:String>
+                           <x:String>Shoulder Press</x:String>
+                       </x:Array>
+                </CollectionView.ItemsSource>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <SwipeView>
+                            <SwipeView.RightItems>
+                                <SwipeItems>
+                                    <SwipeItem Text="Delete" BackgroundColor="Red"/>
+                                </SwipeItems>
+                            </SwipeView.RightItems>
+
+                            <Grid Padding="0,5">
+                                <Frame>
+                                    <Label Text="{Binding .}" FontSize="Body"/>
+                                </Frame>
+                            </Grid>
+
+                        </SwipeView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+
+            </CollectionView>
+
+            <Button Grid.Row="5" Text="Create"
+                    Grid.ColumnSpan="3" Padding="10"/>
+
+    </Grid>
+
+    
+</ContentPage>

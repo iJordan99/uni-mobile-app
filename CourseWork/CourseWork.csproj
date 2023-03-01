@@ -60,10 +60,14 @@
 	  <None Remove="Views\" />
 	  <None Remove="ViewModels\" />
 	  <None Remove="Resources\Images\fitness_guy.png" />
+	  <None Remove="Interfaces\" />
+	  <None Remove="Models\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="Views\" />
 	  <Folder Include="ViewModels\" />
+	  <Folder Include="Interfaces\" />
+	  <Folder Include="Models\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <BundleResource Include="Resources\Images\fitness_guy.png" />

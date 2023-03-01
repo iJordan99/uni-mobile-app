@@ -5,8 +5,9 @@ public partial class App : Application
 	public App()
 	{
 		InitializeComponent();
-
-		MainPage = new AppShell();
+        Routing.RegisterRoute("CreateProgrammePage", typeof(Views.CreateProgrammePage));
+		Routing.RegisterRoute("ProgrammesPage", typeof(Views.ProgrammesPage));
+        MainPage = new AppShell();
 	}
 }
 

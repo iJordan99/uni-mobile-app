@@ -8,12 +8,32 @@
     Shell.BackgroundColor="White"
     Shell.ForegroundColor="Black"
     Shell.TitleColor="Black"
-    Shell.FlyoutBehavior="Disabled">
+    Shell.FlyoutBehavior="Flyout">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:WorkoutsPage}"
-        Route="MainPage" />
+    <FlyoutItem Title="Tracking - Programmes">
+
+        <Tab>
+
+            <ShellContent
+                ContentTemplate="{DataTemplate local:ProgrammesPage}"
+                Route="ProgrammesPage" />
+
+        </Tab>
+
+    </FlyoutItem>
+
+    <FlyoutItem Title="Tracking - New Programme">
+
+        <Tab>
+
+            <ShellContent
+                ContentTemplate="{DataTemplate local:CreateProgrammePage}"
+                Route="CreateProgrammePage" />
+
+        </Tab>
+
+    </FlyoutItem>
+
 
 </Shell>
 
