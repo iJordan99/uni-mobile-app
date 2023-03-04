@@ -2,6 +2,8 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CourseWork.Views.CreateProgrammePage"
+             xmlns:viewModel="clr-namespace:CourseWork.ViewModels"
+             x:DataType="viewModel:CreateProgrammePageViewModel"
              Title="Tracking - Programmes">
 
 
@@ -14,44 +16,41 @@
           RowSpacing="10">
 
         
-
             <Label Text="Programme"/>
 
             <Entry Placeholder="Programme Name"
                    Grid.ColumnSpan="3"
-                   Grid.Row="1"></Entry>
+                   Grid.Row="1"
+                   TextChanged="EntryName_TextChanged"/>
 
-            <Label Text="Exercises"
-                   Grid.Row="2"
-                />
+        <Label Text="Exercises"
+                   Grid.Row="2"/>
 
             <Entry Placeholder="Add Exercise"
-                   Grid.Row="3"></Entry>
+                   Grid.Row="3"
+                   Text="{Binding Excersise}"/>
 
-            <Button Text="QR"
+        <Button Text="QR"
                    Grid.Row="3"
                    Grid.Column="1"></Button>
 
             <Button Text="+"
                    Grid.Row="3"
-                   Grid.Column="2"></Button>
+                   Grid.Column="2"
+                   Command="{Binding AddCommand}"/>
 
-            <CollectionView Grid.Row="4" Grid.ColumnSpan="3">
-
-                <CollectionView.ItemsSource>
-                       <x:Array Type="{x:Type x:String}">
-                           <x:String>Lunges</x:String>
-                           <x:String>DB Press</x:String>
-                           <x:String>Shoulder Press</x:String>
-                       </x:Array>
-                </CollectionView.ItemsSource>
-
+        <CollectionView Grid.Row="4" Grid.ColumnSpan="3"
+                        ItemsSource="{Binding ExerciseList}">
                 <CollectionView.ItemTemplate>
-                    <DataTemplate>
+                <!--Video says you would have a model instead of string -->
+                    <DataTemplate x:DataType="{x:Type x:String }">
                         <SwipeView>
                             <SwipeView.RightItems>
                                 <SwipeItems>
-                                    <SwipeItem Text="Delete" BackgroundColor="Red"/>
+                                    <SwipeItem Text="Delete"
+                                               BackgroundColor="Red"
+                                               Command="{Binding Source={RelativeSource AncestorType={x:Type viewModel:CreateProgrammePageViewModel}}, Path=DeleteCommand}"
+                                               CommandParameter="{Binding .}"/>
                                 </SwipeItems>
                             </SwipeView.RightItems>
 
@@ -67,10 +66,11 @@
 
             </CollectionView>
 
-            <Button Grid.Row="5" Text="Create"
-                    Grid.ColumnSpan="3" Padding="10"/>
+            <Button Grid.Row="5"
+                    Text="Create"
+                    Grid.ColumnSpan="3"
+                    Padding="10"
+                    Command="{Binding CreateCommand}"/>
 
     </Grid>
-
-    
 </ContentPage>
