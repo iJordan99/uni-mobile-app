@@ -1,27 +1,27 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="CourseWork.Views.WorkoutsPage"
-             xmlns:local="clr-namespace:CourseWork.ViewModels"
              
-             Title="Tracking - Workouts"
-             x:DataType="local:WorkoutPageViewModel">
+             x:Class="CourseWork.Views.ProgrammesPage"
+             xmlns:viewModels="clr-namespace:CourseWork.ViewModels"
+             x:DataType="viewModels:ProgrammesPageViewModel"
+             Title="Tracking">
             
-    <Grid BackgroundColor="White"
-          HorizontalOptions="FillAndExpand"
+    <Grid Style="{StaticResource Grid}"
           RowDefinitions="0.80*,auto"
           ColumnDefinitions="0.15*,0.15*,0.15*"
           VerticalOptions="Center"
           RowSpacing="30">
 
-        <StackLayout Grid.ColumnSpan="3"
+        <StackLayout IsVisible="True"         
+            Grid.ColumnSpan="3"
             HorizontalOptions="FillAndExpand">
 
              <Image Source="fitness_guy.png" 
                     HeightRequest="260"
                     HorizontalOptions="Center"/>
 
-            <Label Text="Welcome to your workouts"
+            <Label Text="Welcome to your programmes"
                     HorizontalOptions="Center"
                     FontSize="Large"
                     FontAttributes="Bold"/>
@@ -35,15 +35,15 @@
 
 
          <StackLayout Grid.Row="2"
-                      Grid.Column="1"
-                Spacing="8">
+                      Padding="80"
+                      Grid.ColumnSpan="3"
+                      Spacing="8">
 
-                <Button Text="+ New Workout"
-                        FontAttributes="Bold"
-                        Style="{StaticResource Key=Primary}"
-                        Command="{Binding NavigateToCreateWorkoutPageCommand}"></Button>
-                <Button Text="Workout Library"
-                        BackgroundColor="CadetBlue"></Button>
+                <Button Text="+ New Programme"
+                        Style="{StaticResource SecondButton}"
+                        Command="{Binding NavigateToCreateProgrammePageCommand}"/>
+                <Button Text="Programme Library"
+                        Style="{StaticResource Button}"/>
         </StackLayout>
     </Grid>
 </ContentPage>
