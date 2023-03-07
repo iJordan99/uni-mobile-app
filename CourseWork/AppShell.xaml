@@ -5,12 +5,10 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:CourseWork.Views"
     
-    Shell.BackgroundColor="White"
-    Shell.ForegroundColor="Black"
-    Shell.TitleColor="Black"
+    Style="{StaticResource Shell}"
     Shell.FlyoutBehavior="Flyout">
 
-    <FlyoutItem Title="Tracking - Programmes">
+    <FlyoutItem Title="Tracking">
 
         <Tab>
 
@@ -29,6 +27,18 @@
             <ShellContent
                 ContentTemplate="{DataTemplate local:CreateProgrammePage}"
                 Route="CreateProgrammePage" />
+
+        </Tab>
+
+    </FlyoutItem>
+
+    <FlyoutItem Title="Tracking - My Programmes">
+
+        <Tab>
+
+            <ShellContent
+                ContentTemplate="{DataTemplate local:UserProgrammesPage}"
+                Route="UserProgrammesPage" />
 
         </Tab>
 

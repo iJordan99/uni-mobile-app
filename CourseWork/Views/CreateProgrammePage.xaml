@@ -4,11 +4,10 @@
              x:Class="CourseWork.Views.CreateProgrammePage"
              xmlns:viewModel="clr-namespace:CourseWork.ViewModels"
              x:DataType="viewModel:CreateProgrammePageViewModel"
-             Title="Tracking - Programmes">
+             Title="Create Programme">
 
 
-    <Grid BackgroundColor="White"
-          HorizontalOptions="FillAndExpand"
+    <Grid Style="{StaticResource Grid}"
           ColumnDefinitions="0.6*, 0.2*, 0.2*"
           RowDefinitions="Auto,Auto,Auto,Auto, 0.55*, 0.05*"
           Padding="20"
@@ -30,14 +29,16 @@
                    Grid.Row="3"
                    Text="{Binding Excersise}"/>
 
-        <Button Text="QR"
-                   Grid.Row="3"
-                   Grid.Column="1"></Button>
+            <Button Text="QR"
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    Style="{StaticResource SecondButton}"/>
 
             <Button Text="+"
-                   Grid.Row="3"
-                   Grid.Column="2"
-                   Command="{Binding AddCommand}"/>
+                    Style="{StaticResource Button}"
+                    Grid.Row="3"
+                    Grid.Column="2"
+                    Command="{Binding AddCommand}"/>
 
         <CollectionView Grid.Row="4" Grid.ColumnSpan="3"
                         ItemsSource="{Binding ExerciseList}">
@@ -70,7 +71,9 @@
                     Text="Create"
                     Grid.ColumnSpan="3"
                     Padding="10"
-                    Command="{Binding CreateCommand}"/>
+                    Command="{Binding CreateCommand}"
+                    Style="{StaticResource Button}"
+                    />
 
     </Grid>
 </ContentPage>

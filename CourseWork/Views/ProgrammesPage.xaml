@@ -5,10 +5,9 @@
              x:Class="CourseWork.Views.ProgrammesPage"
              xmlns:viewModels="clr-namespace:CourseWork.ViewModels"
              x:DataType="viewModels:ProgrammesPageViewModel"
-             Title="Tracking - Programmes">
+             Title="Tracking">
             
-    <Grid BackgroundColor="White"
-          HorizontalOptions="FillAndExpand"
+    <Grid Style="{StaticResource Grid}"
           RowDefinitions="0.80*,auto"
           ColumnDefinitions="0.15*,0.15*,0.15*"
           VerticalOptions="Center"
@@ -41,11 +40,10 @@
                       Spacing="8">
 
                 <Button Text="+ New Programme"
-                        FontAttributes="Bold"
-                        Style="{StaticResource Key=Primary}"
-                        Command="{Binding NavigateToCreateProgrammePageCommand}"></Button>
+                        Style="{StaticResource SecondButton}"
+                        Command="{Binding NavigateToCreateProgrammePageCommand}"/>
                 <Button Text="Programme Library"
-                        BackgroundColor="CadetBlue"></Button>
+                        Style="{StaticResource Button}"/>
         </StackLayout>
     </Grid>
 </ContentPage>

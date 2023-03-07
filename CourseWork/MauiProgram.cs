@@ -27,12 +27,14 @@ public static class MauiProgram
         //Pages
         mauiAppBuilder.Services.AddTransient(typeof(Views.ProgrammesPage));
         mauiAppBuilder.Services.AddTransient(typeof(Views.CreateProgrammePage));
+        mauiAppBuilder.Services.AddTransient(typeof(Views.UserProgrammesPage));
 
 
 
         //Services
         mauiAppBuilder.Services.AddTransient(typeof(ViewModels.ProgrammesPageViewModel));
         mauiAppBuilder.Services.AddTransient(typeof(ViewModels.CreateProgrammePageViewModel));
+        mauiAppBuilder.Services.AddTransient(typeof(ViewModels.UserProgrammesPageViewModel));
 
         return mauiAppBuilder;
     }
