@@ -8,6 +8,13 @@
     Style="{StaticResource Shell}"
     Shell.FlyoutBehavior="Flyout">
 
+    <ShellContent
+        ContentTemplate="{DataTemplate local:LoginPage}"
+        Route="LoginPage"
+        Shell.FlyoutBehavior="Disabled"
+        Shell.FlyoutItemIsVisible="False"/>
+       
+
     <FlyoutItem Title="Tracking">
 
         <Tab>
@@ -43,7 +50,5 @@
         </Tab>
 
     </FlyoutItem>
-
-
 </Shell>
 

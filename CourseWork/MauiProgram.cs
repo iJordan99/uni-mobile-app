@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using CourseWork.Interfaces;
+using Microsoft.Extensions.Logging;
+
 
 namespace CourseWork;
 
@@ -14,7 +16,8 @@ public static class MauiProgram
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 			})
-            .RegisterViewsAndViewModels(); 
+            .RegisterViewsAndViewModels()
+            .RegisterServices(); 
 
 #if DEBUG
 		builder.Logging.AddDebug();
@@ -28,6 +31,7 @@ public static class MauiProgram
         mauiAppBuilder.Services.AddTransient(typeof(Views.ProgrammesPage));
         mauiAppBuilder.Services.AddTransient(typeof(Views.CreateProgrammePage));
         mauiAppBuilder.Services.AddTransient(typeof(Views.UserProgrammesPage));
+        mauiAppBuilder.Services.AddTransient(typeof(Views.LoginPage));
 
 
 
@@ -35,6 +39,15 @@ public static class MauiProgram
         mauiAppBuilder.Services.AddTransient(typeof(ViewModels.ProgrammesPageViewModel));
         mauiAppBuilder.Services.AddTransient(typeof(ViewModels.CreateProgrammePageViewModel));
         mauiAppBuilder.Services.AddTransient(typeof(ViewModels.UserProgrammesPageViewModel));
+        mauiAppBuilder.Services.AddTransient(typeof(ViewModels.LoginPageViewModel));
+
+        return mauiAppBuilder;
+    }
+
+    public static MauiAppBuilder RegisterServices(this MauiAppBuilder mauiAppBuilder)
+    {
+
+        mauiAppBuilder.Services.AddSingleton<IAppState, AppState>();
 
         return mauiAppBuilder;
     }

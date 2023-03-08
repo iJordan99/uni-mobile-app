@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CourseWork.Views.LoginPage"
+             xmlns:viewModel="clr-namespace:CourseWork.ViewModels"
+             x:DataType="viewModel:LoginPageViewModel"
+             >
+    <StackLayout VerticalOptions="Start">
+        <StackLayout Padding="20">
+            <Label  Text="Login"
+                    FontSize="Title"
+                    FontAttributes="Bold"
+                    TextColor="Black"
+                    FontFamily="Consolas"/>
+        </StackLayout>
+
+        <Grid Style="{StaticResource Grid}"
+              ColumnDefinitions="0.6*, 0.2*, 0.05*,0.15"
+              RowDefinitions="Auto,Auto,Auto,Auto, Auto, Auto"
+              Padding="20,0,0,0"
+              ColumnSpacing="10"
+              RowSpacing="15">
+
+        
+            <Label Text="Username"
+                   FontFamily="Consolas"
+                   FontAttributes="Bold"/>
+
+            <Entry Placeholder="Username"
+                   Grid.ColumnSpan="3"
+                   Grid.Row="1"
+                   FontFamily="Consolas"
+                   TextChanged="Username_TextChanged"/>
+
+            <Label Text="Password"
+                   Grid.Row="2"
+                   FontAttributes="Bold"
+                   FontFamily="Consolas"/>
+
+            <Entry Placeholder="Password"
+                   Grid.ColumnSpan="3"
+                   Grid.Row="3"
+                   IsPassword="True"
+                   FontFamily="Consolas"
+                   TextChanged="Password_TextChanged"/>
+
+            <Label Grid.Row="4"
+                   FontAttributes="Bold"
+                   FontFamily="Consolas">
+
+                <Label.FormattedText>
+                    <FormattedString>
+                            <Span FontFamily="Consolas" Text="Don't have an account?" />
+                            <Span FontFamily="Consolas"
+                                  FontAttributes="Bold"
+                                  Text="Sign Up"
+                                  TextColor="{StaticResource Primary}"
+                                  TextDecorations="Underline">
+
+                                <Span.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding}"
+                                                          CommandParameter="https://learn.microsoft.com/dotnet/maui/" />
+                                </Span.GestureRecognizers>
+                            </Span>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+
+            <Button Grid.Row="5"
+                    Text="Login"
+                    Grid.ColumnSpan="3"
+                    Style="{StaticResource Button}"
+                    FontFamily="Consolas"
+                    Command="{Binding LoginCommand}"/>
+        </Grid>
+    </StackLayout>
+
+
+</ContentPage>

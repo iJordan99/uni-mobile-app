@@ -22,7 +22,7 @@
                    Grid.Row="1"
                    TextChanged="EntryName_TextChanged"/>
 
-        <Label Text="Exercises"
+            <Label Text="Exercises"
                    Grid.Row="2"/>
 
             <Entry Placeholder="Add Exercise"
