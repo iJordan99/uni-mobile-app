@@ -6,7 +6,7 @@ namespace CourseWork.ViewModels
 {
     public partial class ProgrammesPageViewModel : BaseViewModel
     {
-        public ProgrammesPageViewModel(IAppState appState) : base(appState)
+        public ProgrammesPageViewModel(IAppState appState, IUserDatabaseService userDB) : base(appState, userDB)
         {
         }
 

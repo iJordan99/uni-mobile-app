@@ -54,6 +54,8 @@
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.1.0" />
+		<PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
+		<PackageReference Include="SQLitePCLRaw.bundle_green" Version="2.1.4" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -62,12 +64,14 @@
 	  <None Remove="Resources\Images\fitness_guy.png" />
 	  <None Remove="Interfaces\" />
 	  <None Remove="Models\" />
+	  <None Remove="Services\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="Views\" />
 	  <Folder Include="ViewModels\" />
 	  <Folder Include="Interfaces\" />
 	  <Folder Include="Models\" />
+	  <Folder Include="Services\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <BundleResource Include="Resources\Images\fitness_guy.png" />

@@ -1,4 +1,5 @@
 ﻿using CourseWork.Interfaces;
+using CourseWork.Services;
 using Microsoft.Extensions.Logging;
 
 
@@ -32,6 +33,7 @@ public static class MauiProgram
         mauiAppBuilder.Services.AddTransient(typeof(Views.CreateProgrammePage));
         mauiAppBuilder.Services.AddTransient(typeof(Views.UserProgrammesPage));
         mauiAppBuilder.Services.AddTransient(typeof(Views.LoginPage));
+        mauiAppBuilder.Services.AddTransient(typeof(Views.RegisterPage));
 
 
 
@@ -40,6 +42,7 @@ public static class MauiProgram
         mauiAppBuilder.Services.AddTransient(typeof(ViewModels.CreateProgrammePageViewModel));
         mauiAppBuilder.Services.AddTransient(typeof(ViewModels.UserProgrammesPageViewModel));
         mauiAppBuilder.Services.AddTransient(typeof(ViewModels.LoginPageViewModel));
+        mauiAppBuilder.Services.AddTransient(typeof(ViewModels.RegisterPageViewModel));
 
         return mauiAppBuilder;
     }
@@ -48,6 +51,7 @@ public static class MauiProgram
     {
 
         mauiAppBuilder.Services.AddSingleton<IAppState, AppState>();
+        mauiAppBuilder.Services.AddSingleton<IUserDatabaseService, UserDatabaseService>();
 
         return mauiAppBuilder;
     }

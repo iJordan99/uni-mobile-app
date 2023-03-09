@@ -8,10 +8,12 @@ namespace CourseWork.ViewModels
 	public class BaseViewModel : ObservableObject
 	{
 		protected readonly IAppState appState;
+		protected readonly IUserDatabaseService userDB;
 
-		public BaseViewModel(IAppState appState)
+		public BaseViewModel(IAppState appState, IUserDatabaseService userDB)
 		{
 			this.appState = appState;
+			this.userDB = userDB;
 		}
 	}
 }

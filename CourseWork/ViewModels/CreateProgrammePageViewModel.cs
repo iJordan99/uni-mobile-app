@@ -21,7 +21,7 @@ namespace CourseWork.ViewModels
         [ObservableProperty]
         string currentUser;
 
-        public CreateProgrammePageViewModel(IAppState appState) : base(appState)
+        public CreateProgrammePageViewModel(IAppState appState, IUserDatabaseService userDB) : base(appState, userDB)
         {
             ExerciseList = new ObservableCollection<string>();
             CurrentUser = appState.CurrentUser.Username;
@@ -56,6 +56,7 @@ namespace CourseWork.ViewModels
         {
 			return !string.IsNullOrEmpty(ProgrammeName);
 		}
+
     }
 }
 
