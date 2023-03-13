@@ -2,17 +2,12 @@
 using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CourseWork.Interfaces;
 
 namespace CourseWork.ViewModels
 {
-    public partial class CreateProgrammePageViewModel : ObservableObject
+    public partial class CreateProgrammePageViewModel : BaseViewModel
 	{
-
-		public CreateProgrammePageViewModel()
-		{
-			ExerciseList = new ObservableCollection<string>();
-		}
-
 		[ObservableProperty]
 		ObservableCollection<string> exerciseList;
 
@@ -22,6 +17,15 @@ namespace CourseWork.ViewModels
         [ObservableProperty]
         [NotifyCanExecuteChangedFor(nameof(CreateCommand))]
         private string programmeName;
+
+        [ObservableProperty]
+        string currentUser;
+
+        public CreateProgrammePageViewModel(IAppState appState, IUserDatabaseService userDB) : base(appState, userDB)
+        {
+            ExerciseList = new ObservableCollection<string>();
+            CurrentUser = appState.CurrentUser.Username;
+        }
 
         [RelayCommand]
 		void Add()
@@ -52,6 +56,7 @@ namespace CourseWork.ViewModels
         {
 			return !string.IsNullOrEmpty(ProgrammeName);
 		}
+
     }
 }
 

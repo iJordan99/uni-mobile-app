@@ -22,7 +22,7 @@
                    Grid.Row="1"
                    TextChanged="EntryName_TextChanged"/>
 
-        <Label Text="Exercises"
+            <Label Text="Exercises"
                    Grid.Row="2"/>
 
             <Entry Placeholder="Add Exercise"
@@ -72,8 +72,7 @@
                     Grid.ColumnSpan="3"
                     Padding="10"
                     Command="{Binding CreateCommand}"
-                    Style="{StaticResource Button}"
-                    />
+                    Style="{StaticResource Button}"/>
 
     </Grid>
 </ContentPage>
