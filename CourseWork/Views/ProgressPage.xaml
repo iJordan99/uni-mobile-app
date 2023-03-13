@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CourseWork.Views.ProgressPage"
+             xmlns:viewModel="clr-namespace:CourseWork.ViewModels"
+             x:DataType="viewModel:ProgressPageViewModel"
+             Title="Progress">
+    <VerticalStackLayout>
+
+        <StackLayout Padding="20">
+            <Label  Text="Progress"
+                    FontSize="Title"
+                    FontAttributes="Bold"
+                    TextColor="Black"
+                    FontFamily="Consolas"/>
+        </StackLayout>
+
+        <Grid RowDefinitions="Auto,Auto,Auto,Auto"
+              ColumnDefinitions="0.5*,0.5*"
+              ColumnSpacing="15"
+              RowSpacing="20"
+              Padding="20">
+
+              <VerticalStackLayout Spacing="10">
+                  <Label Text="Date From:"
+                         FontSize="Medium"/>
+                  <DatePicker Format="dd/MM/yyyy"
+                    CharacterSpacing="2"
+                    BackgroundColor="LightCyan"
+                    DateSelected="DateFromPicker_DateSelected"/>
+              </VerticalStackLayout>
+
+              <VerticalStackLayout Spacing="10"
+                                   Grid.Column="1">
+
+                  <Label Text="Date To"
+                         FontSize="Medium"/>
+
+                  <DatePicker Format="dd/MM/yyyy"
+                    CharacterSpacing="2"
+                    BackgroundColor="LightCyan"
+                    DateSelected="DateToPicker_DateSelected"/>
+              </VerticalStackLayout>
+
+            <VerticalStackLayout Grid.Row="2"
+                                 Grid.ColumnSpan="2">
+
+                <Button Text="Get"
+                        Style="{StaticResource Button}"
+                        Command="{Binding CompareMetricsCommand}"/>
+
+                
+
+            </VerticalStackLayout>
+
+            <Label Text="{Binding NullMetric}"
+                   TextColor="Red"
+                   Grid.Row="3"
+                   Grid.ColumnSpan="2"/>
+        </Grid>
+
+        <HorizontalStackLayout WidthRequest="400"
+                               Padding="7"
+                               Margin="0,20,0,0"
+                               IsVisible="{Binding HasGained}">
+
+                <Label Text="Weight Gained: "
+                        FontSize="Medium"/>
+
+                <Label Text="{Binding WeightDiff}"
+                        VerticalOptions="Center"
+                        FontSize="Medium"/>
+
+                <Label Text=" KG "
+                        FontSize="Medium"/>
+
+        </HorizontalStackLayout>
+
+
+        <HorizontalStackLayout WidthRequest="400"
+                                Padding="7"
+                                Margin="0,20,0,0"
+                                IsVisible="{Binding HasLost}">
+
+            <Label Text="Weight Lost: "
+                    FontSize="Medium"/>
+
+            <Label Text="{Binding WeightDiff}"
+                    VerticalOptions="Center"
+                    FontSize="Medium"/>
+
+            <Label Text=" KG "
+                    FontSize="Medium"/>
+
+        </HorizontalStackLayout>
+
+        <HorizontalStackLayout WidthRequest="400"
+                               Padding="7"
+                               Margin="0,20,0,0"
+                               IsVisible="{Binding HasGained}">
+
+                <Label Text="BodyFat Gained: "
+                        FontSize="Medium"/>
+
+                <Label Text="{Binding BodyFatDiff}"
+                        VerticalOptions="Center"
+                        FontSize="Medium"/>
+
+                <Label Text=" % "
+                        FontSize="Medium"/>
+
+        </HorizontalStackLayout>
+
+        <HorizontalStackLayout WidthRequest="400"
+                               Padding="7"
+                               Margin="0,20,0,0"
+                               IsVisible="{Binding HasLost}">
+
+                <Label Text="BodyFat Lost: "
+                        FontSize="Medium"/>
+
+                <Label Text="{Binding BodyFatDiff}"
+                        VerticalOptions="Center"
+                        FontSize="Medium"/>
+
+                <Label Text=" % "
+                        FontSize="Medium"/>
+
+        </HorizontalStackLayout>
+
+
+    </VerticalStackLayout>
+</ContentPage>

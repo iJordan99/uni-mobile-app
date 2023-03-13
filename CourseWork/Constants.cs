@@ -3,7 +3,7 @@ namespace CourseWork
 {
 	public class Constants
 	{
-        public const string DatabaseFilename = "CourseWorkDB.db3";
+        public const string DatabaseFilename = "DEVCourseWorkDB.db3";
         public static string DatabasePath => Path.Combine(FileSystem.AppDataDirectory, DatabaseFilename);
 
         public const SQLite.SQLiteOpenFlags Flags =

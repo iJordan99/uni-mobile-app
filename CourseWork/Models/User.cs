@@ -1,4 +1,6 @@
 ﻿using SQLite;
+using SQLiteNetExtensions.Attributes;
+
 namespace CourseWork.Models
 {
 	[Table("Users")]
@@ -11,7 +13,10 @@ namespace CourseWork.Models
 		[PrimaryKey, Column("_id")]
         public Guid Id { get; set; } = Guid.NewGuid();
 
-		public User()
+        [OneToMany(CascadeOperations = CascadeOperation.All)]
+        public List<Metric> Metrics { get; set; }
+
+        public User()
 		{
 
 		}

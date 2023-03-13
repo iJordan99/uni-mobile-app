@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CourseWork.Interfaces;
+using CourseWork.Models;
 
 namespace CourseWork.ViewModels
 {
@@ -24,18 +25,18 @@ namespace CourseWork.ViewModels
         private async Task Login()
         {
 
-            Models.User user = new Models.User()
+            User user = new User()
             {
                 Username = EntryUsername,
                 Password = EntryPassword
             };
 
-            Models.User validatedUser = await userDB.ValidateUser(user);
+            User validatedUser = await userDB.ValidateUser(user);
 
             if (validatedUser != null)
             {
                 appState.CurrentUser = validatedUser;
-                await Shell.Current.GoToAsync("//CreateProgrammePage");
+                await Shell.Current.GoToAsync("//HomePage");
             }
         }
 

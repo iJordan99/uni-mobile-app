@@ -72,8 +72,7 @@
                     Grid.ColumnSpan="3"
                     Padding="10"
                     Command="{Binding CreateCommand}"
-                    Style="{StaticResource Button}"
-                    />
+                    Style="{StaticResource Button}"/>
 
     </Grid>
 </ContentPage>

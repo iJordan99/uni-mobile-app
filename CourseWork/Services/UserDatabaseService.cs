@@ -5,15 +5,11 @@ using SQLite;
 
 namespace CourseWork.Services
 {
-	public class UserDatabaseService : IUserDatabaseService
+	public class UserDatabaseService : BaseDatabaseService, IUserDatabaseService
 	{
-        private readonly SQLiteAsyncConnection _database;
+        public UserDatabaseService(SQLiteAsyncConnection _database) : base(_database)
+        {
 
-        public UserDatabaseService()
-		{
-            //create new db connection 
-            _database = new SQLiteAsyncConnection(Constants.DatabasePath, Constants.Flags);
-            _database.CreateTableAsync<User>();
         }
 
         public async Task<int> RegisterUser(User user)
@@ -25,6 +21,7 @@ namespace CourseWork.Services
             }
             catch (Exception e)
             {
+                Console.Write(e);
                 return 0;
             }
 
@@ -32,6 +29,7 @@ namespace CourseWork.Services
 
         public async Task<User> ValidateUser(User user)
         {
+
             try
             {
                 var res = await _database.Table<User>().FirstOrDefaultAsync(x =>
@@ -40,6 +38,7 @@ namespace CourseWork.Services
             }
             catch (Exception e)
             {
+                Console.Write(e);
                 return null;
             }
         }

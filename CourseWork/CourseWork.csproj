@@ -34,6 +34,10 @@
 	  <CreatePackage>false</CreatePackage>
 	</PropertyGroup>
 	<ItemGroup>
+	  <MauiImage Remove="Resources\Images\person.svg" />
+	  <MauiImage Remove="Resources\Images\person.svg" />
+	</ItemGroup>
+	<ItemGroup>
 		<!-- App Icon -->
 		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
 
@@ -56,6 +60,7 @@
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.1.0" />
 		<PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
 		<PackageReference Include="SQLitePCLRaw.bundle_green" Version="2.1.4" />
+		<PackageReference Include="SQLiteNetExtensions" Version="2.1.0" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -65,6 +70,9 @@
 	  <None Remove="Interfaces\" />
 	  <None Remove="Models\" />
 	  <None Remove="Services\" />
+	  <None Remove="Resources\Images\measuring-tape-icon.svg" />
+	  <None Remove="Resources\Images\measuring-tape-icon.png" />
+	  <None Remove="Resources\Images\person.svg" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="Views\" />
@@ -75,5 +83,8 @@
 	</ItemGroup>
 	<ItemGroup>
 	  <BundleResource Include="Resources\Images\fitness_guy.png" />
+	  <BundleResource Include="Resources\Images\person.svg" />
+	  <BundleResource Include="Resources\Images\person.svg" />
+	  <BundleResource Include="Resources\Images\person.svg" />
 	</ItemGroup>
 </Project>

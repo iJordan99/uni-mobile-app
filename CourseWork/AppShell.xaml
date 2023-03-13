@@ -13,7 +13,30 @@
         Route="LoginPage"
         Shell.FlyoutBehavior="Disabled"
         Shell.FlyoutItemIsVisible="False"/>
-       
+
+    <FlyoutItem Title="Home">
+
+        <Tab>
+
+            <ShellContent
+                ContentTemplate="{DataTemplate local:HomePage}"
+                Route="HomePage" />
+
+        </Tab>
+
+    </FlyoutItem>
+
+    <FlyoutItem Title="Progess">
+
+        <Tab>
+
+            <ShellContent
+                ContentTemplate="{DataTemplate local:ProgressPage}"
+                Route="ProgressPage" />
+
+        </Tab>
+
+    </FlyoutItem>
 
     <FlyoutItem Title="Tracking">
 
