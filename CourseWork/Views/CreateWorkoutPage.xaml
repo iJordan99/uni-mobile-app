@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CourseWork.Views.CreateWorkoutPage"
+             xmlns:viewModel="clr-namespace:CourseWork.ViewModels"
+             xmlns:model="clr-namespace:CourseWork.Models"
+             x:DataType="viewModel:CreateWorkoutPageViewModel"
+             Title="Create Workout Programme">
+
+    <VerticalStackLayout Padding="20" Spacing="5">
+       <Grid Style="{StaticResource Grid}"
+              ColumnDefinitions="0.3*, 0.3*, 0.3*"
+              RowDefinitions="Auto,Auto,Auto,Auto,Auto, Auto"
+              ColumnSpacing="10"
+              RowSpacing="15">
+
+        
+                <Label Text="Programme"/>
+
+                <Entry Placeholder="Programme Name"
+                       Grid.ColumnSpan="3"
+                       Grid.Row="1"
+                       TextChanged="EntryName_TextChanged"/>
+
+                <Label Text="Exercises"
+                       Grid.Row="2"/>
+
+                <Label Text="Sets"
+                       Grid.Row="2"
+                       Grid.Column="1"/>
+
+                <Label Text="Reps"
+                       Grid.Row="2"
+                       Grid.Column="2"/>
+
+                <Entry Placeholder="Exercise"
+                       Grid.Row="3"
+                       Text="{Binding ExerciseName}"/>
+
+                <Entry Placeholder="Sets"
+                       Grid.Row="3"
+                       Grid.Column="1"
+                       Text="{Binding Sets}"/>
+
+                <Entry Placeholder="Reps"
+                       Grid.Row="3"
+                       Grid.Column="2"
+                       Text="{Binding Reps}"/>
+            
+                <Button Text="+"
+                        Style="{StaticResource Button}"
+                        Grid.Row="4"
+                        Grid.ColumnSpan="2"
+                        Command="{Binding AddCommand}"/>
+
+                <Button Text="QR SCAN"
+                        Style="{StaticResource Button}"
+                        Grid.Row="4"
+                        Grid.Column="2"
+                        Command="{Binding AddCommand}"/>
+
+                <VerticalStackLayout Grid.Row="5"
+                                     Grid.ColumnSpan="4"
+                                     HeightRequest="420">
+                    <CollectionView 
+                            ItemsSource="{Binding ExerciseList}">
+
+                        <CollectionView.ItemTemplate>
+
+                            <DataTemplate x:DataType="{x:Type model:WorkoutExercise}">
+                                <SwipeView>
+                                    <SwipeView.RightItems>
+                                        <SwipeItems>
+                                            <SwipeItem Text="Delete"
+                                                       BackgroundColor="Red"
+                                                       Command="{Binding Source={RelativeSource AncestorType={x:Type viewModel:CreateWorkoutPageViewModel}}, Path=DeleteCommand}"
+                                                       CommandParameter="{Binding .}"/>
+                                        </SwipeItems>
+                                    </SwipeView.RightItems>
+
+                                    <Grid Padding="0,5">
+                                        <Frame>
+                                            <Label Text="{Binding ExerciseName}" FontSize="Body"/>
+                                        </Frame>
+                                    </Grid>
+
+                                </SwipeView>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+
+                    </CollectionView>
+
+
+                </VerticalStackLayout>
+       </Grid>
+
+        <Button Text="Create"
+                Padding="10"
+                Command="{Binding CreateWorkoutCommand}"
+                Style="{StaticResource Button}"/>
+    </VerticalStackLayout>
+</ContentPage>

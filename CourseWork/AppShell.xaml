@@ -50,13 +50,13 @@
 
     </FlyoutItem>
 
-    <FlyoutItem Title="Tracking - New Programme">
+    <FlyoutItem Title="Tracking - New Workout Programme">
 
         <Tab>
 
             <ShellContent
-                ContentTemplate="{DataTemplate local:CreateProgrammePage}"
-                Route="CreateProgrammePage" />
+                ContentTemplate="{DataTemplate local:CreateWorkoutPage}"
+                Route="CreateWorkoutPage" />
 
         </Tab>
 

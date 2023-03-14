@@ -73,6 +73,17 @@
 	  <None Remove="Resources\Images\measuring-tape-icon.svg" />
 	  <None Remove="Resources\Images\measuring-tape-icon.png" />
 	  <None Remove="Resources\Images\person.svg" />
+	  <None Remove="Resources\Fonts\SF-Pro-Italic.ttf" />
+	  <None Remove="Resources\Fonts\SF-Pro.ttf" />
+	  <None Remove="Resources\Fonts\SF-Pro-Rounded-Black.otf" />
+	  <None Remove="Resources\Fonts\SF-Pro-Rounded-Bold.otf" />
+	  <None Remove="Resources\Fonts\SF-Pro-Rounded-Heavy.otf" />
+	  <None Remove="Resources\Fonts\SF-Pro-Rounded-Light.otf" />
+	  <None Remove="Resources\Fonts\SF-Pro-Rounded-Medium.otf" />
+	  <None Remove="Resources\Fonts\SF-Pro-Rounded-Regular.otf" />
+	  <None Remove="Resources\Fonts\SF-Pro-Rounded-Semibold.otf" />
+	  <None Remove="Resources\Fonts\SF-Pro-Rounded-Thin.otf" />
+	  <None Remove="Resources\Fonts\SF-Pro-Rounded-Ultralight.otf" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="Views\" />
@@ -86,5 +97,27 @@
 	  <BundleResource Include="Resources\Images\person.svg" />
 	  <BundleResource Include="Resources\Images\person.svg" />
 	  <BundleResource Include="Resources\Images\person.svg" />
+	  <BundleResource Include="Resources\Fonts\SF-Pro-Italic.ttf" />
+	  <BundleResource Include="Resources\Fonts\SF-Pro-Italic.ttf" />
+	  <BundleResource Include="Resources\Fonts\SF-Pro.ttf" />
+	  <BundleResource Include="Resources\Fonts\SF-Pro.ttf" />
+	  <BundleResource Include="Resources\Fonts\SF-Pro-Rounded-Black.otf" />
+	  <BundleResource Include="Resources\Fonts\SF-Pro-Rounded-Black.otf" />
+	  <BundleResource Include="Resources\Fonts\SF-Pro-Rounded-Bold.otf" />
+	  <BundleResource Include="Resources\Fonts\SF-Pro-Rounded-Bold.otf" />
+	  <BundleResource Include="Resources\Fonts\SF-Pro-Rounded-Heavy.otf" />
+	  <BundleResource Include="Resources\Fonts\SF-Pro-Rounded-Heavy.otf" />
+	  <BundleResource Include="Resources\Fonts\SF-Pro-Rounded-Light.otf" />
+	  <BundleResource Include="Resources\Fonts\SF-Pro-Rounded-Light.otf" />
+	  <BundleResource Include="Resources\Fonts\SF-Pro-Rounded-Medium.otf" />
+	  <BundleResource Include="Resources\Fonts\SF-Pro-Rounded-Medium.otf" />
+	  <BundleResource Include="Resources\Fonts\SF-Pro-Rounded-Regular.otf" />
+	  <BundleResource Include="Resources\Fonts\SF-Pro-Rounded-Regular.otf" />
+	  <BundleResource Include="Resources\Fonts\SF-Pro-Rounded-Semibold.otf" />
+	  <BundleResource Include="Resources\Fonts\SF-Pro-Rounded-Semibold.otf" />
+	  <BundleResource Include="Resources\Fonts\SF-Pro-Rounded-Thin.otf" />
+	  <BundleResource Include="Resources\Fonts\SF-Pro-Rounded-Thin.otf" />
+	  <BundleResource Include="Resources\Fonts\SF-Pro-Rounded-Ultralight.otf" />
+	  <BundleResource Include="Resources\Fonts\SF-Pro-Rounded-Ultralight.otf" />
 	</ItemGroup>
 </Project>

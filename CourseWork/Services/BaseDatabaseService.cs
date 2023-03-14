@@ -14,6 +14,10 @@ namespace CourseWork.Services
             this._database = _database;
             _database.CreateTableAsync<User>();
             _database.CreateTableAsync<Metric>();
+            _database.DropTableAsync<Workout>();
+            _database.CreateTableAsync<Workout>();
+            _database.DropTableAsync<WorkoutExercise>();
+            _database.CreateTableAsync<WorkoutExercise>();
         }
     }
 }

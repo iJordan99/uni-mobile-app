@@ -35,7 +35,7 @@ public static class MauiProgram
         mauiAppBuilder.Services.AddTransient(typeof(Views.HomePage));
         mauiAppBuilder.Services.AddTransient(typeof(Views.ProgressPage));
         mauiAppBuilder.Services.AddTransient(typeof(Views.ProgrammesPage));
-        mauiAppBuilder.Services.AddTransient(typeof(Views.CreateProgrammePage));
+        mauiAppBuilder.Services.AddTransient(typeof(Views.CreateWorkoutPage));
         mauiAppBuilder.Services.AddTransient(typeof(Views.UserProgrammesPage));
         mauiAppBuilder.Services.AddTransient(typeof(Views.LoginPage));
         mauiAppBuilder.Services.AddTransient(typeof(Views.RegisterPage));
@@ -44,7 +44,7 @@ public static class MauiProgram
         mauiAppBuilder.Services.AddTransient(typeof(ViewModels.HomePageViewModel));
         mauiAppBuilder.Services.AddTransient(typeof(ViewModels.ProgressPageViewModel));
         mauiAppBuilder.Services.AddTransient(typeof(ViewModels.ProgrammesPageViewModel));
-        mauiAppBuilder.Services.AddTransient(typeof(ViewModels.CreateProgrammePageViewModel));
+        mauiAppBuilder.Services.AddTransient(typeof(ViewModels.CreateWorkoutPageViewModel));
         mauiAppBuilder.Services.AddTransient(typeof(ViewModels.UserProgrammesPageViewModel));
         mauiAppBuilder.Services.AddTransient(typeof(ViewModels.LoginPageViewModel));
         mauiAppBuilder.Services.AddTransient(typeof(ViewModels.RegisterPageViewModel));
@@ -64,6 +64,8 @@ public static class MauiProgram
 
         mauiAppBuilder.Services.AddSingleton<IUserDatabaseService, UserDatabaseService>();
         mauiAppBuilder.Services.AddSingleton<IMetricDatabaseService, MetricDatabaseService>();
+        mauiAppBuilder.Services.AddSingleton<IWorkoutDatabaseService, WorkoutDatabaseService>();
+        mauiAppBuilder.Services.AddSingleton<IWorkoutExerciseDatabaseService, WorkoutExceriseDatabaseService>();
 
         return mauiAppBuilder;
     }
