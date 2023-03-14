@@ -54,6 +54,8 @@ namespace CourseWork.ViewModels
             DateFromMetric = await metricDB.FetchMetrics(appState.CurrentUser, DateFrom);
             DateToMetric = await metricDB.FetchMetrics(appState.CurrentUser, DateTo);
 
+            NullMetric = "";
+
             if (DateToMetric != null && DateFromMetric != null)
             {
                 Metric progress = GetMetricDifference(DateToMetric, DateFromMetric);

@@ -22,7 +22,6 @@
         <Setter Property="FontFamily" Value="SF-Pro-Bold"/>
     </Style>
 
-
     <Style x:Key="DatePicker" TargetType="DatePicker">
         <Setter Property="Format" Value="dd/MM/yyyy"/>
         <Setter Property="CharacterSpacing" Value="2"/>
