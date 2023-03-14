@@ -4,6 +4,44 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
+    <Style x:Key="AuthHeading" TargetType="Label">
+        <Setter Property="FontSize" Value="Title"/>
+        <Setter Property="FontFamily" Value="SF-Pro-Bold"/>
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"/>
+    </Style>
+
+    <Style x:Key="PageHeading" TargetType="Label">
+        <Setter Property="FontSize" Value="Large"/>
+        <Setter Property="VerticalOptions" Value="Center"/>
+        <Setter Property="FontFamily" Value="SF-Pro-Rounded"/>
+    </Style>
+
+    <Style x:Key="WelcomeMessage" TargetType="Label">
+        <Setter Property="FontSize" Value="Large"/>
+        <Setter Property="HorizontalOptions" Value="Center"/>
+        <Setter Property="FontFamily" Value="SF-Pro-Bold"/>
+    </Style>
+
+
+    <Style x:Key="DatePicker" TargetType="DatePicker">
+        <Setter Property="Format" Value="dd/MM/yyyy"/>
+        <Setter Property="CharacterSpacing" Value="2"/>
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Blue300Accent}, Dark={StaticResource Gray950}}"/>
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource White}}"/>
+        <Setter Property="FontFamily" Value="SF-Pro-Rounded"/>
+    </Style>
+
+    <Style x:Key="DatePickerAlert" TargetType="Label">
+        <Setter Property="TextColor" Value="Red"/>
+        <Setter Property="FontFamily" Value="SF-Pro-Rounded"/>
+    </Style>
+
+    <Style x:Key="MediumLabel" TargetType="Label">
+        <Setter Property="FontFamily" Value="SF-Pro-Rounded"/>
+        <Setter Property="FontSize" Value="Medium"/>
+        <Setter Property="VerticalOptions" Value="Center"/>
+    </Style>
+
 
     <Style x:Key="Grid" TargetType="Grid">
         <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}"/>
@@ -33,7 +71,7 @@
     <Style x:Key="SecondButton" TargetType="Button">
         <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Primary}}" />
         <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource White }, Dark={StaticResource Black}}" />
-        <Setter Property="FontFamily" Value="OpenSansRegular"/>
+        <Setter Property="FontFamily" Value="SF-Pro-Rounded"/>
         <Setter Property="FontSize" Value="16"/>
         <Setter Property="CornerRadius" Value="8"/>
         <Setter Property="Padding" Value="14,10"/>
@@ -57,7 +95,7 @@
     <Style x:Key="Button" TargetType="Button">
         <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource White}}" />
         <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Primary}}" />
-        <Setter Property="FontFamily" Value="OpenSansRegular"/>
+        <Setter Property="FontFamily" Value="SF-Pro-Rounded"/>
         <Setter Property="FontSize" Value="16"/>
         <Setter Property="CornerRadius" Value="8"/>
         <Setter Property="Padding" Value="14,10"/>

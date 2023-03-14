@@ -7,48 +7,37 @@
              Title="Home">
 
     <VerticalStackLayout Padding="20"
-                         Spacing="20">
+                         Spacing="30">
 
         <Label Text="{Binding WelcomeMessage}"
-               FontSize="Large"
-               HorizontalOptions="Center"
-               FontFamily="Consolas"/>
+               Style="{StaticResource WelcomeMessage}"/>
 
         <Grid ColumnDefinitions="0.01*,0.05*,0.4*,0.2*"
               Margin="0,10,0,0">
 
-            <Image Source="person.png"
-                   WidthRequest="30"
-                   HeightRequest="30"
-                   HorizontalOptions="Start"/>
-
             <Label Text="Metrics"
-                   FontSize="Medium"
-                   Grid.Column="2"
-                   VerticalOptions="Center"/>
+                   Style="{StaticResource PageHeading}"
+                   Grid.ColumnSpan="3"/>
 
              <Button Grid.Column="3"
-                    Command="{Binding NavigateToProgressPageCommand}"
-                    Text="Progress"
-                    HorizontalOptions="End"/>
+                     Command="{Binding NavigateToProgressPageCommand}"
+                     Text="Progress"
+                     HorizontalOptions="End"/>
         </Grid>
 
-        <DatePicker Format="dd/MM/yyyy"
-                    CharacterSpacing="2"
-                    BackgroundColor="LightCyan"
+        <DatePicker Style="{StaticResource DatePicker}"
                     DateSelected="DatePicker_DateSelected"/>
 
         <Label Text="No metrics found for date"
                IsVisible="{Binding HasNoMetric}"
-               TextColor="Red"/>
+               Style="{StaticResource DatePickerAlert}"/>
 
         <Grid RowDefinitions="Auto,Auto,Auto, Auto"
               ColumnDefinitions="0.5*, 0.15*,0.15*"
               RowSpacing="5">
 
             <Label Text="Weight"
-                   VerticalOptions="Center"
-                   FontSize="Medium"/>
+                   Style="{StaticResource MediumLabel}"/>
 
             <Entry Grid.Column="2"
                    Text="{Binding Weight}"
@@ -57,12 +46,11 @@
             <Label Text="KG"
                    Grid.Column="3"
                    HorizontalOptions="End"
-                   VerticalOptions="Center"
+                   Style="{StaticResource MediumLabel}"
                    Padding="0,0,1,0"/>
 
             <Label Text="Height"
-                   VerticalOptions="Center"
-                   FontSize="Medium"
+                   Style="{StaticResource MediumLabel}"
                    Grid.Row="2"/>
 
             <Entry Grid.Column="2"
@@ -74,12 +62,11 @@
                    Grid.Row="2"
                    Grid.Column="3"
                    HorizontalOptions="End"
-                   VerticalOptions="Center"
+                   Style="{StaticResource MediumLabel}"
                    Padding="0,0,1,0"/>
 
             <Label Text="Body Fat"
-                   VerticalOptions="Center"
-                   FontSize="Medium"
+                   Style="{StaticResource MediumLabel}"
                    Grid.Row="3"/>
 
             <Entry Grid.Column="2"
@@ -91,7 +78,7 @@
                    Grid.Row="3"
                    Grid.Column="3"
                    HorizontalOptions="End"
-                   VerticalOptions="Center"
+                   Style="{StaticResource MediumLabel}"
                    Padding="0,0,1,0"/>
 
         </Grid>

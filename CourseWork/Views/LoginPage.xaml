@@ -8,10 +8,7 @@
 
         <StackLayout Padding="20">
             <Label  Text="Login"
-                    FontSize="Title"
-                    FontAttributes="Bold"
-                    TextColor="Black"
-                    FontFamily="Consolas"/>
+                    Style="{StaticResource AuthHeading}"/>
         </StackLayout>
 
         <Grid Style="{StaticResource Grid}"

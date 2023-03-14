@@ -16,7 +16,10 @@ public static class MauiProgram
 			{
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-			})
+                fonts.AddFont("SF-Pro-Rounded-Regular.otf", "SF-Pro-Rounded");
+                fonts.AddFont("SF-Pro-Rounded-Bold.otf", "SF-Pro-Bold");
+                fonts.AddFont("SF-Pro-Italic.ttf", "SF-Pro-Italic");
+            })
             .RegisterViewsAndViewModels()
             .RegisterServices(); 
 

@@ -6,15 +6,6 @@
              x:DataType="viewModel:ProgressPageViewModel"
              Title="Progress">
     <VerticalStackLayout>
-
-        <StackLayout Padding="20">
-            <Label  Text="Progress"
-                    FontSize="Title"
-                    FontAttributes="Bold"
-                    TextColor="Black"
-                    FontFamily="Consolas"/>
-        </StackLayout>
-
         <Grid RowDefinitions="Auto,Auto,Auto,Auto"
               ColumnDefinitions="0.5*,0.5*"
               ColumnSpacing="15"
@@ -23,22 +14,20 @@
 
               <VerticalStackLayout Spacing="10">
                   <Label Text="Date From:"
-                         FontSize="Medium"/>
-                  <DatePicker Format="dd/MM/yyyy"
-                    CharacterSpacing="2"
-                    BackgroundColor="LightCyan"
+                         Style="{StaticResource MediumLabel}"/>
+
+                  <DatePicker Style="{StaticResource DatePicker}"
                     DateSelected="DateFromPicker_DateSelected"/>
+
               </VerticalStackLayout>
 
               <VerticalStackLayout Spacing="10"
                                    Grid.Column="1">
 
-                  <Label Text="Date To"
-                         FontSize="Medium"/>
+                  <Label Text="Date To:"
+                         Style="{StaticResource MediumLabel}"/>
 
-                  <DatePicker Format="dd/MM/yyyy"
-                    CharacterSpacing="2"
-                    BackgroundColor="LightCyan"
+                  <DatePicker Style="{StaticResource DatePicker}"
                     DateSelected="DateToPicker_DateSelected"/>
               </VerticalStackLayout>
 
@@ -49,12 +38,10 @@
                         Style="{StaticResource Button}"
                         Command="{Binding CompareMetricsCommand}"/>
 
-                
-
             </VerticalStackLayout>
 
             <Label Text="{Binding NullMetric}"
-                   TextColor="Red"
+                   Style="{StaticResource DatePickerAlert}"
                    Grid.Row="3"
                    Grid.ColumnSpan="2"/>
         </Grid>
@@ -65,14 +52,13 @@
                                IsVisible="{Binding HasGained}">
 
                 <Label Text="Weight Gained: "
-                        FontSize="Medium"/>
+                       Style="{StaticResource MediumLabel}"/>
 
                 <Label Text="{Binding WeightDiff}"
-                        VerticalOptions="Center"
-                        FontSize="Medium"/>
+                        Style="{StaticResource MediumLabel}"/>
 
                 <Label Text=" KG "
-                        FontSize="Medium"/>
+                       Style="{StaticResource MediumLabel}"/>
 
         </HorizontalStackLayout>
 
@@ -83,14 +69,13 @@
                                 IsVisible="{Binding HasLost}">
 
             <Label Text="Weight Lost: "
-                    FontSize="Medium"/>
+                   Style="{StaticResource MediumLabel}"/>
 
             <Label Text="{Binding WeightDiff}"
-                    VerticalOptions="Center"
-                    FontSize="Medium"/>
+                   Style="{StaticResource MediumLabel}"/>
 
             <Label Text=" KG "
-                    FontSize="Medium"/>
+                   Style="{StaticResource MediumLabel}"/>
 
         </HorizontalStackLayout>
 
@@ -100,14 +85,13 @@
                                IsVisible="{Binding HasGained}">
 
                 <Label Text="BodyFat Gained: "
-                        FontSize="Medium"/>
+                       Style="{StaticResource MediumLabel}"/>
 
                 <Label Text="{Binding BodyFatDiff}"
-                        VerticalOptions="Center"
-                        FontSize="Medium"/>
+                       Style="{StaticResource MediumLabel}"/>
 
                 <Label Text=" % "
-                        FontSize="Medium"/>
+                        Style="{StaticResource MediumLabel}"/>
 
         </HorizontalStackLayout>
 
@@ -117,14 +101,13 @@
                                IsVisible="{Binding HasLost}">
 
                 <Label Text="BodyFat Lost: "
-                        FontSize="Medium"/>
+                       Style="{StaticResource MediumLabel}"/>
 
                 <Label Text="{Binding BodyFatDiff}"
-                        VerticalOptions="Center"
-                        FontSize="Medium"/>
+                        Style="{StaticResource MediumLabel}"/>
 
                 <Label Text=" % "
-                        FontSize="Medium"/>
+                       Style="{StaticResource MediumLabel}"/>
 
         </HorizontalStackLayout>
 
