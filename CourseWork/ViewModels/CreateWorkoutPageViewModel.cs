@@ -88,11 +88,14 @@ namespace CourseWork.ViewModels
 					await exerciseDB.StoreWorkoutExercise(exercise);
 				}
 
+                await Application.Current.MainPage.DisplayAlert("Success!", "Programme Saved", "OK");
+                ResetFields();
+
 			}
 			catch (Exception e)
 			{
-				Console.Write(e.Message);
-			}
+                await Application.Current.MainPage.DisplayAlert("Oh no!", $"Encountered {e.Message}", "OK");
+            }
 		}
 
 		private bool CanCreate()
@@ -100,15 +103,14 @@ namespace CourseWork.ViewModels
 			return !string.IsNullOrEmpty(WorkoutName) && ExerciseList.Any(); ;
 		}
 
-
-		[RelayCommand]
-		private async Task Fetch()
+		private void ResetFields()
 		{
-
-			var t = await workoutDB.FetchAllByUser(appState.CurrentUser);
-			var e = await exerciseDB.FetchWorkoutExercise(t.First());
-		}
-
+			ExerciseList.Clear();
+			WorkoutName = "";
+            ExerciseName = "";
+			Sets = 0;
+            Reps = 0;
+        }
 	}
 }
 

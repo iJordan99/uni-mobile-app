@@ -34,20 +34,20 @@ public static class MauiProgram
         //Pages
         mauiAppBuilder.Services.AddTransient(typeof(Views.HomePage));
         mauiAppBuilder.Services.AddTransient(typeof(Views.ProgressPage));
-        mauiAppBuilder.Services.AddTransient(typeof(Views.ProgrammesPage));
         mauiAppBuilder.Services.AddTransient(typeof(Views.CreateWorkoutPage));
         mauiAppBuilder.Services.AddTransient(typeof(Views.UserProgrammesPage));
         mauiAppBuilder.Services.AddTransient(typeof(Views.LoginPage));
         mauiAppBuilder.Services.AddTransient(typeof(Views.RegisterPage));
+        mauiAppBuilder.Services.AddTransient(typeof(Views.WorkoutDetailsPage));
 
         //Services
         mauiAppBuilder.Services.AddTransient(typeof(ViewModels.HomePageViewModel));
         mauiAppBuilder.Services.AddTransient(typeof(ViewModels.ProgressPageViewModel));
-        mauiAppBuilder.Services.AddTransient(typeof(ViewModels.ProgrammesPageViewModel));
         mauiAppBuilder.Services.AddTransient(typeof(ViewModels.CreateWorkoutPageViewModel));
         mauiAppBuilder.Services.AddTransient(typeof(ViewModels.UserProgrammesPageViewModel));
         mauiAppBuilder.Services.AddTransient(typeof(ViewModels.LoginPageViewModel));
         mauiAppBuilder.Services.AddTransient(typeof(ViewModels.RegisterPageViewModel));
+        mauiAppBuilder.Services.AddTransient(typeof(ViewModels.WorkoutDetailsPageViewModel));
 
         return mauiAppBuilder;
     }

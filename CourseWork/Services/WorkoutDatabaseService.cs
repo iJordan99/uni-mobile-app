@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using CourseWork.Interfaces;
 using CourseWork.Models;
 using SQLite;
@@ -7,14 +8,14 @@ namespace CourseWork.Services
 {
 	public class WorkoutDatabaseService : BaseDatabaseService, IWorkoutDatabaseService
     {
-        public async Task<Workout> StoreWorkout(Workout workout, User user)
+        public async Task<Workout> StoreWorkout(Workout Workout, User User)
         {
             
             try
             {
-                workout.UserId = user.Id;
-                await _database.InsertAsync(workout);
-                return await _database.Table<Workout>().Where(m => m.Id == workout.Id).FirstOrDefaultAsync();
+                Workout.UserId = User.Id;
+                await _database.InsertAsync(Workout);
+                return await _database.Table<Workout>().Where(m => m.Id == Workout.Id).FirstOrDefaultAsync();
             }
             catch (Exception e)
             {
@@ -23,15 +24,17 @@ namespace CourseWork.Services
             }
         }
 
-        public async Task<List<Workout>> FetchAllByUser(User user)
+        public async Task<ObservableCollection<Workout>> FetchAllByUser(User User)
         {
             try
             {
-                List<Workout> workouts = await _database.Table<Workout>()
-                    .Where(w => w.UserId == user.Id)
+                List<Workout> WorkoutsList = await _database.Table<Workout>()
+                    .Where(m => m.UserId == User.Id)
                     .ToListAsync();
 
-                return workouts;
+                ObservableCollection<Workout> Workouts = new ObservableCollection<Workout>(WorkoutsList);
+
+                return Workouts;
             }
             catch (Exception e)
             {
@@ -42,6 +45,15 @@ namespace CourseWork.Services
             }
         }
 
+        public async Task<Workout>FetchById(Guid WorkoutId)
+        {
+            return await _database.Table<Workout>().Where(m => m.Id == WorkoutId).FirstOrDefaultAsync();
+        }
+
+        public async Task<int>DeleteWorkout(Workout Workout)
+        {
+            return await _database.Table<Workout>().Where(m => m.Id == Workout.Id).DeleteAsync();
+        }
 
         public WorkoutDatabaseService(SQLiteAsyncConnection _database) : base(_database)
 		{

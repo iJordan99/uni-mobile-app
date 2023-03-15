@@ -4,8 +4,48 @@
              x:Class="CourseWork.Views.UserProgrammesPage"
              xmlns:viewModels="clr-namespace:CourseWork.ViewModels"
              x:DataType="viewModels:UserProgrammesPageViewModel"
+             xmlns:model="clr-namespace:CourseWork.Models"
              Title="My Programmes">
-    <VerticalStackLayout>
-        
+    <VerticalStackLayout Padding="20" Spacing="10">
+
+        <Image Source="fitness_guy.png" 
+                    HeightRequest="260"
+                    HorizontalOptions="Center"/>
+
+            <Label Text="Welcome to your programmes"
+                    HorizontalOptions="Center"
+                    FontSize="Large"
+                    FontAttributes="Bold"/>
+
+        <CollectionView ItemsSource="{Binding Programmes}">
+
+            <CollectionView.ItemTemplate>
+
+                <DataTemplate x:DataType="{x:Type model:Workout}">
+                    <SwipeView>
+                        <SwipeView.RightItems>
+                            <SwipeItems>
+                                <SwipeItem Text="Delete"
+                                            BackgroundColor="Red"
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:UserProgrammesPageViewModel}}, Path=DeleteCommand}"
+                                            CommandParameter="{Binding .}"/>
+                            </SwipeItems>
+                        </SwipeView.RightItems>
+
+                        <Grid Padding="0,5">
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:UserProgrammesPageViewModel}}, Path=ProgrammeInfoCommand}"
+                                                        CommandParameter="{Binding .}" />
+                            </Grid.GestureRecognizers>
+                            <Frame>
+                                <Label Text="{Binding WorkoutName}" FontSize="Body"/>
+                            </Frame>
+                        </Grid>
+
+                    </SwipeView>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    
     </VerticalStackLayout>
 </ContentPage>

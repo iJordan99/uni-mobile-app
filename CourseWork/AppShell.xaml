@@ -38,18 +38,6 @@
 
     </FlyoutItem>
 
-    <FlyoutItem Title="Tracking">
-
-        <Tab>
-
-            <ShellContent
-                ContentTemplate="{DataTemplate local:ProgrammesPage}"
-                Route="ProgrammesPage" />
-
-        </Tab>
-
-    </FlyoutItem>
-
     <FlyoutItem Title="Tracking - New Workout Programme">
 
         <Tab>
