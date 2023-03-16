@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="CourseWork.Views.UserProgrammesPage"
+             x:Class="CourseWork.Views.UserProgramsPage"
              xmlns:viewModels="clr-namespace:CourseWork.ViewModels"
-             x:DataType="viewModels:UserProgrammesPageViewModel"
+             x:DataType="viewModels:UserProgramsPageViewModel"
              xmlns:model="clr-namespace:CourseWork.Models"
              Title="My Programmes">
     <VerticalStackLayout Padding="20" Spacing="10">
@@ -21,24 +21,24 @@
 
             <CollectionView.ItemTemplate>
 
-                <DataTemplate x:DataType="{x:Type model:Workout}">
+                <DataTemplate x:DataType="{x:Type model:Program}">
                     <SwipeView>
                         <SwipeView.RightItems>
                             <SwipeItems>
                                 <SwipeItem Text="Delete"
                                             BackgroundColor="Red"
-                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:UserProgrammesPageViewModel}}, Path=DeleteCommand}"
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:UserProgramsPageViewModel}}, Path=DeleteCommand}"
                                             CommandParameter="{Binding .}"/>
                             </SwipeItems>
                         </SwipeView.RightItems>
 
                         <Grid Padding="0,5">
                             <Grid.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:UserProgrammesPageViewModel}}, Path=ProgrammeInfoCommand}"
+                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:UserProgramsPageViewModel}}, Path=ProgrammeInfoCommand}"
                                                         CommandParameter="{Binding .}" />
                             </Grid.GestureRecognizers>
                             <Frame>
-                                <Label Text="{Binding WorkoutName}" FontSize="Body"/>
+                                <Label Text="{Binding ProgramName}" FontSize="Body"/>
                             </Frame>
                         </Grid>
 

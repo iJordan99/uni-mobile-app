@@ -3,8 +3,8 @@ using SQLiteNetExtensions.Attributes;
 
 namespace CourseWork.Models
 {
-	[Table("Workouts")]
-	public class Workout
+	[Table("Programs")]
+	public class Program
 	{
         [PrimaryKey, Column("_Id")]
         public Guid Id { get; set; } = Guid.NewGuid();
@@ -19,15 +19,15 @@ namespace CourseWork.Models
         [ManyToOne]
         public User User { get; set; }
 
-        public string WorkoutName { get; set; }
+        public string ProgramName { get; set; }
 
-        public Workout(User user, string workoutName)
+        public Program(User user, string programName)
 		{
-            WorkoutName = workoutName;            
+            ProgramName = programName;            
             UserId = user.Id;
 		}
 
-        public Workout() { }
+        public Program() { }
 	}
 }
 

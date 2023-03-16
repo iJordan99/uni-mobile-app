@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using System.Runtime.InteropServices.JavaScript;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CourseWork.Interfaces;
 using CourseWork.Models;
@@ -26,6 +27,7 @@ namespace CourseWork.ViewModels
 		Metric metric;
 
         [ObservableProperty]
+        [NotifyCanExecuteChangedFor(nameof(GetMetricCommand))]
         DateTime date;
 
         [ObservableProperty]
@@ -34,7 +36,7 @@ namespace CourseWork.ViewModels
         [ObservableProperty]
         bool hasNoMetric;
 
-        protected readonly IMetricDatabaseService metricDB;
+        private readonly IMetricDatabaseService metricDB;
 
         public HomePageViewModel(IAppState appState, IUserDatabaseService userDB, IMetricDatabaseService metricDB) : base(appState, userDB)
         {
@@ -49,6 +51,11 @@ namespace CourseWork.ViewModels
         private async void LoadDataAsync()
         {
             await GetMetric();
+        }
+
+        partial void OnDateChanged(DateTime value)
+        {
+            LoadDataAsync();
         }
 
         [RelayCommand]
@@ -71,6 +78,7 @@ namespace CourseWork.ViewModels
                 HasNoMetric = true;
             }
         }
+
 
         [RelayCommand]
         private async Task SaveMetrics()
