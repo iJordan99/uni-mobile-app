@@ -19,7 +19,6 @@ public partial class HomePage : ContentPage
         {
             viewModel.Date = e.NewDate;
             //https://learn.microsoft.com/en-us/answers/questions/918723/how-do-i-call-a-method-that-is-in-the-viewmodel-fo
-            viewModel.GetMetricCommand.Execute(null);
         }
     }
 

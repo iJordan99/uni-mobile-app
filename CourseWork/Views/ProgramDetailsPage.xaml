@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CourseWork.Views.ProgramDetailsPage"
+             xmlns:viewModels="clr-namespace:CourseWork.ViewModels"
+             x:DataType="viewModels:ProgramDetailsPageViewModel"
+             xmlns:model="clr-namespace:CourseWork.Models">
+
+    
+        <VerticalStackLayout Padding="20"
+                             Spacing="20"
+                             VerticalOptions="StartAndExpand">
+
+            <HorizontalStackLayout>
+
+                <Label Text="{Binding Program.ProgramName}"
+                        Style="{StaticResource PageHeading}"
+                        HorizontalOptions="StartAndExpand"
+                        WidthRequest="260"/>
+
+                <!--<Button Text="Register Session"
+                        Style="{StaticResource SecondButton}"
+                        HorizontalOptions="End"
+                        Command="{Binding RegisterWorkoutSessionCommand}"/>-->
+
+            </HorizontalStackLayout>
+
+            <Grid ColumnDefinitions="0.3*,0.25*,0.25*, 0.25*"
+                  RowDefinitions="Auto,Auto, Auto, Auto">
+
+                <Label Text="Exercise"
+                       Style="{StaticResource MediumLabel}"/>
+
+                <Label Text="Sets"
+                       Grid.Column="1"
+                       Style="{StaticResource MediumLabel}"/>
+
+                <Label Text="Reps"
+                       Grid.Column="2"
+                       Style="{StaticResource MediumLabel}"/>
+
+                <Label Text="Weight"
+                       Grid.Column="3"
+                       Style="{StaticResource MediumLabel}"/>
+            </Grid>
+
+            <CollectionView ItemsSource="{Binding WorkoutExercises}" 
+                            VerticalOptions="FillAndExpand">
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="{x:Type model:ProgramExercise}">
+                        <Grid ColumnDefinitions="0.3*,0.25*,0.25*,0.25*"
+                                RowDefinitions="Auto,Auto"
+                                RowSpacing="15">
+
+                            <Label Text="{Binding ExerciseName}"
+                                    Style="{StaticResource MediumLabel}"/>
+
+                            <Label Text="{Binding Sets}"
+                                    Grid.Column="1"
+                                    Style="{StaticResource MediumLabel}"/>
+
+                            <Label Text="{Binding Reps}"
+                                    Grid.Column="2"
+                                    Style="{StaticResource MediumLabel}" />
+
+                          
+                            <Entry Grid.Column="3"
+                                   TextChanged="Weight_TextChanged"/>
+
+
+
+
+                    </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+    </VerticalStackLayout>
+</ContentPage>

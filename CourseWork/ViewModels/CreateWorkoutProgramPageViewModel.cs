@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CourseWork.Interfaces;
@@ -7,15 +6,15 @@ using CourseWork.Models;
 
 namespace CourseWork.ViewModels
 {
-    public partial class CreateWorkoutPageViewModel : BaseViewModel
+    public partial class CreateWorkoutProgramPageViewModel : BaseViewModel
 	{
 		[ObservableProperty]
 		[NotifyCanExecuteChangedFor(nameof(CreateWorkoutCommand))]
-		string workoutName;
+		string programName;
 
 		[ObservableProperty]
 		[NotifyCanExecuteChangedFor(nameof(CreateWorkoutCommand))]
-        WorkoutExercise exercise;
+        ProgramExercise exercise;
 
 		[ObservableProperty]
 		int sets;
@@ -25,7 +24,7 @@ namespace CourseWork.ViewModels
 
 		[ObservableProperty]
 		[NotifyCanExecuteChangedFor(nameof(CreateWorkoutCommand))]
-		ObservableCollection<WorkoutExercise> exerciseList;
+		ObservableCollection<ProgramExercise> exerciseList;
 
 		[ObservableProperty]
         string currentUser;
@@ -33,24 +32,24 @@ namespace CourseWork.ViewModels
 		[ObservableProperty]
 		string exerciseName;
 
-        protected readonly IWorkoutDatabaseService workoutDB;
-		protected readonly IWorkoutExerciseDatabaseService exerciseDB;
+		private readonly IProgramDatabaseService ProgramDb;
+		private readonly IProgramExerciseDatabaseService exerciseDB;
 
-        public CreateWorkoutPageViewModel(IAppState appState, IUserDatabaseService userDB, IWorkoutDatabaseService workoutDB,
-		IWorkoutExerciseDatabaseService exerciseDB) : base(appState, userDB)
+        public CreateWorkoutProgramPageViewModel(IAppState appState, IUserDatabaseService userDB, IProgramDatabaseService programDb,
+		IProgramExerciseDatabaseService exerciseDB) : base(appState, userDB)
         {
-			this.workoutDB = workoutDB;
+			this.ProgramDb = programDb;
 			this.exerciseDB = exerciseDB;
-            ExerciseList = new ObservableCollection<WorkoutExercise>();
+            ExerciseList = new ObservableCollection<ProgramExercise>();
             CurrentUser = appState.CurrentUser.Username;
         }
 
         [RelayCommand]
-		void Add()
+        private void Add()
 		{
 			if(!string.IsNullOrEmpty(ExerciseName) && Sets != 0 && Reps != 0)
 			{
-                WorkoutExercise exercise = new WorkoutExercise()
+                var exercise = new ProgramExercise()
 				{
 					ExerciseName = ExerciseName,
 					Sets = Sets,
@@ -65,24 +64,24 @@ namespace CourseWork.ViewModels
 		}
 
 		[RelayCommand]
-		void Delete(WorkoutExercise excersise)
+		private void Delete(ProgramExercise exercise)
 		{
-			if (ExerciseList.Contains(excersise))
+			if (ExerciseList.Contains(exercise))
 			{
-				ExerciseList.Remove(excersise);
+				ExerciseList.Remove(exercise);
 			}
 		}
 
 		[RelayCommand(CanExecute = nameof(CanCreate))]
 		private async Task CreateWorkout()
 		{
-			Workout workout = new Workout(appState.CurrentUser, WorkoutName);
+			var program = new Models.Program(appState.CurrentUser, ProgramName);
 
 			try
 			{
-				var res = await workoutDB.StoreWorkout(workout, appState.CurrentUser);
+				var res = await ProgramDb.StoreProgram(program, appState.CurrentUser);
 
-				foreach (WorkoutExercise exercise in ExerciseList)
+				foreach (ProgramExercise exercise in ExerciseList)
 				{
 					exercise.WorkoutId = res.Id;
 					await exerciseDB.StoreWorkoutExercise(exercise);
@@ -100,13 +99,13 @@ namespace CourseWork.ViewModels
 
 		private bool CanCreate()
 		{
-			return !string.IsNullOrEmpty(WorkoutName) && ExerciseList.Any(); ;
+			return !string.IsNullOrEmpty(ProgramName) && ExerciseList.Any(); ;
 		}
 
 		private void ResetFields()
 		{
 			ExerciseList.Clear();
-			WorkoutName = "";
+			ProgramName = "";
             ExerciseName = "";
 			Sets = 0;
             Reps = 0;

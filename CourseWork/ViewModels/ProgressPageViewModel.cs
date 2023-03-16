@@ -8,7 +8,7 @@ namespace CourseWork.ViewModels
 {
     public partial class ProgressPageViewModel : BaseViewModel
     {
-        protected readonly IMetricDatabaseService metricDB;
+        private readonly IMetricDatabaseService metricDB;
 
         [ObservableProperty]
         [NotifyCanExecuteChangedFor(nameof(CompareMetricsCommand))]
@@ -58,7 +58,7 @@ namespace CourseWork.ViewModels
 
             if (DateToMetric != null && DateFromMetric != null)
             {
-                Metric progress = GetMetricDifference(DateToMetric, DateFromMetric);
+                var progress = GetMetricDifference(DateToMetric, DateFromMetric);
 
 
                 WeightDiff = progress.Weight;
@@ -93,10 +93,11 @@ namespace CourseWork.ViewModels
 
         private static Metric GetMetricDifference(Metric metric1, Metric metric2)
         {
-            Metric res = new Metric();
-
-            res.Weight = Math.Round(metric1.Weight - metric2.Weight,2);
-            res.BodyFat = Math.Round(metric1.BodyFat - metric2.BodyFat,2);
+            var res = new Metric
+            {
+                Weight = Math.Round(metric1.Weight - metric2.Weight,2),
+                BodyFat = Math.Round(metric1.BodyFat - metric2.BodyFat,2)
+            };
 
             return res;
         }

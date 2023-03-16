@@ -1,5 +1,4 @@
-﻿using System;
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CourseWork.Interfaces;
 
@@ -27,7 +26,7 @@ namespace CourseWork.ViewModels
         private async Task Register()
         {
 
-            Models.User user = new Models.User()
+            var user = new Models.User()
             {
                 Username = EntryUsername,
                 Password = EntryPassword,

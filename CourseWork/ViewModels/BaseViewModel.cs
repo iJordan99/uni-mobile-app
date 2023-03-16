@@ -10,7 +10,7 @@ namespace CourseWork.ViewModels
 		protected readonly IAppState appState;
 		protected readonly IUserDatabaseService userDB;
 
-		public BaseViewModel(IAppState appState, IUserDatabaseService userDB)
+		protected BaseViewModel(IAppState appState, IUserDatabaseService userDB)
 		{
 			this.appState = appState;
 			this.userDB = userDB;

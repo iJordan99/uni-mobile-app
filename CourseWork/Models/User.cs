@@ -17,7 +17,7 @@ namespace CourseWork.Models
         public List<Metric> Metrics { get; set; }
 
         [OneToMany(CascadeOperations = CascadeOperation.All)]
-        public List<Workout> Workouts { get; set; }
+        public List<Program> Workouts { get; set; }
 
         public User()
 		{

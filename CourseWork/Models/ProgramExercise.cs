@@ -3,14 +3,14 @@ using SQLiteNetExtensions.Attributes;
 
 namespace CourseWork.Models
 {
-	[Table("Workout_Exercises")]
-	public class WorkoutExercise
+	[Table("ProgramExercises")]
+	public class ProgramExercise
 	{
 
         [PrimaryKey, Column("_Id")]
         public Guid Id { get; set; } = Guid.NewGuid();
 
-        [ForeignKey(typeof(Workout))]
+        [ForeignKey(typeof(Program))]
         [NotNull]
         public Guid WorkoutId { get; set; }
 
@@ -19,16 +19,16 @@ namespace CourseWork.Models
         public int Reps { get; set; }
         public double Weight { get; set; }
 
-        public WorkoutExercise(Workout workout, string exerciseName, int sets, int reps, double weight)
+        public ProgramExercise(Program program, string exerciseName, int sets, int reps, double weight)
 		{
-            WorkoutId = workout.Id;
+            WorkoutId = program.Id;
             ExerciseName = exerciseName;
             Sets = sets;
             Reps = reps;
             Weight = weight;
 		}
 
-        public WorkoutExercise() { }
+        public ProgramExercise() { }
     }
 }
 

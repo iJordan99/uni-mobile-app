@@ -2,9 +2,9 @@
 
 namespace CourseWork.Views;
 
-public partial class UserProgrammesPage : ContentPage
+public partial class UserProgramsPage : ContentPage
 {
-	public UserProgrammesPage(UserProgrammesPageViewModel vm)
+	public UserProgramsPage(UserProgramsPageViewModel vm)
 	{
 		InitializeComponent();
         this.BindingContext = vm;
