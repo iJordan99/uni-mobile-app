@@ -7,7 +7,7 @@ namespace CourseWork.Services
 {
 	public class MetricDatabaseService : BaseDatabaseService, IMetricDatabaseService
 	{
-        public MetricDatabaseService(SQLiteAsyncConnection _database) : base(_database)
+        public MetricDatabaseService(SQLiteAsyncConnection database) : base(database)
         { 
         }
 
@@ -15,7 +15,7 @@ namespace CourseWork.Services
         {
             try
             {
-                Metric metric = await _database.Table<Metric>()
+                Metric metric = await Database.Table<Metric>()
                                 .Where(m => m.UserId == user.Id && m.Date == date)
                                 .FirstOrDefaultAsync();
                 return metric;
@@ -28,26 +28,11 @@ namespace CourseWork.Services
                 return null;
             }
         }
-
-        public async Task<int> StoreMetric(Metric metric, User user)
+        public async Task<int> StoreMetric(Metric metric)
         {
             try
-            {
-
-                Metric existingMetric = await FetchMetrics(user, metric.Date);
-                if (existingMetric != null)
-                {
-                    existingMetric.Weight = metric.Weight;
-                    existingMetric.Height = metric.Height;
-                    existingMetric.BodyFat = metric.BodyFat;
-
-                    return await _database.UpdateAsync(existingMetric);
-                }
-                else
-                {
-                    metric.UserId = user.Id;
-                    return await _database.InsertAsync(metric);
-                }
+            { 
+                return await Database.InsertAsync(metric);
             }
             catch (Exception e)
             {

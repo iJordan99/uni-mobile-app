@@ -14,11 +14,11 @@ public partial class ProgramDetailsPage : ContentPage
     void Weight_TextChanged(System.Object sender, Microsoft.Maui.Controls.TextChangedEventArgs e)
     {
         var entry = sender as Entry;
-        var WorkoutExercise = entry?.BindingContext as ProgramExercise;
+        var workoutExercise = entry?.BindingContext as ProgramExercise;
 
-        if (WorkoutExercise != null)
+        if (workoutExercise != null)
         {
-            WorkoutExercise.Weight = Convert.ToDouble(e.NewTextValue);
+            workoutExercise.Weight = Convert.ToDouble(e.NewTextValue);
         }
     }
 }

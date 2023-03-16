@@ -1,4 +1,4 @@
-﻿using System.Runtime.InteropServices.JavaScript;
+﻿using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CourseWork.Interfaces;
@@ -9,38 +9,48 @@ namespace CourseWork.ViewModels
 	public partial class HomePageViewModel : BaseViewModel
 	{
 		[ObservableProperty]
-		string currentUser;
+		string _currentUser;
 
         [ObservableProperty]
-        string welcomeMessage;
+        string _welcomeMessage;
 
 		[ObservableProperty]
-		double weight;
+		double _weight;
 
         [ObservableProperty]
-        double height;
+        double _height;
 
         [ObservableProperty]
-        double bodyFat;
+        double _bodyFat;
 
 		[ObservableProperty]
-		Metric metric;
+		Metric _metric;
 
         [ObservableProperty]
         [NotifyCanExecuteChangedFor(nameof(GetMetricCommand))]
-        DateTime date;
+        DateTime _date;
 
         [ObservableProperty]
-        bool canUpdate;
+        bool _canUpdate;
 
         [ObservableProperty]
-        bool hasNoMetric;
+        bool _hasNoMetric;
 
-        private readonly IMetricDatabaseService metricDB;
+        [ObservableProperty] ObservableCollection<WorkoutSession> _workoutSessions;
+        
+        [ObservableProperty] ObservableCollection<WorkoutSessionExercise> _sessionExercises;
 
-        public HomePageViewModel(IAppState appState, IUserDatabaseService userDB, IMetricDatabaseService metricDB) : base(appState, userDB)
+        private readonly IMetricDatabaseService _metricDb;
+
+        private readonly IWorkoutSessionDatabaseService _workoutSessionDb;
+
+        private readonly IWorkoutSessionExerciseDatabaseService _workoutSessionExerciseDb;
+
+        public HomePageViewModel(IAppState appState, IUserDatabaseService userDb, IMetricDatabaseService metricDb, IWorkoutSessionDatabaseService workoutSessionDb, IWorkoutSessionExerciseDatabaseService workoutSessionExerciseDb) : base(appState, userDb)
         {
-			this.metricDB = metricDB;
+			this._metricDb = metricDb;
+            this._workoutSessionDb = workoutSessionDb;
+            this._workoutSessionExerciseDb = workoutSessionExerciseDb;
             CurrentUser = appState.CurrentUser.Username;
 			WelcomeMessage = $"Welcome back {CurrentUser}";
             Date = DateTime.Today;
@@ -51,6 +61,7 @@ namespace CourseWork.ViewModels
         private async void LoadDataAsync()
         {
             await GetMetric();
+            await GetWorkoutSessionsInfo();
         }
 
         partial void OnDateChanged(DateTime value)
@@ -58,10 +69,20 @@ namespace CourseWork.ViewModels
             LoadDataAsync();
         }
 
+        private async Task GetWorkoutSessionsInfo()
+        {
+            WorkoutSessions = await _workoutSessionDb.FetchSessions(AppState.CurrentUser);
+            
+            foreach (var session in WorkoutSessions)
+            {
+                SessionExercises = await _workoutSessionExerciseDb.FetchSessionExercises(session);
+            }
+        }
+        
         [RelayCommand]
         private async Task GetMetric()
         {
-            Metric = await metricDB.FetchMetrics(appState.CurrentUser, Date);
+            Metric = await _metricDb.FetchMetrics(AppState.CurrentUser, Date);
 
             if (Metric != null)
             {
@@ -83,26 +104,27 @@ namespace CourseWork.ViewModels
         [RelayCommand]
         private async Task SaveMetrics()
         {
-            Metric = new Metric()
-            {
-                Weight = Weight,
-                Height = Height,
-                BodyFat = BodyFat,
-                Date = Date
-            };
+            Metric = new Metric(Weight, Height, BodyFat, Date, AppState.CurrentUser);
 
             try
             {
-                var res = await metricDB.StoreMetric(Metric, appState.CurrentUser);
+                var res = await _metricDb.StoreMetric(Metric);
                 if(res != 0)
                 {
-                    await Application.Current.MainPage.DisplayAlert("Success!", "Metrics Saved", "OK");
+                    if (Application.Current.MainPage != null)
+                    {
+                        await Application.Current.MainPage.DisplayAlert("Success!", "Metrics Saved", "OK");
+                    }
+                    
                     HasNoMetric = false;
                 }
             }
             catch (Exception e)
             {
-                await Application.Current.MainPage.DisplayAlert("Oh no!", $"Encountered {e.Message}", "OK");
+                if (Application.Current != null)
+                {
+                    await Application.Current.MainPage.DisplayAlert("Oh no!", $"Encountered {e.Message}", "OK");
+                }
             }
         }
 

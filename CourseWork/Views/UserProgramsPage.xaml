@@ -5,19 +5,19 @@
              xmlns:viewModels="clr-namespace:CourseWork.ViewModels"
              x:DataType="viewModels:UserProgramsPageViewModel"
              xmlns:model="clr-namespace:CourseWork.Models"
-             Title="My Programmes">
+             Title="My Programs">
     <VerticalStackLayout Padding="20" Spacing="10">
 
         <Image Source="fitness_guy.png" 
                     HeightRequest="260"
                     HorizontalOptions="Center"/>
 
-            <Label Text="Welcome to your programmes"
+            <Label Text="Welcome to your programs"
                     HorizontalOptions="Center"
                     FontSize="Large"
                     FontAttributes="Bold"/>
 
-        <CollectionView ItemsSource="{Binding Programmes}">
+        <CollectionView ItemsSource="{Binding Programs}">
 
             <CollectionView.ItemTemplate>
 
@@ -34,7 +34,7 @@
 
                         <Grid Padding="0,5">
                             <Grid.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:UserProgramsPageViewModel}}, Path=ProgrammeInfoCommand}"
+                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:UserProgramsPageViewModel}}, Path=ProgramInfoCommand}"
                                                         CommandParameter="{Binding .}" />
                             </Grid.GestureRecognizers>
                             <Frame>

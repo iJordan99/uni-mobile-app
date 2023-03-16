@@ -38,7 +38,7 @@
 
     </FlyoutItem>
 
-    <FlyoutItem Title="Tracking - New Program Programme">
+    <FlyoutItem Title="Tracking - New Program Program">
 
         <Tab>
 
@@ -50,7 +50,7 @@
 
     </FlyoutItem>
 
-    <FlyoutItem Title="Tracking - My Programmes">
+    <FlyoutItem Title="Tracking - My Programs">
 
         <Tab>
 

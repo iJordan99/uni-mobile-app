@@ -8,17 +8,17 @@ namespace CourseWork.ViewModels
 	{
 		[ObservableProperty]
         [NotifyCanExecuteChangedFor(nameof(RegisterCommand))]
-        string entryUsername;
+        string _entryUsername;
 
         [ObservableProperty]
         [NotifyCanExecuteChangedFor(nameof(RegisterCommand))]
-        string entryEmail;
+        string _entryEmail;
 
         [ObservableProperty]
         [NotifyCanExecuteChangedFor(nameof(RegisterCommand))]
-        string entryPassword;
+        string _entryPassword;
 
-        public RegisterPageViewModel(IAppState appState, IUserDatabaseService userDB) : base(appState, userDB)
+        public RegisterPageViewModel(IAppState appState, IUserDatabaseService userDb) : base(appState, userDb)
         {
 		}
 
@@ -33,7 +33,7 @@ namespace CourseWork.ViewModels
                 Email = EntryEmail
             };
 
-            var res = await userDB.RegisterUser(user);
+            var res = await UserDb.RegisterUser(user);
             if(res != 0)
             {
                 await Shell.Current.GoToAsync("//LoginPage");

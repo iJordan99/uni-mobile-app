@@ -8,29 +8,29 @@ namespace CourseWork.ViewModels
     public partial class UserProgramsPageViewModel : BaseViewModel
     {
         [ObservableProperty]
-        ObservableCollection<Models.Program> programmes;
+        ObservableCollection<Models.Program> _programs;
 
-        private readonly IProgramDatabaseService ProgramDb;
+        private readonly IProgramDatabaseService _programDb;
        
-        public UserProgramsPageViewModel(IAppState appState, IUserDatabaseService userDB, IProgramDatabaseService programDb) : base(appState, userDB)
+        public UserProgramsPageViewModel(IAppState appState, IUserDatabaseService userDb, IProgramDatabaseService programDb) : base(appState, userDb)
         {
-            this.ProgramDb = programDb;
-            Programmes = new ObservableCollection<Models.Program>();
+            this._programDb = programDb;
+            Programs = new ObservableCollection<Models.Program>();
             LoadDataAsync();
         }
 
         private async void LoadDataAsync()
         {
-            await GetProgrammes();
+            await GetPrograms();
         }
 
-        private async Task GetProgrammes()
+        private async Task GetPrograms()
         {
-            Programmes = await ProgramDb.FetchAllByUser(appState.CurrentUser);
+            Programs = await _programDb.FetchAllByUser(AppState.CurrentUser);
         }
 
         [RelayCommand]
-        private async Task ProgrammeInfo(Models.Program program)
+        private async Task ProgramInfo(Models.Program program)
         {
             await Shell.Current.GoToAsync($"/ProgramDetailsPage?workoutId={program.Id}");
         }
@@ -38,10 +38,10 @@ namespace CourseWork.ViewModels
         [RelayCommand]
         async void Delete(Models.Program program)
         {
-            if(Programmes.Contains(program))
+            if(Programs.Contains(program))
             {
-                await ProgramDb.DeleteWorkout(program);
-                Programmes.Remove(program);
+                await _programDb.DeleteWorkout(program);
+                Programs.Remove(program);
             }
         }
     }

@@ -8,14 +8,14 @@ namespace CourseWork.Services
 {
 	public class ProgramDatabaseService : BaseDatabaseService, IProgramDatabaseService
     {
-        public async Task<Models.Program> StoreProgram(Models.Program program, User User)
+        public async Task<Models.Program> StoreProgram(Models.Program program, User user)
         {
             
             try
             {
-                program.UserId = User.Id;
-                await _database.InsertAsync(program);
-                return await _database.Table<Models.Program>().Where(m => m.Id == program.Id).FirstOrDefaultAsync();
+                program.UserId = user.Id;
+                await Database.InsertAsync(program);
+                return await Database.Table<Models.Program>().Where(m => m.Id == program.Id).FirstOrDefaultAsync();
             }
             catch (Exception e)
             {
@@ -24,17 +24,17 @@ namespace CourseWork.Services
             }
         }
 
-        public async Task<ObservableCollection<Models.Program>> FetchAllByUser(User User)
+        public async Task<ObservableCollection<Models.Program>> FetchAllByUser(User user)
         {
             try
             {
-                List<Models.Program> ProgramList = await _database.Table<Models.Program>()
-                    .Where(m => m.UserId == User.Id)
+                List<Models.Program> programList = await Database.Table<Models.Program>()
+                    .Where(m => m.UserId == user.Id)
                     .ToListAsync();
 
-                ObservableCollection<Models.Program> Programs = new ObservableCollection<Models.Program>(ProgramList);
+                ObservableCollection<Models.Program> programs = new ObservableCollection<Models.Program>(programList);
 
-                return Programs;
+                return programs;
             }
             catch (Exception e)
             {
@@ -45,17 +45,17 @@ namespace CourseWork.Services
             }
         }
 
-        public async Task<Models.Program>FetchById(Guid ProgramId)
+        public async Task<Models.Program>FetchById(Guid programId)
         {
-            return await _database.Table<Models.Program>().Where(m => m.Id == ProgramId).FirstOrDefaultAsync();
+            return await Database.Table<Models.Program>().Where(m => m.Id == programId).FirstOrDefaultAsync();
         }
 
         public async Task<int>DeleteWorkout(Models.Program program)
         {
-            return await _database.Table<Models.Program>().Where(m => m.Id == program.Id).DeleteAsync();
+            return await Database.Table<Models.Program>().Where(m => m.Id == program.Id).DeleteAsync();
         }
 
-        public ProgramDatabaseService(SQLiteAsyncConnection _database) : base(_database)
+        public ProgramDatabaseService(SQLiteAsyncConnection database) : base(database)
 		{
 
 		}

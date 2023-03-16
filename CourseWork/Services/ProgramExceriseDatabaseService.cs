@@ -11,7 +11,7 @@ namespace CourseWork.Services
 
         public async Task<int> StoreWorkoutExercise(ProgramExercise programExercise)
         {
-            return await _database.InsertAsync(programExercise);
+            return await Database.InsertAsync(programExercise);
         }
 
         public async Task<ObservableCollection<ProgramExercise>> FetchWorkoutExercise(Models.Program program)
@@ -19,12 +19,12 @@ namespace CourseWork.Services
             try
             {
 
-                List<ProgramExercise> ProgramExercisesList = await _database.Table<ProgramExercise>().Where(m => m.WorkoutId == program.Id)
+                List<ProgramExercise> programExercisesList = await Database.Table<ProgramExercise>().Where(m => m.WorkoutId == program.Id)
                             .ToListAsync();
 
-                ObservableCollection<ProgramExercise> ProgramExercises = new ObservableCollection<ProgramExercise>(ProgramExercisesList);
+                ObservableCollection<ProgramExercise> programExercises = new ObservableCollection<ProgramExercise>(programExercisesList);
 
-                return ProgramExercises;
+                return programExercises;
 
             } catch(Exception e)
             {
@@ -33,7 +33,7 @@ namespace CourseWork.Services
             }
         }
 
-        public ProgramExceriseDatabaseService(SQLiteAsyncConnection _database) : base(_database)
+        public ProgramExceriseDatabaseService(SQLiteAsyncConnection database) : base(database)
 		{
 
 		}

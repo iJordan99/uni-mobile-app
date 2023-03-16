@@ -5,7 +5,7 @@
              xmlns:viewModel="clr-namespace:CourseWork.ViewModels"
              xmlns:model="clr-namespace:CourseWork.Models"
              x:DataType="viewModel:CreateWorkoutProgramPageViewModel"
-             Title="Create Program Programme">
+             Title="Create Workout Program">
 
     <VerticalStackLayout Padding="20" Spacing="5">
        <Grid Style="{StaticResource Grid}"
@@ -15,9 +15,9 @@
               RowSpacing="15">
 
         
-                <Label Text="Programme"/>
+                <Label Text="Program"/>
 
-                <Entry Placeholder="Programme Name"
+                <Entry Placeholder="Program Name"
                        Grid.ColumnSpan="3"
                        Grid.Row="1"
                        TextChanged="EntryName_TextChanged"/>

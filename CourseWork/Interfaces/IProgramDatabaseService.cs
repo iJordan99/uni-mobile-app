@@ -6,9 +6,9 @@ namespace CourseWork.Interfaces
 {
 	public interface IProgramDatabaseService
 	{
-		Task<Models.Program> StoreProgram(Models.Program program,User User);
-		Task<ObservableCollection<Models.Program>> FetchAllByUser(User User);
-		Task<Models.Program> FetchById(Guid ProgramId);
+		Task<Models.Program> StoreProgram(Models.Program program,User user);
+		Task<ObservableCollection<Models.Program>> FetchAllByUser(User user);
+		Task<Models.Program> FetchById(Guid programId);
 		Task<int> DeleteWorkout(Models.Program program);
 	}
 }

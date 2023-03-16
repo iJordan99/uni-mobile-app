@@ -57,15 +57,14 @@ public static class MauiProgram
         mauiAppBuilder.Services.AddSingleton<IAppState, AppState>();
 
         // Register SQLiteAsyncConnection
-        mauiAppBuilder.Services.AddSingleton(provider =>
-        {
-            return new SQLiteAsyncConnection(Constants.DatabasePath, Constants.Flags);
-        });
+        mauiAppBuilder.Services.AddSingleton(_ => new SQLiteAsyncConnection(Constants.DatabasePath, Constants.Flags));
 
         mauiAppBuilder.Services.AddSingleton<IUserDatabaseService, UserDatabaseService>();
         mauiAppBuilder.Services.AddSingleton<IMetricDatabaseService, MetricDatabaseService>();
         mauiAppBuilder.Services.AddSingleton<IProgramDatabaseService, ProgramDatabaseService>();
         mauiAppBuilder.Services.AddSingleton<IProgramExerciseDatabaseService, ProgramExceriseDatabaseService>();
+        mauiAppBuilder.Services.AddSingleton<IWorkoutSessionDatabaseService, WorkoutSessionDatabaseServiceDatabaseService>();
+        mauiAppBuilder.Services.AddSingleton<IWorkoutSessionExerciseDatabaseService, WorkoutSessionExerciseDatabaseService>();
 
         return mauiAppBuilder;
     }

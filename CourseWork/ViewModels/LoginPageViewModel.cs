@@ -9,13 +9,13 @@ namespace CourseWork.ViewModels
 	{
         [ObservableProperty]
         [NotifyCanExecuteChangedFor(nameof(LoginCommand))]
-        string entryUsername;
+        string _entryUsername;
 
         [ObservableProperty]
         [NotifyCanExecuteChangedFor(nameof(LoginCommand))]
-        string entryPassword;
+        string _entryPassword;
 
-        public LoginPageViewModel(IAppState appState, IUserDatabaseService userDB): base(appState, userDB)
+        public LoginPageViewModel(IAppState appState, IUserDatabaseService userDb): base(appState, userDb)
         {
 
         }
@@ -30,11 +30,11 @@ namespace CourseWork.ViewModels
                 Password = EntryPassword
             };
 
-            User validatedUser = await userDB.ValidateUser(user);
+            User validatedUser = await UserDb.ValidateUser(user);
 
             if (validatedUser != null)
             {
-                appState.CurrentUser = validatedUser;
+                AppState.CurrentUser = validatedUser;
                 await Shell.Current.GoToAsync("//HomePage");
             }
         }

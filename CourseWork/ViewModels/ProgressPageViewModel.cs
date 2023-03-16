@@ -8,42 +8,42 @@ namespace CourseWork.ViewModels
 {
     public partial class ProgressPageViewModel : BaseViewModel
     {
-        private readonly IMetricDatabaseService metricDB;
+        private readonly IMetricDatabaseService _metricDb;
 
         [ObservableProperty]
         [NotifyCanExecuteChangedFor(nameof(CompareMetricsCommand))]
-        DateTime dateFrom;
+        DateTime _dateFrom;
 
         [ObservableProperty]
-        DateTime dateTo;
+        DateTime _dateTo;
 
         [ObservableProperty]
-        Metric dateFromMetric;
+        Metric _dateFromMetric;
 
         [ObservableProperty]
-        Metric dateToMetric;
+        Metric _dateToMetric;
 
         [ObservableProperty]
-        double weightDiff;
+        double _weightDiff;
 
         [ObservableProperty]
-        double bodyFatDiff;
+        double _bodyFatDiff;
 
         [ObservableProperty]
-        bool hasLost;
+        bool _hasLost;
 
         [ObservableProperty]
-        bool hasGained;
+        bool _hasGained;
 
         [ObservableProperty]
-        string nullMetric;
+        string _nullMetric;
 
         [ObservableProperty]
-        bool hasNoMetric;
+        bool _hasNoMetric;
 
-        public ProgressPageViewModel(IAppState appState, IUserDatabaseService userDB, IMetricDatabaseService metricDB) : base(appState, userDB)
+        public ProgressPageViewModel(IAppState appState, IUserDatabaseService userDb, IMetricDatabaseService metricDb) : base(appState, userDb)
         {
-            this.metricDB = metricDB;
+            this._metricDb = metricDb;
             DateTo = DateTime.Today;
             DateFrom = DateTime.Today;
         }
@@ -51,8 +51,8 @@ namespace CourseWork.ViewModels
         [RelayCommand]
         private async Task CompareMetrics()
         {
-            DateFromMetric = await metricDB.FetchMetrics(appState.CurrentUser, DateFrom);
-            DateToMetric = await metricDB.FetchMetrics(appState.CurrentUser, DateTo);
+            DateFromMetric = await _metricDb.FetchMetrics(AppState.CurrentUser, DateFrom);
+            DateToMetric = await _metricDb.FetchMetrics(AppState.CurrentUser, DateTo);
 
             NullMetric = "";
 

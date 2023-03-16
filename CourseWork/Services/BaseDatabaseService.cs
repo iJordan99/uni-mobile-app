@@ -7,15 +7,17 @@ namespace CourseWork.Services
 {
 	public class BaseDatabaseService
 	{
-        protected readonly SQLiteAsyncConnection _database;
+        protected readonly SQLiteAsyncConnection Database;
 
-        public BaseDatabaseService(SQLiteAsyncConnection _database)
+        protected BaseDatabaseService(SQLiteAsyncConnection database)
         {
-            this._database = _database;
-            _database.CreateTableAsync<User>();
-            _database.CreateTableAsync<Metric>();
-            _database.CreateTableAsync<Models.Program>();
-            _database.CreateTableAsync<ProgramExercise>();
+            this.Database = database;
+            database.CreateTableAsync<User>();
+            database.CreateTableAsync<Metric>();
+            database.CreateTableAsync<Models.Program>();
+            database.CreateTableAsync<ProgramExercise>();
+            database.CreateTableAsync<WorkoutSession>();
+            database.CreateTableAsync<WorkoutSessionExercise>();
         }
     }
 }

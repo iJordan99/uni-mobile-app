@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using CourseWork.Interfaces;
 using CourseWork.Models;
 
@@ -9,28 +10,32 @@ namespace CourseWork.ViewModels
     {
 
         [ObservableProperty]
-        Guid workoutId;
+        Guid _workoutId;
 
         [ObservableProperty]
         Models.Program _program;
 
         [ObservableProperty]
-        double weight;
+        double _weight;
 
         [ObservableProperty]
-        ObservableCollection<ProgramExercise> workoutExercises;
+        ObservableCollection<ProgramExercise> _workoutExercises;
 
-        private readonly IProgramDatabaseService ProgramDb;
+        private readonly IProgramDatabaseService _programDb;
 
-        private readonly IProgramExerciseDatabaseService exerciseDB;
-        //protected readonly IRegisterWorkoutSession workoutSessionDB;
+        private readonly IProgramExerciseDatabaseService _programExerciseDb;
 
-        public ProgramDetailsPageViewModel(IAppState appState, IUserDatabaseService userDB, IProgramDatabaseService programDb,
-            IProgramExerciseDatabaseService exerciseDB) : base(appState, userDB)
+        private readonly IWorkoutSessionDatabaseService _workoutSessionDb;
+
+        private readonly IWorkoutSessionExerciseDatabaseService _workoutSessionExerciseDb; 
+
+        public ProgramDetailsPageViewModel(IAppState appState, IUserDatabaseService userDb, IProgramDatabaseService programDb,
+            IProgramExerciseDatabaseService programExerciseDb, IWorkoutSessionDatabaseService workoutSessionDb, IWorkoutSessionExerciseDatabaseService workoutSessionExerciseDb) : base(appState, userDb)
 		{
-            this.ProgramDb = programDb;
-            this.exerciseDB = exerciseDB;
-            //this.workoutSessionDB = workoutSessionDB;
+            this._programDb = programDb;
+            this._programExerciseDb = programExerciseDb;
+            this._workoutSessionDb = workoutSessionDb;
+            this._workoutSessionExerciseDb = workoutSessionExerciseDb;
         }
 
         //https://learn.microsoft.com/en-us/dotnet/maui/fundamentals/shell/navigation?view=net-maui-7.0
@@ -42,34 +47,40 @@ namespace CourseWork.ViewModels
 
         private async void LoadData()
         {
-            Program = await ProgramDb.FetchById(WorkoutId);
-            WorkoutExercises = await exerciseDB.FetchWorkoutExercise(Program);
+            Program = await _programDb.FetchById(WorkoutId);
+            WorkoutExercises = await _programExerciseDb.FetchWorkoutExercise(Program);
         }
 
-        //[RelayCommand]
-        //private async Task RegisterWorkoutSession()
-        //{
+        [RelayCommand]
+        private async Task RegisterWorkoutSession()
+        {
+            var session = new WorkoutSession(AppState.CurrentUser.Id, DateTime.Now);
+            session = await _workoutSessionDb.StoreWorkoutSession(session);
 
-        //    try
-        //    {
+            try
+            {
+                foreach (var exercise in WorkoutExercises)
+                {
+                    var sessionExercise = new WorkoutSessionExercise(session, exercise.ExerciseName, exercise.Sets,
+                        exercise.Reps, exercise.Weight);
+                    
+                     await _workoutSessionExerciseDb.StoreWorkoutSessionExercise(sessionExercise);
+                }
                 
-        //        Program NewWorkout = new Program(appState.CurrentUser, Program.ProgramName);
-        //        NewWorkout = await programDb.StoreProgram(NewWorkout, appState.CurrentUser);
-
-        //        foreach (ProgramExercise exercise in WorkoutExercises)
-        //        {
-        //            exercise.WorkoutId = NewWorkout.Id;
-        //            await exerciseDB.StoreWorkoutExercise(exercise);
-        //        }
-
-        //        var i = await workoutSessionDB.StoreWorkoutSession(NewWorkout, appState.CurrentUser);
-        //        await Application.Current.MainPage.DisplayAlert("Oh no!", $"{i}", "OK");
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        await Application.Current.MainPage.DisplayAlert("Oh no!", $"Encountered {e.Message}", "OK");
-        //    }
-        //}
+                if (Application.Current.MainPage != null)
+                {
+                    await Application.Current.MainPage.DisplayAlert("Success!", "Workout Session Saved", "OK");
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                if (Application.Current.MainPage != null)
+                {
+                    await Application.Current.MainPage.DisplayAlert("Success!", e.Message, "OK");
+                }
+            }
+        }
     }
 }
 

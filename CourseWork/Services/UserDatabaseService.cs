@@ -7,7 +7,7 @@ namespace CourseWork.Services
 {
 	public class UserDatabaseService : BaseDatabaseService, IUserDatabaseService
 	{
-        public UserDatabaseService(SQLiteAsyncConnection _database) : base(_database)
+        public UserDatabaseService(SQLiteAsyncConnection database) : base(database)
         {
 
         }
@@ -16,7 +16,7 @@ namespace CourseWork.Services
         {
             try
             {
-                var res = await _database.InsertAsync(user);
+                var res = await Database.InsertAsync(user);
                 return res;
             }
             catch (Exception e)
@@ -32,7 +32,7 @@ namespace CourseWork.Services
 
             try
             {
-                var res = await _database.Table<User>().FirstOrDefaultAsync(x =>
+                var res = await Database.Table<User>().FirstOrDefaultAsync(x =>
                                             x.Username == user.Username && x.Password == user.Password);
                 return res;
             }

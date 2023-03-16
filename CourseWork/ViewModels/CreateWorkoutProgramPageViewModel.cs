@@ -10,36 +10,36 @@ namespace CourseWork.ViewModels
 	{
 		[ObservableProperty]
 		[NotifyCanExecuteChangedFor(nameof(CreateWorkoutCommand))]
-		string programName;
+		string _programName;
 
 		[ObservableProperty]
 		[NotifyCanExecuteChangedFor(nameof(CreateWorkoutCommand))]
-        ProgramExercise exercise;
+        ProgramExercise _exercise;
 
 		[ObservableProperty]
-		int sets;
+		int _sets;
 
 		[ObservableProperty]
-		int reps;
+		int _reps;
 
 		[ObservableProperty]
 		[NotifyCanExecuteChangedFor(nameof(CreateWorkoutCommand))]
-		ObservableCollection<ProgramExercise> exerciseList;
+		ObservableCollection<ProgramExercise> _exerciseList;
 
 		[ObservableProperty]
-        string currentUser;
+        string _currentUser;
 
 		[ObservableProperty]
-		string exerciseName;
+		string _exerciseName;
 
-		private readonly IProgramDatabaseService ProgramDb;
-		private readonly IProgramExerciseDatabaseService exerciseDB;
+		private readonly IProgramDatabaseService _programDb;
+		private readonly IProgramExerciseDatabaseService _programExerciseDb;
 
-        public CreateWorkoutProgramPageViewModel(IAppState appState, IUserDatabaseService userDB, IProgramDatabaseService programDb,
-		IProgramExerciseDatabaseService exerciseDB) : base(appState, userDB)
+        public CreateWorkoutProgramPageViewModel(IAppState appState, IUserDatabaseService userDb, IProgramDatabaseService programDb,
+		IProgramExerciseDatabaseService programExerciseDb) : base(appState, userDb)
         {
-			this.ProgramDb = programDb;
-			this.exerciseDB = exerciseDB;
+			this._programDb = programDb;
+			this._programExerciseDb = programExerciseDb;
             ExerciseList = new ObservableCollection<ProgramExercise>();
             CurrentUser = appState.CurrentUser.Username;
         }
@@ -75,16 +75,16 @@ namespace CourseWork.ViewModels
 		[RelayCommand(CanExecute = nameof(CanCreate))]
 		private async Task CreateWorkout()
 		{
-			var program = new Models.Program(appState.CurrentUser, ProgramName);
+			var program = new Models.Program(AppState.CurrentUser, ProgramName);
 
 			try
 			{
-				var res = await ProgramDb.StoreProgram(program, appState.CurrentUser);
+				var res = await _programDb.StoreProgram(program, AppState.CurrentUser);
 
 				foreach (ProgramExercise exercise in ExerciseList)
 				{
 					exercise.WorkoutId = res.Id;
-					await exerciseDB.StoreWorkoutExercise(exercise);
+					await _programExerciseDb.StoreWorkoutExercise(exercise);
 				}
 
                 await Application.Current.MainPage.DisplayAlert("Success!", "Programme Saved", "OK");
@@ -105,7 +105,7 @@ namespace CourseWork.ViewModels
 		private void ResetFields()
 		{
 			ExerciseList.Clear();
-			ProgramName = "";
+			ProgramName = string.Empty;
             ExerciseName = "";
 			Sets = 0;
             Reps = 0;

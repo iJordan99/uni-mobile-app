@@ -7,9 +7,9 @@ namespace CourseWork.Models
     public class Metric
 	{
 		public double Weight { get; set; }
-        public double Height { get; set; }
+		public double Height { get; set; }
 		public double BodyFat { get; set; }
-        public DateTime Date { get; set; }
+		public DateTime Date { get; set; }
 
         [PrimaryKey, Column("_Id")]
         public Guid Id { get; set; } = Guid.NewGuid();

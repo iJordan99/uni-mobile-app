@@ -18,10 +18,10 @@
                         HorizontalOptions="StartAndExpand"
                         WidthRequest="260"/>
 
-                <!--<Button Text="Register Session"
+                <Button Text="Register Session"
                         Style="{StaticResource SecondButton}"
                         HorizontalOptions="End"
-                        Command="{Binding RegisterWorkoutSessionCommand}"/>-->
+                        Command="{Binding RegisterWorkoutSessionCommand}"/>
 
             </HorizontalStackLayout>
 
@@ -51,27 +51,21 @@
                     <DataTemplate x:DataType="{x:Type model:ProgramExercise}">
                         <Grid ColumnDefinitions="0.3*,0.25*,0.25*,0.25*"
                                 RowDefinitions="Auto,Auto"
-                                RowSpacing="15">
+                                RowSpacing="15"
+                                ColumnSpacing="5">
 
                             <Label Text="{Binding ExerciseName}"
                                     Style="{StaticResource MediumLabel}"/>
 
-                            <Label Text="{Binding Sets}"
-                                    Grid.Column="1"
-                                    Style="{StaticResource MediumLabel}"/>
+                            <Entry  Text="{Binding Sets}"
+                                    Grid.Column="1"/>
 
-                            <Label Text="{Binding Reps}"
-                                    Grid.Column="2"
-                                    Style="{StaticResource MediumLabel}" />
-
+                            <Entry  Text="{Binding Reps}"
+                                    Grid.Column="2"/>
                           
                             <Entry Grid.Column="3"
                                    TextChanged="Weight_TextChanged"/>
-
-
-
-
-                    </Grid>
+                        </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
