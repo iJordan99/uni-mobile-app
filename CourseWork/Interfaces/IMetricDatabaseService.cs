@@ -1,12 +1,13 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using CourseWork.Models;
 
 namespace CourseWork.Interfaces
 {
 	public interface IMetricDatabaseService
 	{
-		Task<Metric> FetchMetrics(User user, DateTime date);
-		Task<int> StoreMetric(Metric metric);
+		Task<ObservableCollection<Metric>>FetchMetrics(User user, DateTime dateFrom, DateTime dateTo);
+		Task<int>StoreMetric(Metric metric);
 	}
 }
 

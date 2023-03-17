@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using CourseWork.Interfaces;
 using CourseWork.Models;
 using SQLite;
@@ -11,14 +12,18 @@ namespace CourseWork.Services
         { 
         }
 
-        public async Task<Metric> FetchMetrics(User user, DateTime date)
+        public async Task<ObservableCollection<Metric>> FetchMetrics(User user, DateTime dateFrom, DateTime dateTo)
         {
             try
+            
             {
-                Metric metric = await Database.Table<Metric>()
-                                .Where(m => m.UserId == user.Id && m.Date == date)
-                                .FirstOrDefaultAsync();
-                return metric;
+                List<Metric> metrics = await Database.Table<Metric>()
+                    .Where(m => m.UserId == user.Id &&m.Date >= dateFrom &&  m.Date <= dateTo)
+                    .ToListAsync();
+
+                ObservableCollection<Metric> filteredMetrics = new ObservableCollection<Metric>(metrics);
+
+                return filteredMetrics;
             }
             catch (Exception e)
             {

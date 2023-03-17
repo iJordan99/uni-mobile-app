@@ -5,112 +5,112 @@
              xmlns:viewModel="clr-namespace:CourseWork.ViewModels"
              x:DataType="viewModel:ProgressPageViewModel"
              Title="Progress">
+       
     <VerticalStackLayout>
         <Grid RowDefinitions="Auto,Auto,Auto,Auto"
               ColumnDefinitions="0.5*,0.5*"
               ColumnSpacing="15"
               RowSpacing="20"
               Padding="20">
-
+    
               <VerticalStackLayout Spacing="10">
                   <Label Text="Date From:"
                          Style="{StaticResource MediumLabel}"/>
-
+    
                   <DatePicker Style="{StaticResource DatePicker}"
-                    DateSelected="DateFromPicker_DateSelected"/>
-
+                              DateSelected="DateFromPicker_DateSelected"/>
+    
               </VerticalStackLayout>
-
+    
               <VerticalStackLayout Spacing="10"
                                    Grid.Column="1">
-
+    
                   <Label Text="Date To:"
                          Style="{StaticResource MediumLabel}"/>
-
+    
                   <DatePicker Style="{StaticResource DatePicker}"
-                    DateSelected="DateToPicker_DateSelected"/>
+                              DateSelected="DateToPicker_DateSelected"/>
               </VerticalStackLayout>
-
+    
             <VerticalStackLayout Grid.Row="2"
                                  Grid.ColumnSpan="2">
-
+    
                 <Button Text="Get"
                         Style="{StaticResource Button}"
-                        Command="{Binding CompareMetricsCommand}"/>
-
+                        Command="{Binding GetUserProgressMetricsCommand}"/>
+    
             </VerticalStackLayout>
-
+    
             <Label Text="{Binding NullMetric}"
                    Style="{StaticResource DatePickerAlert}"
                    Grid.Row="3"
                    Grid.ColumnSpan="2"/>
         </Grid>
-
+    
         <HorizontalStackLayout WidthRequest="400"
                                Padding="7"
                                Margin="0,20,0,0"
                                IsVisible="{Binding HasGained}">
-
+    
                 <Label Text="Weight Gained: "
                        Style="{StaticResource MediumLabel}"/>
-
+    
                 <Label Text="{Binding WeightDiff}"
                         Style="{StaticResource MediumLabel}"/>
-
+    
                 <Label Text=" KG "
                        Style="{StaticResource MediumLabel}"/>
-
+    
         </HorizontalStackLayout>
-
-
-        <HorizontalStackLayout WidthRequest="400"
-                                Padding="7"
-                                Margin="0,20,0,0"
-                                IsVisible="{Binding HasLost}">
-
-            <Label Text="Weight Lost: "
-                   Style="{StaticResource MediumLabel}"/>
-
-            <Label Text="{Binding WeightDiff}"
-                   Style="{StaticResource MediumLabel}"/>
-
-            <Label Text=" KG "
-                   Style="{StaticResource MediumLabel}"/>
-
-        </HorizontalStackLayout>
-
-        <HorizontalStackLayout WidthRequest="400"
-                               Padding="7"
-                               Margin="0,20,0,0"
-                               IsVisible="{Binding HasGained}">
-
-                <Label Text="BodyFat Gained: "
-                       Style="{StaticResource MediumLabel}"/>
-
-                <Label Text="{Binding BodyFatDiff}"
-                       Style="{StaticResource MediumLabel}"/>
-
-                <Label Text=" % "
-                        Style="{StaticResource MediumLabel}"/>
-
-        </HorizontalStackLayout>
-
+    
+    
         <HorizontalStackLayout WidthRequest="400"
                                Padding="7"
                                Margin="0,20,0,0"
                                IsVisible="{Binding HasLost}">
-
+    
+            <Label Text="Weight Lost: "
+                   Style="{StaticResource MediumLabel}"/>
+    
+            <Label Text="{Binding WeightDiff}"
+                   Style="{StaticResource MediumLabel}"/>
+    
+            <Label Text=" KG "
+                   Style="{StaticResource MediumLabel}"/>
+    
+        </HorizontalStackLayout>
+    
+        <HorizontalStackLayout WidthRequest="400"
+                               Padding="7"
+                               Margin="0,20,0,0"
+                               IsVisible="{Binding HasGained}">
+    
+                <Label Text="BodyFat Gained: "
+                       Style="{StaticResource MediumLabel}"/>
+    
+                <Label Text="{Binding BodyFatDiff}"
+                       Style="{StaticResource MediumLabel}"/>
+    
+                <Label Text=" % "
+                        Style="{StaticResource MediumLabel}"/>
+    
+        </HorizontalStackLayout>
+    
+        <HorizontalStackLayout WidthRequest="400"
+                               Padding="7"
+                               Margin="0,20,0,0"
+                               IsVisible="{Binding HasLost}">
+    
                 <Label Text="BodyFat Lost: "
                        Style="{StaticResource MediumLabel}"/>
-
+    
                 <Label Text="{Binding BodyFatDiff}"
                         Style="{StaticResource MediumLabel}"/>
-
+    
                 <Label Text=" % "
                        Style="{StaticResource MediumLabel}"/>
-
+    
         </HorizontalStackLayout>
-
-
+    
     </VerticalStackLayout>
 </ContentPage>

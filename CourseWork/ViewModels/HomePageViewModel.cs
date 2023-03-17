@@ -24,7 +24,7 @@ namespace CourseWork.ViewModels
         double _bodyFat;
 
 		[ObservableProperty]
-		Metric _metric;
+        ObservableCollection<Metric> _metric;
 
         [ObservableProperty]
         [NotifyCanExecuteChangedFor(nameof(GetMetricCommand))]
@@ -46,11 +46,13 @@ namespace CourseWork.ViewModels
 
         private readonly IWorkoutSessionExerciseDatabaseService _workoutSessionExerciseDb;
 
-        public HomePageViewModel(IAppState appState, IUserDatabaseService userDb, IMetricDatabaseService metricDb, IWorkoutSessionDatabaseService workoutSessionDb, IWorkoutSessionExerciseDatabaseService workoutSessionExerciseDb) : base(appState, userDb)
+        public HomePageViewModel(IAppState appState, IUserDatabaseService userDb, IMetricDatabaseService metricDb,
+            IWorkoutSessionDatabaseService workoutSessionDb, 
+            IWorkoutSessionExerciseDatabaseService workoutSessionExerciseDb) : base(appState, userDb)
         {
 			this._metricDb = metricDb;
-            this._workoutSessionDb = workoutSessionDb;
-            this._workoutSessionExerciseDb = workoutSessionExerciseDb;
+            _workoutSessionDb = workoutSessionDb;
+            _workoutSessionExerciseDb = workoutSessionExerciseDb;
             CurrentUser = appState.CurrentUser.Username;
 			WelcomeMessage = $"Welcome back {CurrentUser}";
             Date = DateTime.Today;
@@ -82,21 +84,28 @@ namespace CourseWork.ViewModels
         [RelayCommand]
         private async Task GetMetric()
         {
-            Metric = await _metricDb.FetchMetrics(AppState.CurrentUser, Date);
+            try
+            {
+                var dailyMetric = await _metricDb.FetchMetrics(AppState.CurrentUser, Date, Date);
+                if (dailyMetric.Any())
+                {
+                    Weight = dailyMetric[0].Weight;
+                    Height = dailyMetric[0].Height;
+                    BodyFat = dailyMetric[0].BodyFat;
+                    HasNoMetric = false;
+                }
+                else
+                {
+                    Weight = 0;
+                    Height = 0;
+                    BodyFat = 0;
+                    HasNoMetric = true;
+                }
 
-            if (Metric != null)
-            {
-                Weight = Metric.Weight;
-                Height= Metric.Height;
-                BodyFat = Metric.BodyFat;
-                HasNoMetric = false;
             }
-            else
+            catch (Exception e)
             {
-                Weight = 0;
-                Height = 0;
-                BodyFat = 0;
-                HasNoMetric = true;
+                Console.WriteLine(e.Message);
             }
         }
 
@@ -104,11 +113,11 @@ namespace CourseWork.ViewModels
         [RelayCommand]
         private async Task SaveMetrics()
         {
-            Metric = new Metric(Weight, Height, BodyFat, Date, AppState.CurrentUser);
+            var dailyMetric = new Metric(Weight, Height, BodyFat, Date, AppState.CurrentUser);
 
             try
             {
-                var res = await _metricDb.StoreMetric(Metric);
+                var res = await _metricDb.StoreMetric(dailyMetric);
                 if(res != 0)
                 {
                     if (Application.Current.MainPage != null)

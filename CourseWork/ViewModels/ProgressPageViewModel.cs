@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CourseWork.Interfaces;
@@ -11,10 +11,11 @@ namespace CourseWork.ViewModels
         private readonly IMetricDatabaseService _metricDb;
 
         [ObservableProperty]
-        [NotifyCanExecuteChangedFor(nameof(CompareMetricsCommand))]
+        [NotifyCanExecuteChangedFor(nameof(GetUserProgressMetricsCommand))]
         DateTime _dateFrom;
 
         [ObservableProperty]
+        [NotifyCanExecuteChangedFor(nameof(GetUserProgressMetricsCommand))]
         DateTime _dateTo;
 
         [ObservableProperty]
@@ -46,60 +47,95 @@ namespace CourseWork.ViewModels
             this._metricDb = metricDb;
             DateTo = DateTime.Today;
             DateFrom = DateTime.Today;
+            LoadDataAsync();
+        }
+
+        partial void OnDateFromChanged(DateTime value)
+        {
+            GetUserProgressMetrics();
+        }
+
+        partial void OnDateToChanged(DateTime value)
+        {
+            GetUserProgressMetrics();
+        }
+        
+        private async Task LoadDataAsync()
+        {
+            await GetUserProgressMetrics();
         }
 
         [RelayCommand]
-        private async Task CompareMetrics()
+        private async Task GetUserProgressMetrics()
         {
-            DateFromMetric = await _metricDb.FetchMetrics(AppState.CurrentUser, DateFrom);
-            DateToMetric = await _metricDb.FetchMetrics(AppState.CurrentUser, DateTo);
-
-            NullMetric = "";
-
-            if (DateToMetric != null && DateFromMetric != null)
+            var metrics = await _metricDb.FetchMetrics(AppState.CurrentUser, DateFrom, DateTo);
+            if (metrics.Any())
             {
-                var progress = GetMetricDifference(DateToMetric, DateFromMetric);
-
-
-                WeightDiff = progress.Weight;
-                HasGained = true;
-                HasLost = false;
-                if (progress.Weight < 0)
-                {
-                    WeightDiff = progress.Weight - (progress.Weight * 2);
-                    HasLost = true;
-                    HasGained = false;
-                }
-
-                BodyFatDiff = progress.BodyFat;
-                if (progress.BodyFat < 0)
-                {
-                    BodyFatDiff = progress.BodyFat - (progress.BodyFat * 2);
-                    return;
-                }
+                var progress = GetMetricDifference(metrics);
+                CalculateProgress(progress["Weight"],progress["BodyFat"]);
             }
             else
             {
-                if (DateToMetric == null)
-                {
-                    NullMetric = $"No metrics found for {DateOnly.FromDateTime(DateTo)}";
-                    return;
-                }
-
-                NullMetric = $"No metrics found for {DateOnly.FromDateTime(DateFrom)}";
+                NullMetric = $"No metrics found for {DateOnly.FromDateTime(DateFrom)} & {DateOnly.FromDateTime(DateTo)}";
                 HasNoMetric = true;
             }
         }
 
-        private static Metric GetMetricDifference(Metric metric1, Metric metric2)
+        private static Dictionary<string, double> GetMetricDifference(ObservableCollection<Metric> metrics)
         {
-            var res = new Metric
+            double totalWeightDiff = 0;
+            double totalBodyFatDiff = 0;
+
+            //need to check if total metrics = 2 as the for loop wont account for the 2nd metric
+            if (metrics.Count == 2)
             {
-                Weight = Math.Round(metric1.Weight - metric2.Weight,2),
-                BodyFat = Math.Round(metric1.BodyFat - metric2.BodyFat,2)
+                totalWeightDiff = metrics[1].Weight - metrics[0].Weight;
+                totalBodyFatDiff = metrics[1].BodyFat - metrics[0].BodyFat;
+            }
+            else
+            {
+                for (var i = 1; i < metrics.Count; i++)
+                {
+                    var weightDifference = metrics[i].Weight - metrics[i - 1].Weight;
+                    var bodyFatDifference = metrics[i].BodyFat - metrics[i - 1].BodyFat;
+
+                    totalWeightDiff = totalWeightDiff + weightDifference;
+                    totalBodyFatDiff = totalBodyFatDiff + bodyFatDifference;
+                }
+            }
+            
+            var metricDiffDict = new Dictionary<string, double>
+            {
+                { "Weight", totalWeightDiff },
+                { "BodyFat", totalBodyFatDiff }
             };
 
-            return res;
+            return metricDiffDict;
+        }
+        
+        private void CalculateProgress(double progressWeight, double progressBodyFat)
+        {
+            if (progressWeight < 0)
+            {
+                HasLost = true;
+                HasGained = false;
+                WeightDiff = Math.Round(progressWeight - (progressWeight * 2),2);
+            }
+            else
+            {
+                HasLost = false;
+                HasGained = true;
+                WeightDiff = Math.Round(progressWeight,2);
+            }
+            
+            if (progressBodyFat < 0)
+            {
+                BodyFatDiff =  Math.Round(progressBodyFat - (progressBodyFat * 2),2);
+            }
+            else
+            {
+                BodyFatDiff = Math.Round(progressBodyFat, 2);
+            }
         }
     }
 }

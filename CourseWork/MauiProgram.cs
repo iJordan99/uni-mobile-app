@@ -2,6 +2,7 @@
 using CourseWork.Services;
 using Microsoft.Extensions.Logging;
 using SQLite;
+using SkiaSharp.Views.Maui.Controls.Hosting; 
 
 namespace CourseWork;
 
@@ -20,6 +21,7 @@ public static class MauiProgram
                 fonts.AddFont("SF-Pro-Rounded-Bold.otf", "SF-Pro-Bold");
                 fonts.AddFont("SF-Pro-Italic.ttf", "SF-Pro-Italic");
             })
+			.UseSkiaSharp(true)
             .RegisterViewsAndViewModels()
             .RegisterServices(); 
 
