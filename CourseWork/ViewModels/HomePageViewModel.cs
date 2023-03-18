@@ -99,8 +99,7 @@ namespace CourseWork.ViewModels
                 HasNoMetric = true;
             }
         }
-
-
+        
         [RelayCommand]
         private async Task SaveMetrics()
         {

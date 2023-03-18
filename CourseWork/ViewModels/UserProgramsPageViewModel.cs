@@ -32,7 +32,7 @@ namespace CourseWork.ViewModels
         [RelayCommand]
         private async Task ProgramInfo(Models.Program program)
         {
-            await Shell.Current.GoToAsync($"/ProgramDetailsPage?workoutId={program.Id}");
+            await Shell.Current.GoToAsync($"ProgramDetailsPage?workoutId={program.Id}");
         }
 
         [RelayCommand]
