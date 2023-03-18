@@ -13,6 +13,7 @@ This repo contains the project files for a mobile app written using the .net mau
 - Journey progression (Compare current metrics to previous)
 - Create workout programs
 - User workout sessions
+- Workout session history
 
 
 ### 🔧 Tools
