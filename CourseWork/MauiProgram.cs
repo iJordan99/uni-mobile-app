@@ -2,7 +2,9 @@
 using CourseWork.Services;
 using Microsoft.Extensions.Logging;
 using SQLite;
-using SkiaSharp.Views.Maui.Controls.Hosting; 
+
+using CommunityToolkit.Maui;
+using CommunityToolkit.Maui.Markup;
 
 namespace CourseWork;
 
@@ -11,8 +13,9 @@ public static class MauiProgram
 	public static MauiApp CreateMauiApp()
 	{
 		var builder = MauiApp.CreateBuilder();
-		builder
-			.UseMauiApp<App>()
+		builder.UseMauiApp<App>()
+			.UseMauiCommunityToolkit()
+			.UseMauiCommunityToolkitMarkup()
 			.ConfigureFonts(fonts =>
 			{
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");

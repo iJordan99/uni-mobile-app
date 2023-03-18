@@ -1,102 +1,139 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
+
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="CourseWork.Views.CreateWorkoutProgramPage"
              xmlns:viewModel="clr-namespace:CourseWork.ViewModels"
              xmlns:model="clr-namespace:CourseWork.Models"
              x:DataType="viewModel:CreateWorkoutProgramPageViewModel"
              Title="Create Workout Program">
 
-    <VerticalStackLayout Padding="20" Spacing="5">
-       <Grid Style="{StaticResource Grid}"
-              ColumnDefinitions="0.3*, 0.3*, 0.3*"
-              RowDefinitions="Auto,Auto,Auto,Auto,Auto, Auto"
-              ColumnSpacing="10"
-              RowSpacing="15">
+    <Grid Style="{StaticResource Grid}"
+          ColumnDefinitions="0.3*, 0.3*, 0.3*"
+          RowDefinitions="20,40,20,40,40,0.3*,40"
+          ColumnSpacing="10"
+          RowSpacing="15">
 
-        
-                <Label Text="Program"/>
+        <Label Text="Program Name"/>
 
-                <Entry Placeholder="Program Name"
-                       Grid.ColumnSpan="3"
-                       Grid.Row="1"
-                       TextChanged="EntryName_TextChanged"/>
-
-                <Label Text="Exercises"
-                       Grid.Row="2"/>
-
-                <Label Text="Sets"
-                       Grid.Row="2"
-                       Grid.Column="1"/>
-
-                <Label Text="Reps"
-                       Grid.Row="2"
-                       Grid.Column="2"/>
-
-                <Entry Placeholder="Exercise"
-                       Grid.Row="3"
-                       Text="{Binding ExerciseName}"/>
-
-                <Entry Placeholder="Sets"
-                       Grid.Row="3"
-                       Grid.Column="1"
-                       Text="{Binding Sets}"/>
-
-                <Entry Placeholder="Reps"
-                       Grid.Row="3"
-                       Grid.Column="2"
-                       Text="{Binding Reps}"/>
+        <Entry Placeholder="Program Name"
+               Grid.ColumnSpan="3"
+               Grid.Row="1"
+               TextChanged="EntryName_TextChanged">
             
-                <Button Text="+"
-                        Style="{StaticResource Button}"
-                        Grid.Row="4"
-                        Grid.ColumnSpan="2"
-                        Command="{Binding AddCommand}"/>
+            <Entry.Behaviors>
+                <toolkit:TextValidationBehavior 
+                    InvalidStyle="{StaticResource InvalidEntryStyle}"
+                    ValidStyle="{StaticResource ValidEntryStyle}"
+                    Flags="ValidateOnValueChanged"
+                    MinimumLength="3"/>
+            </Entry.Behaviors>
+            
+        </Entry>
 
-                <Button Text="QR SCAN"
-                        Style="{StaticResource Button}"
-                        Grid.Row="4"
-                        Grid.Column="2"
-                        Command="{Binding AddCommand}"/>
+        <Label Text="Exercises"
+               Grid.Row="2" />
 
-                <VerticalStackLayout Grid.Row="5"
-                                     Grid.ColumnSpan="4"
-                                     HeightRequest="420">
-                    <CollectionView 
-                            ItemsSource="{Binding ExerciseList}">
+        <Label Text="Sets"
+               Grid.Row="2"
+               Grid.Column="1" />
 
-                        <CollectionView.ItemTemplate>
+        <Label Text="Reps"
+               Grid.Row="2"
+               Grid.Column="2" />
 
-                            <DataTemplate x:DataType="{x:Type model:ProgramExercise}">
-                                <SwipeView>
-                                    <SwipeView.RightItems>
-                                        <SwipeItems>
-                                            <SwipeItem Text="Delete"
-                                                       BackgroundColor="Red"
-                                                       Command="{Binding Source={RelativeSource AncestorType={x:Type viewModel:CreateWorkoutProgramPageViewModel}}, Path=DeleteCommand}"
-                                                       CommandParameter="{Binding .}"/>
-                                        </SwipeItems>
-                                    </SwipeView.RightItems>
+        <Entry Placeholder="Exercise"
+               Grid.Row="3"
+               Text="{Binding ExerciseName}">
 
-                                    <Grid Padding="0,5">
-                                        <Frame>
-                                            <Label Text="{Binding ExerciseName}" FontSize="Body"/>
-                                        </Frame>
-                                    </Grid>
+            <Entry.Behaviors>
+                <toolkit:TextValidationBehavior 
+                    InvalidStyle="{StaticResource InvalidEntryStyle}"
+                    ValidStyle="{StaticResource ValidEntryStyle}"
+                    Flags="ValidateOnValueChanged"
+                    MinimumLength="3"/>
+            </Entry.Behaviors>
+            
+        </Entry>
+        
+        
+        <Entry Placeholder="Sets"
+               Grid.Row="3"
+               Grid.Column="1"
+               Text="{Binding Sets}">
+        
+            <Entry.Behaviors>
+                <toolkit:NumericValidationBehavior 
+                    InvalidStyle="{StaticResource InvalidEntryStyle}"
+                    ValidStyle="{StaticResource ValidEntryStyle}"
+                    Flags="ValidateOnValueChanged"
+                    MinimumValue="1"
+                    MaximumValue="20"
+                    MaximumDecimalPlaces="0" />
+            </Entry.Behaviors>
+            
+        </Entry>
 
-                                </SwipeView>
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
+        <Entry Placeholder="Reps"
+               Grid.Row="3"
+               Grid.Column="2"
+               Text="{Binding Reps}">
+            
+            <Entry.Behaviors>
+                <toolkit:NumericValidationBehavior 
+                    InvalidStyle="{StaticResource InvalidEntryStyle}"
+                    ValidStyle="{StaticResource ValidEntryStyle}"
+                    Flags="ValidateOnValueChanged"
+                    MinimumValue="1"
+                    MaximumValue="20"
+                    MaximumDecimalPlaces="0" />
+            </Entry.Behaviors>
+            
+        </Entry>
 
-                    </CollectionView>
+        <Button Text="Add Exercise"
+                Style="{StaticResource Button}"
+                Grid.Row="4"
+                Grid.ColumnSpan="3"
+                Command="{Binding AddCommand}" />
 
 
-                </VerticalStackLayout>
-       </Grid>
+        <CollectionView Grid.Row="5"
+                        Grid.ColumnSpan="3"
+                        ItemsSource="{Binding ExerciseList}">
 
-        <Button Text="Create"
+            <CollectionView.ItemTemplate>
+
+                <DataTemplate x:DataType="{x:Type model:ProgramExercise}">
+                    <SwipeView>
+                        <SwipeView.RightItems>
+                            <SwipeItems>
+                                <SwipeItem Text="Delete"
+                                           BackgroundColor="Red"
+                                           Command="{Binding Source={RelativeSource AncestorType={x:Type viewModel:CreateWorkoutProgramPageViewModel}}, Path=DeleteCommand}"
+                                           CommandParameter="{Binding .}" />
+                            </SwipeItems>
+                        </SwipeView.RightItems>
+
+                        <Grid Padding="0,5">
+                            <Frame>
+                                <Label Text="{Binding ExerciseName}" FontSize="Body" />
+                            </Frame>
+                        </Grid>
+
+                    </SwipeView>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+        </CollectionView>
+
+        <Button Text="Create Program"
+                Grid.Row="6"
+                Grid.ColumnSpan="3"
                 Padding="10"
                 Command="{Binding CreateWorkoutCommand}"
-                Style="{StaticResource Button}"/>
-    </VerticalStackLayout>
+                Style="{StaticResource Button}" />
+
+    </Grid>
 </ContentPage>

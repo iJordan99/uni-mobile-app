@@ -108,8 +108,7 @@ namespace CourseWork.ViewModels
                 Console.WriteLine(e.Message);
             }
         }
-
-
+        
         [RelayCommand]
         private async Task SaveMetrics()
         {

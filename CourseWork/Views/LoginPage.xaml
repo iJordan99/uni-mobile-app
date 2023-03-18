@@ -1,65 +1,65 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
+
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CourseWork.Views.LoginPage"
              xmlns:viewModel="clr-namespace:CourseWork.ViewModels"
              x:DataType="viewModel:LoginPageViewModel">
-    <StackLayout VerticalOptions="Start">
 
-        <StackLayout Padding="20">
-            <Label  Text="Login"
-                    Style="{StaticResource AuthHeading}"/>
-        </StackLayout>
+    <Grid Style="{StaticResource Grid}"
+          ColumnDefinitions="0.5*,0.4*"
+          RowDefinitions="40,20,40,20,40, 40,20"
+          Padding="20"
+          RowSpacing="10">
 
-        <Grid Style="{StaticResource Grid}"
-              ColumnDefinitions="0.6*, 0.2*, 0.05*,0.15"
-              RowDefinitions="Auto,Auto,Auto,Auto, Auto, Auto"
-              Padding="20,0,0,0"
-              ColumnSpacing="10"
-              RowSpacing="15">
+        <Label Text="Login"
+               Style="{StaticResource AuthHeading}" />
 
-            <Label Text="Username"
-                   FontFamily="Consolas"
-                   FontAttributes="Bold"/>
+        <Label Grid.Row="1"
+               Grid.ColumnSpan="2"
+               Text="Username"
+               FontFamily="Consolas"
+               FontAttributes="Bold" />
 
-            <Entry Placeholder="Username"
-                   Grid.ColumnSpan="3"
-                   Grid.Row="1"
-                   FontFamily="Consolas"
-                   TextChanged="Username_TextChanged"/>
+        <Entry Placeholder="Username"
+               Grid.ColumnSpan="2"
+               Grid.Row="2"
+               FontFamily="Consolas"
+               TextChanged="Username_TextChanged" />
 
-            <Label Text="Password"
-                   Grid.Row="2"
-                   FontAttributes="Bold"
-                   FontFamily="Consolas"/>
+        <Label Text="Password"
+               Grid.Row="3"
+               FontAttributes="Bold"
+               FontFamily="Consolas" />
 
-            <Entry Placeholder="Password"
-                   Grid.ColumnSpan="3"
-                   Grid.Row="3"
-                   IsPassword="True"
-                   FontFamily="Consolas"
-                   TextChanged="Password_TextChanged"/>
+        <Entry Placeholder="Password"
+               Grid.ColumnSpan="2"
+               Grid.Row="4"
+               IsPassword="True"
+               FontFamily="Consolas"
+               TextChanged="Password_TextChanged" />
 
-            <Button Grid.Row="4"
-                    Text="Login"
-                    Grid.ColumnSpan="3"
-                    Style="{StaticResource Button}"
-                    FontFamily="Consolas"
-                    Command="{Binding LoginCommand}"/>
+        <Button Grid.Row="5"
+                Text="Login"
+                Grid.ColumnSpan="2"
+                Style="{StaticResource Button}"
+                FontFamily="Consolas"
+                Command="{Binding LoginCommand}" />
 
-            <HorizontalStackLayout Grid.Row="5">
-                <Label Text="Don't have an account?"
-                       FontFamily="Consolas"
-                       FontAttributes="Bold"
-                       VerticalOptions="Center"/>
+        <Label Grid.Row="6"
+               Text="Don't have an account?"
+               FontFamily="Consolas"
+               FontAttributes="Bold"
+               VerticalOptions="Center" />
 
 
-                <Button Text="Register"
-                        FontFamily="Consolas"
-                        Command="{Binding NavigateToRegisterPageCommand}"
-                        VerticalOptions="Center"/>
-            </HorizontalStackLayout>
+        <Button Grid.Row="6"
+                Grid.Column="2"
+                Text="Register"
+                FontFamily="Consolas"
+                Command="{Binding NavigateToRegisterPageCommand}"
+                HorizontalOptions="End"
+                VerticalOptions="Center" />
 
-        </Grid>
-    </StackLayout>
+    </Grid>
 </ContentPage>
