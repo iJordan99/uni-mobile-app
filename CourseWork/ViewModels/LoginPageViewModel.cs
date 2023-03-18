@@ -24,7 +24,7 @@ namespace CourseWork.ViewModels
         private async Task Login()
         {
 
-            var user = new User()
+            var user = new User
             {
                 Username = EntryUsername,
                 Password = EntryPassword
