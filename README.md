@@ -17,7 +17,7 @@ This repo contains the project files for a mobile app written using the .net mau
 
 
 ### 🔧 Tools
-- .net maui
+- https://dotnet.microsoft.com/en-us/apps/maui
 - https://learn.microsoft.com/en-us/dotnet/communitytoolkit/maui/ 
 - https://learn.microsoft.com/en-us/dotnet/communitytoolkit/mvvm/
 - https://lvcharts.com/docs/Maui/2.0.0-beta.700/gallery
