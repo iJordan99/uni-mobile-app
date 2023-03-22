@@ -105,7 +105,7 @@ namespace CourseWork.ViewModels
 		private void ResetFields()
 		{
 			ExerciseList.Clear();
-			ProgramName = string.Empty;
+			ProgramName = "";
             ExerciseName = "";
 			Sets = 0;
             Reps = 0;

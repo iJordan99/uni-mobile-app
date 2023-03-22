@@ -4,9 +4,10 @@
              x:Class="CourseWork.Views.ProgressPage"
              xmlns:viewModel="clr-namespace:CourseWork.ViewModels"
              x:DataType="viewModel:ProgressPageViewModel"
+             xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.Maui;assembly=LiveChartsCore.SkiaSharpView.Maui"
              Title="Progress">
        
-       <Grid RowDefinitions="20,40,20,20"
+       <Grid RowDefinitions="20,40,20,20,0.7*"
              ColumnDefinitions="0.5*,0.5*"
              ColumnSpacing="15"
              RowSpacing="15"
@@ -16,19 +17,11 @@
                      Style="{StaticResource MediumLabel}"/>
     
               <DatePicker Grid.Row="1"
+                          Grid.ColumnSpan="2"
                           Style="{StaticResource DatePicker}"
                           DateSelected="DateFromPicker_DateSelected"/>
-    
-    
-              <Label Grid.Column="1"
-                     Text="Date To:" 
-                     Style="{StaticResource MediumLabel}"/>
-    
-              <DatePicker Grid.Row="1"
-                          Grid.Column="1"
-                          Style="{StaticResource DatePicker}"
-                          DateSelected="DateToPicker_DateSelected"/>
-
+              
+              
               <Label Grid.Row="2"
                      Text="Weight Lost (KG) :"
                      Style="{StaticResource MediumLabel}"
@@ -75,5 +68,11 @@
                      Style="{StaticResource MediumLabel}"
                      IsVisible="{Binding HasGained}"/>
 
-        </Grid>
+              <lvc:CartesianChart Grid.Row="4"
+                                  Grid.ColumnSpan="2"
+                                  IsVisible="{Binding HasMetric}"
+                                  Title="{Binding Title}"
+                                  Series="{Binding Path=Series}"
+                                  ZoomMode="X"/>
+       </Grid>
 </ContentPage>

@@ -8,10 +8,9 @@
              x:DataType="viewModel:HomePageViewModel"
              Title="Home"
              Padding="20">
-
-    <Grid ColumnDefinitions="0.5*,0.5*"
-          RowSpacing="10"
-          RowDefinitions="35,40,40,40,40,40,40,40">
+       <Grid ColumnDefinitions="0.5*,0.5*"
+             RowSpacing="10"
+             RowDefinitions="35,40,40,5,40,40,40,40,35">
 
         <Label Grid.ColumnSpan="2"
                Text="{Binding WelcomeMessage}"
@@ -49,17 +48,17 @@
                Text="{Binding Weight}"
                TextChanged="Weight_TextChanged"
                HorizontalOptions="End">
-               
-               <Entry.Behaviors>
-                      <toolkit:NumericValidationBehavior 
-                             InvalidStyle="{StaticResource InvalidEntryStyle}"
-                             ValidStyle="{StaticResource ValidEntryStyle}"
-                             Flags="ValidateOnValueChanged"
-                             MinimumValue="1.0"
-                             MaximumDecimalPlaces="2" />
-               </Entry.Behaviors>
-               
-               
+
+            <Entry.Behaviors>
+                <toolkit:NumericValidationBehavior
+                    InvalidStyle="{StaticResource InvalidEntryStyle}"
+                    ValidStyle="{StaticResource ValidEntryStyle}"
+                    Flags="ValidateOnValueChanged"
+                    MinimumValue="1.0"
+                    MaximumDecimalPlaces="2" />
+            </Entry.Behaviors>
+
+
         </Entry>
 
         <Label Text="Height (Cm)"
@@ -71,16 +70,16 @@
                Text="{Binding Height}"
                TextChanged="Height_TextChanged"
                HorizontalOptions="End">
-               
-               <Entry.Behaviors>
-                      <toolkit:NumericValidationBehavior 
-                             InvalidStyle="{StaticResource InvalidEntryStyle}"
-                             ValidStyle="{StaticResource ValidEntryStyle}"
-                             Flags="ValidateOnValueChanged"
-                             MinimumValue="1.0"
-                             MaximumDecimalPlaces="2" />
-               </Entry.Behaviors>
-               
+
+            <Entry.Behaviors>
+                <toolkit:NumericValidationBehavior
+                    InvalidStyle="{StaticResource InvalidEntryStyle}"
+                    ValidStyle="{StaticResource ValidEntryStyle}"
+                    Flags="ValidateOnValueChanged"
+                    MinimumValue="1.0"
+                    MaximumDecimalPlaces="2" />
+            </Entry.Behaviors>
+
         </Entry>
 
         <Label Text="Body Fat (%)"
@@ -92,24 +91,23 @@
                Text="{Binding BodyFat}"
                TextChanged="BodyFat_TextChanged"
                HorizontalOptions="End">
-               
-               <Entry.Behaviors>
-                      <toolkit:NumericValidationBehavior 
-                             InvalidStyle="{StaticResource InvalidEntryStyle}"
-                             ValidStyle="{StaticResource ValidEntryStyle}"
-                             Flags="ValidateOnValueChanged"
-                             MinimumValue="1.0"
-                             MaximumDecimalPlaces="2" />
-               </Entry.Behaviors>
-               
-               
+
+            <Entry.Behaviors>
+                <toolkit:NumericValidationBehavior
+                    InvalidStyle="{StaticResource InvalidEntryStyle}"
+                    ValidStyle="{StaticResource ValidEntryStyle}"
+                    Flags="ValidateOnValueChanged"
+                    MinimumValue="1.0"
+                    MaximumDecimalPlaces="2" />
+            </Entry.Behaviors>
+
+
         </Entry>
 
-               <Button Grid.Row="7"
-                       Grid.ColumnSpan="2"
-                       Command="{Binding SaveMetricsCommand}"
-                       Style="{StaticResource Button}"
-                       Text="Save Metrics" />
-
-    </Grid>
+        <Button Grid.Row="7"
+                Grid.ColumnSpan="2"
+                Command="{Binding SaveMetricsCommand}"
+                Style="{StaticResource Button}"
+                Text="Save Metrics" />
+       </Grid>
 </ContentPage>
