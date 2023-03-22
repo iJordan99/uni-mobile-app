@@ -3,7 +3,10 @@
 #### 6002CEM Mobile App Development 
 
 
-This repo contains the project files for a mobile app written using the .net maui framework with MVVM as the architecture pattern
+This repo contains the project files for a mobile app written using the .net maui framework with MVVM as the architecture pattern.
+
+The app is a workout tracking app called 'Amazing Workout App'. Its core features can be found below as well as the tools used to 
+develop the app.
 
 
 ####  App Features
