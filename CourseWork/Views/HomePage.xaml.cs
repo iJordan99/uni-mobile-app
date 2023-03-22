@@ -31,6 +31,7 @@ public partial class HomePage : ContentPage
                 viewModel.Weight = weight;
                 return;
             }
+            DisplayAlert("Invalid Weight", "Please enter a valid number for weight.", "OK");
         }
         viewModel.Weight = 0;
     }
@@ -45,6 +46,7 @@ public partial class HomePage : ContentPage
                 viewModel.Height = double.Parse(e.NewTextValue);
                 return;
             }
+            DisplayAlert("Invalid Height", "Please enter a valid number for height.", "OK");
         }
         viewModel.Height = 0;
     }
@@ -59,6 +61,7 @@ public partial class HomePage : ContentPage
                 viewModel.BodyFat = double.Parse(e.NewTextValue);
                 return;
             }
+            DisplayAlert("Invalid Body Fat", "Please enter a valid number for Body Fat.", "OK");
         }
         viewModel.BodyFat = 0;
     }

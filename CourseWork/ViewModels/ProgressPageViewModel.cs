@@ -4,6 +4,13 @@ using CommunityToolkit.Mvvm.Input;
 using CourseWork.Interfaces;
 using CourseWork.Models;
 
+using LiveChartsCore;
+using LiveChartsCore.Kernel;
+using LiveChartsCore.SkiaSharpView;
+using LiveChartsCore.SkiaSharpView.Painting;
+using LiveChartsCore.SkiaSharpView.VisualElements;
+using SkiaSharp;
+
 namespace CourseWork.ViewModels
 {
     public partial class ProgressPageViewModel : BaseViewModel
@@ -13,10 +20,6 @@ namespace CourseWork.ViewModels
         [ObservableProperty]
         [NotifyCanExecuteChangedFor(nameof(GetUserProgressMetricsCommand))]
         DateTime _dateFrom;
-
-        [ObservableProperty]
-        [NotifyCanExecuteChangedFor(nameof(GetUserProgressMetricsCommand))]
-        DateTime _dateTo;
 
         [ObservableProperty]
         Metric _dateFromMetric;
@@ -40,44 +43,60 @@ namespace CourseWork.ViewModels
         string _nullMetric;
 
         [ObservableProperty]
-        bool _hasNoMetric;
+        bool _hasMetric;
 
         public ProgressPageViewModel(IAppState appState, IUserDatabaseService userDb, IMetricDatabaseService metricDb) : base(appState, userDb)
         {
             this._metricDb = metricDb;
-            DateTo = DateTime.Today;
-            DateFrom = DateTime.Today;
-            LoadDataAsync();
+            HasMetric = false;
         }
 
         partial void OnDateFromChanged(DateTime value)
         {
             GetUserProgressMetrics();
         }
-
-        partial void OnDateToChanged(DateTime value)
-        {
-            GetUserProgressMetrics();
-        }
         
-        private async Task LoadDataAsync()
-        {
-            await GetUserProgressMetrics();
-        }
+        [ObservableProperty]
+        List<double> _chartValues;
+        
+        [ObservableProperty] ISeries[] _series;
+        
+        public LabelVisual Title { get; set; } =
+            new LabelVisual
+            {
+                Text = "Weight Loss Journey",
+                TextSize = 40,
+                Padding = new LiveChartsCore.Drawing.Padding(15),
+                Paint = new SolidColorPaint(SKColors.DarkSlateGray)
+            };
 
         [RelayCommand]
         private async Task GetUserProgressMetrics()
         {
-            var metrics = await _metricDb.FetchMetrics(AppState.CurrentUser, DateFrom, DateTo);
+            var metrics = await _metricDb.FetchMetrics(AppState.CurrentUser, DateFrom, DateTime.Now);
             if (metrics.Any())
             {
+                HasMetric = true;
                 var progress = GetMetricDifference(metrics);
                 CalculateProgress(progress["Weight"],progress["BodyFat"]);
+                ChartValues = ChartMetrics(metrics);
+                
+                Series = new ISeries[]
+                {
+                    new LineSeries<double>
+                    {
+                        Values = ChartValues,
+                        Fill = null
+                    }
+                };  
             }
             else
             {
-                NullMetric = $"No metrics found for {DateOnly.FromDateTime(DateFrom)} & {DateOnly.FromDateTime(DateTo)}";
-                HasNoMetric = true;
+                if (Application.Current.MainPage != null)
+                {
+                    await Application.Current.MainPage.DisplayAlert("Invalid Dates", "No Metrics Found", "OK");
+                }
+                HasMetric = false;
             }
         }
 
@@ -137,6 +156,14 @@ namespace CourseWork.ViewModels
                 BodyFatDiff = Math.Round(progressBodyFat, 2);
             }
         }
+
+        private List<double> ChartMetrics(ObservableCollection<Metric> metrics)
+        {
+            var chartValues = metrics.Select(metric => metric.Weight).ToList();
+            return chartValues;
+        }
+
+        
     }
 }
 

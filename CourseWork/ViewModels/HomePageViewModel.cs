@@ -41,18 +41,10 @@ namespace CourseWork.ViewModels
         [ObservableProperty] ObservableCollection<WorkoutSessionExercise> _sessionExercises;
 
         private readonly IMetricDatabaseService _metricDb;
-
-        private readonly IWorkoutSessionDatabaseService _workoutSessionDb;
-
-        private readonly IWorkoutSessionExerciseDatabaseService _workoutSessionExerciseDb;
-
-        public HomePageViewModel(IAppState appState, IUserDatabaseService userDb, IMetricDatabaseService metricDb,
-            IWorkoutSessionDatabaseService workoutSessionDb, 
-            IWorkoutSessionExerciseDatabaseService workoutSessionExerciseDb) : base(appState, userDb)
+        
+        public HomePageViewModel(IAppState appState, IUserDatabaseService userDb, IMetricDatabaseService metricDb) : base(appState, userDb)
         {
 			this._metricDb = metricDb;
-            _workoutSessionDb = workoutSessionDb;
-            _workoutSessionExerciseDb = workoutSessionExerciseDb;
             CurrentUser = appState.CurrentUser.Username;
 			WelcomeMessage = $"Welcome back {CurrentUser}";
             Date = DateTime.Today;
@@ -63,7 +55,6 @@ namespace CourseWork.ViewModels
         private async void LoadDataAsync()
         {
             await GetMetric();
-            await GetWorkoutSessionsInfo();
         }
 
         partial void OnDateChanged(DateTime value)
@@ -71,16 +62,6 @@ namespace CourseWork.ViewModels
             LoadDataAsync();
         }
 
-        private async Task GetWorkoutSessionsInfo()
-        {
-            WorkoutSessions = await _workoutSessionDb.FetchSessions(AppState.CurrentUser);
-            
-            foreach (var session in WorkoutSessions)
-            {
-                SessionExercises = await _workoutSessionExerciseDb.FetchSessionExercises(session);
-            }
-        }
-        
         [RelayCommand]
         private async Task GetMetric()
         {
@@ -135,6 +116,7 @@ namespace CourseWork.ViewModels
                 }
             }
         }
+        
 
         [RelayCommand]
         private async Task NavigateToProgressPage()

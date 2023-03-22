@@ -48,7 +48,8 @@
         </Tab>
     
         <Tab Title="Workout Sessions">
-    
+            <ShellContent ContentTemplate="{DataTemplate local:WorkoutSessionsPage}"
+                          Route="WorkoutSessionsPage"/>
         </Tab>
     </FlyoutItem>
     

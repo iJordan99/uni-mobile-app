@@ -37,7 +37,18 @@ namespace CourseWork.Services
         {
             try
             { 
-                return await Database.InsertAsync(metric);
+                var existingMetric = await Database.Table<Metric>().FirstOrDefaultAsync(m => m.Date == metric.Date);
+                if (existingMetric == null)
+                {
+                    return await Database.InsertAsync(metric);
+                }
+                else
+                {
+                    existingMetric.Weight = metric.Weight;
+                    existingMetric.Height = metric.Height;
+                    existingMetric.BodyFat = metric.BodyFat;
+                    return await Database.UpdateAsync(existingMetric);
+                }
             }
             catch (Exception e)
             {
