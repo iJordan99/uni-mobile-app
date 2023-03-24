@@ -3,10 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CourseWork.Views.WorkoutSessionsPage"
              xmlns:viewModel="clr-namespace:CourseWork.ViewModels"
-             Title="Workout Sessions"
-             Padding="20">
-    <VerticalStackLayout>
-        
-        
-    </VerticalStackLayout>
+             Title="Workout Sessions">
+
+    <Grid Style="{StaticResource Grid}"
+          RowDefinitions="40">
+
+
+
+    </Grid>
+
+
+
 </ContentPage>

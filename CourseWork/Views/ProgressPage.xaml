@@ -10,8 +10,7 @@
        <Grid RowDefinitions="20,40,20,20,0.7*"
              ColumnDefinitions="0.5*,0.5*"
              ColumnSpacing="15"
-             RowSpacing="15"
-             Padding="20">
+             Style="{StaticResource Grid}">
     
               <Label Text="Date From:"
                      Style="{StaticResource MediumLabel}"/>

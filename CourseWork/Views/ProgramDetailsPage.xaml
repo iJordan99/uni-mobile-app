@@ -11,8 +11,7 @@
 
     <Grid ColumnDefinitions="0.25*,0.25*,0.25*,0.25*"
           RowDefinitions="20, 40,0.6*, 40"
-          RowSpacing="10"
-          Padding="20">
+          Style="{StaticResource Grid}">
 
         <Label Grid.ColumnSpan="4"
                Text="Record a workout session"
