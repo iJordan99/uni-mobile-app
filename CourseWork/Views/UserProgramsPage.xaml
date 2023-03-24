@@ -7,49 +7,51 @@
              xmlns:model="clr-namespace:CourseWork.Models"
              Title="My Programs">
 
-    <Grid RowDefinitions="0.2*,0.05*,0.5*"
-          Padding="20"
-          RowSpacing="10">
+    <RefreshView Command="{Binding RefreshDataCommand}"
+                 IsRefreshing="{Binding IsRefreshing}">
+        <Grid RowDefinitions="0.2*,0.05*,0.5*"
+              Style="{StaticResource Grid}">
 
-        <Image Source="fitness_guy.png" 
-                    HeightRequest="260"
-                    HorizontalOptions="Center"/>
+            <Image Source="fitness_guy.png" 
+                        HeightRequest="260"
+                        HorizontalOptions="Center"/>
 
-        <Label Grid.Row="1"
-            Text="Welcome to your programs"
-                    HorizontalOptions="Center"
-                    FontSize="Large"
-                    FontAttributes="Bold"/>
+            <Label Grid.Row="1"
+                Text="Welcome to your programs"
+                        HorizontalOptions="Center"
+                        FontSize="Large"
+                        FontAttributes="Bold"/>
 
-        <CollectionView Grid.Row="2"
-            ItemsSource="{Binding Programs}">
+            <CollectionView Grid.Row="2"
+                ItemsSource="{Binding Programs}">
 
-            <CollectionView.ItemTemplate>
+                <CollectionView.ItemTemplate>
 
-                <DataTemplate x:DataType="{x:Type model:Program}">
-                    <SwipeView HeightRequest="70">
-                        <SwipeView.RightItems>
-                            <SwipeItems>
-                                <SwipeItem Text="Delete"
-                                            BackgroundColor="Red"
-                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:UserProgramsPageViewModel}}, Path=DeleteCommand}"
-                                            CommandParameter="{Binding .}"/>
-                            </SwipeItems>
-                        </SwipeView.RightItems>
+                    <DataTemplate x:DataType="{x:Type model:Program}">
+                        <SwipeView HeightRequest="70">
+                            <SwipeView.RightItems>
+                                <SwipeItems>
+                                    <SwipeItem Text="Delete"
+                                                BackgroundColor="Red"
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:UserProgramsPageViewModel}}, Path=DeleteCommand}"
+                                                CommandParameter="{Binding .}"/>
+                                </SwipeItems>
+                            </SwipeView.RightItems>
 
-                        <Grid Padding="0,5">
-                            <Grid.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:UserProgramsPageViewModel}}, Path=ProgramInfoCommand}"
-                                                        CommandParameter="{Binding .}" />
-                            </Grid.GestureRecognizers>
-                            <Frame>
-                                <Label Text="{Binding ProgramName}" FontSize="Body"/>
-                            </Frame>
-                        </Grid>
+                            <Grid Padding="0,5">
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:UserProgramsPageViewModel}}, Path=ProgramInfoCommand}"
+                                                            CommandParameter="{Binding .}" />
+                                </Grid.GestureRecognizers>
+                                <Frame>
+                                    <Label Text="{Binding ProgramName}" FontSize="Body"/>
+                                </Frame>
+                            </Grid>
 
-                    </SwipeView>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-    </Grid>
+                        </SwipeView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+    </RefreshView>
 </ContentPage>

@@ -131,7 +131,6 @@
         <Button Text="Create Program"
                 Grid.Row="6"
                 Grid.ColumnSpan="3"
-                Padding="10"
                 Command="{Binding CreateWorkoutCommand}"
                 Style="{StaticResource Button}" />
 

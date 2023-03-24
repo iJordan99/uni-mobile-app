@@ -17,7 +17,8 @@
     <Shell.FlyoutHeaderTemplate>
         <DataTemplate>
             <Grid HeightRequest="50">
-                <Label Text="Amazing Workout"
+                <Label Text="Amazing Workout App"
+                       FontSize="Large"
                        TextColor="{StaticResource Primary}"
                        FontFamily="SF-Pro-Bold"
                        HorizontalTextAlignment="Center"

@@ -10,6 +10,9 @@ namespace CourseWork.ViewModels
         [ObservableProperty]
         ObservableCollection<Models.Program> _programs;
 
+        [ObservableProperty] 
+        bool _isRefreshing;
+
         private readonly IProgramDatabaseService _programDb;
        
         public UserProgramsPageViewModel(IAppState appState, IUserDatabaseService userDb, IProgramDatabaseService programDb) : base(appState, userDb)
@@ -26,7 +29,16 @@ namespace CourseWork.ViewModels
 
         private async Task GetPrograms()
         {
+            //https://learn.microsoft.com/en-us/dotnet/maui/user-interface/controls/refreshview?view=net-maui-7.0
+            IsRefreshing = true;
             Programs = await _programDb.FetchAllByUser(AppState.CurrentUser);
+            IsRefreshing = false;
+        }
+
+        [RelayCommand]
+        private async Task RefreshData()
+        {
+            await GetPrograms();
         }
 
         [RelayCommand]

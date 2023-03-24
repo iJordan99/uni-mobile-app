@@ -6,9 +6,9 @@
              x:Class="CourseWork.Views.HomePage"
              xmlns:viewModel="clr-namespace:CourseWork.ViewModels"
              x:DataType="viewModel:HomePageViewModel"
-             Title="Home"
-             Padding="20">
+             Title="Home">
        <Grid ColumnDefinitions="0.5*,0.5*"
+             Style="{StaticResource Grid}"
              RowSpacing="10"
              RowDefinitions="35,40,40,5,40,40,40,40,35">
 
