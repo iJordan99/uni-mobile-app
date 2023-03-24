@@ -18,6 +18,7 @@
         <Label Text="Program Name"/>
 
         <Entry Placeholder="Program Name"
+               Text="{Binding ProgramName}"
                Grid.ColumnSpan="3"
                Grid.Row="1"
                TextChanged="EntryName_TextChanged">

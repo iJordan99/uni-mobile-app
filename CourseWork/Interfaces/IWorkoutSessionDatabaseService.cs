@@ -8,6 +8,8 @@ namespace CourseWork.Interfaces
 	{
 		Task<WorkoutSession> StoreWorkoutSession(WorkoutSession workoutSession);
 		Task<ObservableCollection<WorkoutSession>>FetchSessions(User user);
+
+		Task<WorkoutSession> FetchById(Guid sessionId);
 	}
 }
 
