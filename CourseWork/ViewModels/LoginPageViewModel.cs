@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CourseWork.Helpers;
 using CourseWork.Interfaces;
 using CourseWork.Models;
 
@@ -27,7 +28,7 @@ namespace CourseWork.ViewModels
             var user = new User
             {
                 Username = EntryUsername,
-                Password = EntryPassword
+                Password = Password.Hash(EntryPassword)
             };
 
             User validatedUser = await UserDb.ValidateUser(user);
@@ -37,6 +38,14 @@ namespace CourseWork.ViewModels
                 AppState.CurrentUser = validatedUser;
                 await Shell.Current.GoToAsync("//HomePage");
             }
+            else
+            {
+                if (Application.Current.MainPage != null)
+                {
+                    await Application.Current.MainPage.DisplayAlert("Invalid Credentials", "Try Again", "OK");
+                }
+            }
+            
         }
 
         private bool CanLogin()

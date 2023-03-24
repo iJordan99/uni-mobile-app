@@ -16,9 +16,6 @@ namespace CourseWork.ViewModels
         Models.Program _program;
 
         [ObservableProperty]
-        double _weight;
-
-        [ObservableProperty]
         ObservableCollection<ProgramExercise> _workoutExercises;
 
         private readonly IProgramDatabaseService _programDb;
@@ -67,10 +64,13 @@ namespace CourseWork.ViewModels
                      await _workoutSessionExerciseDb.StoreWorkoutSessionExercise(sessionExercise);
                 }
                 
+                WorkoutExercises.Clear();
+                
                 if (Application.Current.MainPage != null)
                 {
                     await Application.Current.MainPage.DisplayAlert("Success!", "Workout Session Saved", "OK");
                 }
+                
             }
             catch (Exception e)
             {

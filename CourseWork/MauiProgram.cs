@@ -46,6 +46,7 @@ public static class MauiProgram
         mauiAppBuilder.Services.AddTransient(typeof(Views.RegisterPage));
         mauiAppBuilder.Services.AddTransient(typeof(Views.ProgramDetailsPage));
         mauiAppBuilder.Services.AddTransient(typeof(Views.WorkoutSessionsPage));
+        mauiAppBuilder.Services.AddTransient(typeof(Views.WorkoutSessionDetailsPage));
 
         //Services
         mauiAppBuilder.Services.AddTransient(typeof(ViewModels.HomePageViewModel));
@@ -56,6 +57,7 @@ public static class MauiProgram
         mauiAppBuilder.Services.AddTransient(typeof(ViewModels.RegisterPageViewModel));
         mauiAppBuilder.Services.AddTransient(typeof(ViewModels.ProgramDetailsPageViewModel));
         mauiAppBuilder.Services.AddTransient(typeof(ViewModels.WorkoutSessionsPageViewModel));
+        mauiAppBuilder.Services.AddTransient(typeof(ViewModels.WorkoutSessionDetailsPageViewModel));
 
         return mauiAppBuilder;
     }

@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CourseWork.Helpers;
 using CourseWork.Interfaces;
 
 namespace CourseWork.ViewModels
@@ -29,7 +30,7 @@ namespace CourseWork.ViewModels
             var user = new Models.User()
             {
                 Username = EntryUsername,
-                Password = EntryPassword,
+                Password = Password.Hash(EntryPassword),
                 Email = EntryEmail
             };
 
