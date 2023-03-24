@@ -1,74 +1,112 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
+
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CourseWork.Views.ProgramDetailsPage"
              xmlns:viewModels="clr-namespace:CourseWork.ViewModels"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:DataType="viewModels:ProgramDetailsPageViewModel"
-             xmlns:model="clr-namespace:CourseWork.Models">
+             xmlns:model="clr-namespace:CourseWork.Models"
+             Title="{Binding Program.ProgramName}">
 
-    
-        <VerticalStackLayout Padding="20"
-                             Spacing="20"
-                             VerticalOptions="StartAndExpand">
+    <Grid ColumnDefinitions="0.25*,0.25*,0.25*,0.25*"
+          RowDefinitions="20, 40,0.6*, 40"
+          Style="{StaticResource Grid}">
 
-            <HorizontalStackLayout>
+        <Label Grid.ColumnSpan="4"
+               Text="Record a workout session"
+               Style="{StaticResource PageHeading}" />
 
-                <Label Text="{Binding Program.ProgramName}"
-                        Style="{StaticResource PageHeading}"
-                        HorizontalOptions="StartAndExpand"
-                        WidthRequest="260"/>
+        <Label Grid.Row="1"
+               Text="Exercise"
+               Style="{StaticResource MediumLabel}" />
 
-                <Button Text="Register Session"
-                        Style="{StaticResource SecondButton}"
-                        HorizontalOptions="End"
-                        Command="{Binding RegisterWorkoutSessionCommand}"/>
+        <Label Grid.Row="1"
+               Grid.Column="1"
+               Text="Sets"
+               Style="{StaticResource MediumLabel}" />
 
-            </HorizontalStackLayout>
+        <Label Text="Reps"
+               Grid.Row="1"
+               Grid.Column="2"
+               Style="{StaticResource MediumLabel}" />
 
-            <Grid ColumnDefinitions="0.3*,0.25*,0.25*, 0.25*"
-                  RowDefinitions="Auto,Auto, Auto, Auto">
+        <Label Text="Weight"
+               Grid.Row="1"
+               Grid.Column="3"
+               Style="{StaticResource MediumLabel}" />
 
-                <Label Text="Exercise"
-                       Style="{StaticResource MediumLabel}"/>
 
-                <Label Text="Sets"
-                       Grid.Column="1"
-                       Style="{StaticResource MediumLabel}"/>
+        <CollectionView Grid.Row="2"
+                        Grid.ColumnSpan="4"
+                        ItemsSource="{Binding WorkoutExercises}"
+                        VerticalOptions="FillAndExpand">
 
-                <Label Text="Reps"
-                       Grid.Column="2"
-                       Style="{StaticResource MediumLabel}"/>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="{x:Type model:ProgramExercise}">
+                    <Grid ColumnDefinitions="0.25*,0.25*,0.25*,0.25*"
+                          RowDefinitions="Auto,Auto"
+                          RowSpacing="15"
+                          ColumnSpacing="5">
 
-                <Label Text="Weight"
-                       Grid.Column="3"
-                       Style="{StaticResource MediumLabel}"/>
-            </Grid>
+                        <Label Text="{Binding ExerciseName}"
+                               Style="{StaticResource MediumLabel}" />
 
-            <CollectionView ItemsSource="{Binding WorkoutExercises}" 
-                            VerticalOptions="FillAndExpand">
+                        <Entry Keyboard="Numeric" 
+                               Text="{Binding Sets}"
+                               Grid.Column="1">
 
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="{x:Type model:ProgramExercise}">
-                        <Grid ColumnDefinitions="0.3*,0.25*,0.25*,0.25*"
-                                RowDefinitions="Auto,Auto"
-                                RowSpacing="15"
-                                ColumnSpacing="5">
+                            <Entry.Behaviors>
+                                <toolkit:NumericValidationBehavior
+                                    InvalidStyle="{StaticResource InvalidEntryStyle}"
+                                    ValidStyle="{StaticResource ValidEntryStyle}"
+                                    Flags="ValidateOnValueChanged"
+                                    MinimumValue="1" />
+                            </Entry.Behaviors>
 
-                            <Label Text="{Binding ExerciseName}"
-                                    Style="{StaticResource MediumLabel}"/>
+                        </Entry>
 
-                            <Entry  Text="{Binding Sets}"
-                                    Grid.Column="1"/>
+                        <Entry Keyboard="Numeric"
+                               Text="{Binding Reps}"
+                               Grid.Column="2">
 
-                            <Entry  Text="{Binding Reps}"
-                                    Grid.Column="2"/>
-                          
-                            <Entry Grid.Column="3"
-                                   TextChanged="Weight_TextChanged"/>
-                        </Grid>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+                            <Entry.Behaviors>
+                                <toolkit:NumericValidationBehavior
+                                    InvalidStyle="{StaticResource InvalidEntryStyle}"
+                                    ValidStyle="{StaticResource ValidEntryStyle}"
+                                    Flags="ValidateOnValueChanged"
+                                    MinimumValue="1" />
+                            </Entry.Behaviors>
 
-    </VerticalStackLayout>
+
+                        </Entry>
+
+                        <Entry Keyboard="Numeric" 
+                               Grid.Column="3"
+                               TextChanged="Weight_TextChanged">
+
+                            <Entry.Behaviors>
+                                <toolkit:NumericValidationBehavior
+                                    InvalidStyle="{StaticResource InvalidEntryStyle}"
+                                    ValidStyle="{StaticResource ValidEntryStyle}"
+                                    Flags="ValidateOnValueChanged"
+                                    MinimumValue="1.0"
+                                    MaximumDecimalPlaces="2" />
+                            </Entry.Behaviors>
+
+                        </Entry>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <Button Grid.Row="3"
+                Grid.ColumnSpan="4"
+                Text="Record Workout Session"
+                Style="{StaticResource Button}"
+                Command="{Binding RegisterWorkoutSessionCommand}" />
+
+    </Grid>
+
+
 </ContentPage>

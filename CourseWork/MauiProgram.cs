@@ -3,6 +3,9 @@ using CourseWork.Services;
 using Microsoft.Extensions.Logging;
 using SQLite;
 
+using CommunityToolkit.Maui;
+using CommunityToolkit.Maui.Markup;
+using SkiaSharp.Views.Maui.Controls.Hosting; 
 namespace CourseWork;
 
 public static class MauiProgram
@@ -10,8 +13,10 @@ public static class MauiProgram
 	public static MauiApp CreateMauiApp()
 	{
 		var builder = MauiApp.CreateBuilder();
-		builder
-			.UseMauiApp<App>()
+		builder.UseMauiApp<App>()
+			.UseMauiCommunityToolkit()
+			.UseMauiCommunityToolkitMarkup()
+			.UseSkiaSharp(true)
 			.ConfigureFonts(fonts =>
 			{
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -20,6 +25,7 @@ public static class MauiProgram
                 fonts.AddFont("SF-Pro-Rounded-Bold.otf", "SF-Pro-Bold");
                 fonts.AddFont("SF-Pro-Italic.ttf", "SF-Pro-Italic");
             })
+			
             .RegisterViewsAndViewModels()
             .RegisterServices(); 
 
@@ -39,6 +45,8 @@ public static class MauiProgram
         mauiAppBuilder.Services.AddTransient(typeof(Views.LoginPage));
         mauiAppBuilder.Services.AddTransient(typeof(Views.RegisterPage));
         mauiAppBuilder.Services.AddTransient(typeof(Views.ProgramDetailsPage));
+        mauiAppBuilder.Services.AddTransient(typeof(Views.WorkoutSessionsPage));
+        mauiAppBuilder.Services.AddTransient(typeof(Views.WorkoutSessionDetailsPage));
 
         //Services
         mauiAppBuilder.Services.AddTransient(typeof(ViewModels.HomePageViewModel));
@@ -48,6 +56,8 @@ public static class MauiProgram
         mauiAppBuilder.Services.AddTransient(typeof(ViewModels.LoginPageViewModel));
         mauiAppBuilder.Services.AddTransient(typeof(ViewModels.RegisterPageViewModel));
         mauiAppBuilder.Services.AddTransient(typeof(ViewModels.ProgramDetailsPageViewModel));
+        mauiAppBuilder.Services.AddTransient(typeof(ViewModels.WorkoutSessionsPageViewModel));
+        mauiAppBuilder.Services.AddTransient(typeof(ViewModels.WorkoutSessionDetailsPageViewModel));
 
         return mauiAppBuilder;
     }

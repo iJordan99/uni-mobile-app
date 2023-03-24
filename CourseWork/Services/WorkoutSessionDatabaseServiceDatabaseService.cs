@@ -34,4 +34,9 @@ public class WorkoutSessionDatabaseServiceDatabaseService: BaseDatabaseService, 
             return null;
         }
     }
+
+    public async Task<WorkoutSession> FetchById(Guid sessionId)
+    {
+        return await Database.Table<WorkoutSession>().Where(m => m.Id == sessionId).FirstOrDefaultAsync();
+    }
 }

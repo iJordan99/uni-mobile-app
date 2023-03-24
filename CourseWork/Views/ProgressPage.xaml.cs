@@ -19,10 +19,4 @@ public partial class ProgressPage : ContentPage
             viewModel.DateFrom = e.NewDate;
         }
     }
-
-    void DateToPicker_DateSelected(System.Object sender, Microsoft.Maui.Controls.DateChangedEventArgs e)
-    {
-        var viewModel = (BindingContext as ProgressPageViewModel);
-        viewModel.DateTo = e.NewDate;    
-    }
 }

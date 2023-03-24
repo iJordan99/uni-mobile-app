@@ -6,46 +6,52 @@
              x:DataType="viewModels:UserProgramsPageViewModel"
              xmlns:model="clr-namespace:CourseWork.Models"
              Title="My Programs">
-    <VerticalStackLayout Padding="20" Spacing="10">
 
-        <Image Source="fitness_guy.png" 
-                    HeightRequest="260"
-                    HorizontalOptions="Center"/>
+    <RefreshView Command="{Binding RefreshDataCommand}"
+                 IsRefreshing="{Binding IsRefreshing}">
+        <Grid RowDefinitions="0.2*,0.05*,0.5*"
+              Style="{StaticResource Grid}">
 
-            <Label Text="Welcome to your programs"
-                    HorizontalOptions="Center"
-                    FontSize="Large"
-                    FontAttributes="Bold"/>
+            <Image Source="fitness_guy.png" 
+                        HeightRequest="260"
+                        HorizontalOptions="Center"/>
 
-        <CollectionView ItemsSource="{Binding Programs}">
+            <Label Grid.Row="1"
+                Text="Welcome to your programs"
+                        HorizontalOptions="Center"
+                        FontSize="Large"
+                        FontAttributes="Bold"/>
 
-            <CollectionView.ItemTemplate>
+            <CollectionView Grid.Row="2"
+                ItemsSource="{Binding Programs}">
 
-                <DataTemplate x:DataType="{x:Type model:Program}">
-                    <SwipeView>
-                        <SwipeView.RightItems>
-                            <SwipeItems>
-                                <SwipeItem Text="Delete"
-                                            BackgroundColor="Red"
-                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:UserProgramsPageViewModel}}, Path=DeleteCommand}"
-                                            CommandParameter="{Binding .}"/>
-                            </SwipeItems>
-                        </SwipeView.RightItems>
+                <CollectionView.ItemTemplate>
 
-                        <Grid Padding="0,5">
-                            <Grid.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:UserProgramsPageViewModel}}, Path=ProgramInfoCommand}"
-                                                        CommandParameter="{Binding .}" />
-                            </Grid.GestureRecognizers>
-                            <Frame>
-                                <Label Text="{Binding ProgramName}" FontSize="Body"/>
-                            </Frame>
-                        </Grid>
+                    <DataTemplate x:DataType="{x:Type model:Program}">
+                        <SwipeView HeightRequest="70">
+                            <SwipeView.RightItems>
+                                <SwipeItems>
+                                    <SwipeItem Text="Delete"
+                                                BackgroundColor="Red"
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:UserProgramsPageViewModel}}, Path=DeleteCommand}"
+                                                CommandParameter="{Binding .}"/>
+                                </SwipeItems>
+                            </SwipeView.RightItems>
 
-                    </SwipeView>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-    
-    </VerticalStackLayout>
+                            <Grid Padding="0,5">
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:UserProgramsPageViewModel}}, Path=ProgramInfoCommand}"
+                                                            CommandParameter="{Binding .}" />
+                                </Grid.GestureRecognizers>
+                                <Frame>
+                                    <Label Text="{Binding ProgramName}" FontSize="Body"/>
+                                </Frame>
+                            </Grid>
+
+                        </SwipeView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+    </RefreshView>
 </ContentPage>

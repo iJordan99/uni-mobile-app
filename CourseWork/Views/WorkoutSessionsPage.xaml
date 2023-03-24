@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CourseWork.Views.WorkoutSessionsPage"
+             xmlns:viewModels="clr-namespace:CourseWork.ViewModels"
+             x:DataType="viewModels:WorkoutSessionsPageViewModel"
+             xmlns:model="clr-namespace:CourseWork.Models"
+             Title="Workout Sessions">
+
+    <RefreshView Command="{Binding GetSessionsCommand}"
+                 IsRefreshing="{Binding IsRefreshing}">
+        <Grid Style="{StaticResource Grid}"
+              RowDefinitions="40, 0.7*">
+            
+            <Label Text="Workout Sessions"
+                   Style="{StaticResource PageHeading}" />
+            
+            <CollectionView Grid.Row="1"
+                            ItemsSource="{Binding Sessions}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="{x:Type model:WorkoutSession}">
+                        <SwipeView HeightRequest="70">
+                            <Grid Padding="0,5">
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:WorkoutSessionsPageViewModel}}, Path=SessionInfoCommand}"
+                                                          CommandParameter="{Binding .}" />
+                                </Grid.GestureRecognizers>
+                                <Frame>
+                                    <Label>
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{Binding SessionDate.Day}"/>
+                                                <Span Text="-"/>
+                                                <Span Text="{Binding SessionDate.Month}"/>
+                                                <Span Text="-"/>
+                                                <Span Text="{Binding SessionDate.Year}"/>
+                                                <Span Text=" "/>
+                                                <Span Text="{Binding SessionDate.Hour}"></Span>
+                                                <Span Text=":"/>
+                                                <Span Text="{Binding SessionDate.Minute}"></Span>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                </Frame>
+                            </Grid>
+                        </SwipeView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+    </RefreshView>
+</ContentPage>

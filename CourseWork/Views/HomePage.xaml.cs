@@ -18,7 +18,6 @@ public partial class HomePage : ContentPage
         if (DateTime.Compare(e.NewDate, e.OldDate) != 0)
         {
             viewModel.Date = e.NewDate;
-            //https://learn.microsoft.com/en-us/answers/questions/918723/how-do-i-call-a-method-that-is-in-the-viewmodel-fo
         }
     }
 
@@ -27,8 +26,12 @@ public partial class HomePage : ContentPage
         var viewModel = (BindingContext as HomePageViewModel);
         if (!string.IsNullOrEmpty(e.NewTextValue))
         {
-            viewModel.Weight = double.Parse(e.NewTextValue);
-            return;
+            if (double.TryParse(e.NewTextValue, out double weight))
+            {
+                viewModel.Weight = weight;
+                return;
+            }
+            DisplayAlert("Invalid Weight", "Please enter a valid number for weight.", "OK");
         }
         viewModel.Weight = 0;
     }
@@ -38,8 +41,12 @@ public partial class HomePage : ContentPage
         var viewModel = (BindingContext as HomePageViewModel);
         if (!string.IsNullOrEmpty(e.NewTextValue))
         {
-            viewModel.Height = double.Parse(e.NewTextValue);
-            return;
+            if (double.TryParse(e.NewTextValue, out double height))
+            {
+                viewModel.Height = double.Parse(e.NewTextValue);
+                return;
+            }
+            DisplayAlert("Invalid Height", "Please enter a valid number for height.", "OK");
         }
         viewModel.Height = 0;
     }
@@ -49,8 +56,12 @@ public partial class HomePage : ContentPage
         var viewModel = (BindingContext as HomePageViewModel);
         if (!string.IsNullOrEmpty(e.NewTextValue))
         {
-            viewModel.BodyFat = double.Parse(e.NewTextValue);
-            return;
+            if (double.TryParse(e.NewTextValue, out double height))
+            {
+                viewModel.BodyFat = double.Parse(e.NewTextValue);
+                return;
+            }
+            DisplayAlert("Invalid Body Fat", "Please enter a valid number for Body Fat.", "OK");
         }
         viewModel.BodyFat = 0;
     }

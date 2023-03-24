@@ -12,6 +12,9 @@ public partial class App : Application
         Routing.RegisterRoute("HomePage", typeof(Views.HomePage));
         Routing.RegisterRoute("CreateWorkoutProgramPage", typeof(Views.CreateWorkoutProgramPage));
 		Routing.RegisterRoute("UserProgramsPage", typeof(Views.UserProgramsPage));
+		Routing.RegisterRoute("WorkoutSessionsPage",typeof(Views.WorkoutSessionsPage));
+		Routing.RegisterRoute("WorkoutSessionDetailsPage",typeof(Views.WorkoutSessionDetailsPage));
+		
         MainPage = new AppShell();
 	}
 }

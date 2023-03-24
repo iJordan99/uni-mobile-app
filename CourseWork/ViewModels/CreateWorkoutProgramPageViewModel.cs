@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CourseWork.Interfaces;
@@ -11,10 +12,9 @@ namespace CourseWork.ViewModels
 		[ObservableProperty]
 		[NotifyCanExecuteChangedFor(nameof(CreateWorkoutCommand))]
 		string _programName;
-
+		
 		[ObservableProperty]
-		[NotifyCanExecuteChangedFor(nameof(CreateWorkoutCommand))]
-        ProgramExercise _exercise;
+		ProgramExercise _exercise;
 
 		[ObservableProperty]
 		int _sets;
@@ -97,19 +97,20 @@ namespace CourseWork.ViewModels
             }
 		}
 
+
 		private bool CanCreate()
 		{
-			return !string.IsNullOrEmpty(ProgramName) && ExerciseList.Any(); ;
+			return !string.IsNullOrEmpty(ProgramName) && ExerciseList.Any();
 		}
 
 		private void ResetFields()
 		{
 			ExerciseList.Clear();
-			ProgramName = string.Empty;
-            ExerciseName = "";
+			ProgramName = "";
+			ExerciseName = "";
 			Sets = 0;
-            Reps = 0;
-        }
+			Reps = 0;
+		}
 	}
 }
 

@@ -13,53 +13,63 @@
         Route="LoginPage"
         Shell.FlyoutBehavior="Disabled"
         Shell.FlyoutItemIsVisible="False"/>
-
-    <FlyoutItem Title="Home">
-
+    
+    <Shell.FlyoutHeaderTemplate>
+        <DataTemplate>
+            <Grid HeightRequest="50">
+                <Label Text="Amazing Workout App"
+                       FontSize="Large"
+                       TextColor="{StaticResource Primary}"
+                       FontFamily="SF-Pro-Bold"
+                       HorizontalTextAlignment="Center"
+                       VerticalTextAlignment="Center" />
+            </Grid>
+        </DataTemplate>
+    </Shell.FlyoutHeaderTemplate>
+    
+    <FlyoutItem Title="Home"
+                FlyoutDisplayOptions="AsSingleItem">
+    
         <Tab>
-
+    
             <ShellContent
                 ContentTemplate="{DataTemplate local:HomePage}"
                 Route="HomePage" />
-
+    
         </Tab>
-
+    
     </FlyoutItem>
-
-    <FlyoutItem Title="Progess">
-
-        <Tab>
-
-            <ShellContent
-                ContentTemplate="{DataTemplate local:ProgressPage}"
-                Route="ProgressPage" />
-
+    
+    <FlyoutItem FlyoutDisplayOptions="AsSingleItem"
+                Title="Tracking">
+    
+        <Tab Title="Journey Progress">
+            <ShellContent ContentTemplate="{DataTemplate local:ProgressPage}"
+                          Route="ProgressPage" />
         </Tab>
-
+    
+        <Tab Title="Workout Sessions">
+            <ShellContent ContentTemplate="{DataTemplate local:WorkoutSessionsPage}"
+                          Route="WorkoutSessionsPage"/>
+        </Tab>
     </FlyoutItem>
-
-    <FlyoutItem Title="Tracking - New Program Program">
-
-        <Tab>
-
+    
+    
+    <FlyoutItem FlyoutDisplayOptions="AsSingleItem"
+                Title="Programs">
+    
+        <Tab Title="New Program">
             <ShellContent
                 ContentTemplate="{DataTemplate local:CreateWorkoutProgramPage}"
                 Route="CreateWorkoutProgramPage" />
-
         </Tab>
-
-    </FlyoutItem>
-
-    <FlyoutItem Title="Tracking - My Programs">
-
-        <Tab>
-
+    
+        <Tab Title="My Programs">
             <ShellContent
                 ContentTemplate="{DataTemplate local:UserProgramsPage}"
                 Route="UserProgramsPage" />
-
         </Tab>
-
     </FlyoutItem>
+    
 </Shell>
 
