@@ -7,6 +7,7 @@ namespace CourseWork.Interfaces
 	{
 		Task<int> RegisterUser(User user);
 		Task<User> ValidateUser(User user);
+		Task<bool> CheckIfUser(User user);
 	}
 }
 

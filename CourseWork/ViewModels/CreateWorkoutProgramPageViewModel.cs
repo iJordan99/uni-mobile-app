@@ -32,13 +32,13 @@ namespace CourseWork.ViewModels
 		[ObservableProperty]
 		string _exerciseName;
 
-		private readonly IProgramDatabaseService _programDb;
+		private readonly IWorkoutProgramDatabaseService _workoutProgramDb;
 		private readonly IProgramExerciseDatabaseService _programExerciseDb;
 
-        public CreateWorkoutProgramPageViewModel(IAppState appState, IUserDatabaseService userDb, IProgramDatabaseService programDb,
+        public CreateWorkoutProgramPageViewModel(IAppState appState, IUserDatabaseService userDb, IWorkoutProgramDatabaseService workoutProgramDb,
 		IProgramExerciseDatabaseService programExerciseDb) : base(appState, userDb)
         {
-			this._programDb = programDb;
+			this._workoutProgramDb = workoutProgramDb;
 			this._programExerciseDb = programExerciseDb;
             ExerciseList = new ObservableCollection<ProgramExercise>();
             CurrentUser = appState.CurrentUser.Username;
@@ -75,11 +75,11 @@ namespace CourseWork.ViewModels
 		[RelayCommand(CanExecute = nameof(CanCreate))]
 		private async Task CreateWorkout()
 		{
-			var program = new Models.Program(AppState.CurrentUser, ProgramName);
+			var program = new WorkoutProgram(AppState.CurrentUser, ProgramName);
 
 			try
 			{
-				var res = await _programDb.StoreProgram(program, AppState.CurrentUser);
+				var res = await _workoutProgramDb.StoreProgram(program, AppState.CurrentUser);
 
 				foreach (ProgramExercise exercise in ExerciseList)
 				{

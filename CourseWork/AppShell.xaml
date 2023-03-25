@@ -57,18 +57,19 @@
     
     <FlyoutItem FlyoutDisplayOptions="AsSingleItem"
                 Title="Programs">
-    
-        <Tab Title="New Program">
-            <ShellContent
-                ContentTemplate="{DataTemplate local:CreateWorkoutProgramPage}"
-                Route="CreateWorkoutProgramPage" />
-        </Tab>
-    
+        
         <Tab Title="My Programs">
             <ShellContent
                 ContentTemplate="{DataTemplate local:UserProgramsPage}"
                 Route="UserProgramsPage" />
         </Tab>
+    
+        <Tab Title="New WorkoutProgram">
+            <ShellContent
+                ContentTemplate="{DataTemplate local:CreateWorkoutProgramPage}"
+                Route="CreateWorkoutProgramPage" />
+        </Tab>
+    
     </FlyoutItem>
     
 </Shell>
