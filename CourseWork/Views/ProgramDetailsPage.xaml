@@ -7,7 +7,7 @@
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:DataType="viewModels:ProgramDetailsPageViewModel"
              xmlns:model="clr-namespace:CourseWork.Models"
-             Title="{Binding Program.ProgramName}">
+             Title="{Binding WorkoutProgram.ProgramName}">
 
     <Grid ColumnDefinitions="0.25*,0.25*,0.25*,0.25*"
           RowDefinitions="20, 40,0.6*, 40"
@@ -52,7 +52,9 @@
                         <Label Text="{Binding ExerciseName}"
                                Style="{StaticResource MediumLabel}" />
 
-                        <Entry Keyboard="Numeric" 
+                        <Entry x:Name="SetsEntry"
+                               toolkit:SetFocusOnEntryCompletedBehavior.NextElement="{x:Reference RepsEntry}"
+                               Keyboard="Numeric"
                                Text="{Binding Sets}"
                                Grid.Column="1">
 
@@ -66,7 +68,9 @@
 
                         </Entry>
 
-                        <Entry Keyboard="Numeric"
+                        <Entry x:Name="RepsEntry"
+                               toolkit:SetFocusOnEntryCompletedBehavior.NextElement="{x:Reference WeightEntry}"
+                               Keyboard="Numeric"
                                Text="{Binding Reps}"
                                Grid.Column="2">
 
@@ -81,7 +85,8 @@
 
                         </Entry>
 
-                        <Entry Keyboard="Numeric" 
+                        <Entry x:Name="WeightEntry"
+                               Keyboard="Numeric"
                                Grid.Column="3"
                                TextChanged="Weight_TextChanged">
 

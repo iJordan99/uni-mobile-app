@@ -12,7 +12,7 @@
              ColumnSpacing="15"
              Style="{StaticResource Grid}">
     
-              <Label Text="Date From:"
+              <Label Text="Progress From:"
                      Style="{StaticResource MediumLabel}"/>
     
               <DatePicker Grid.Row="1"

@@ -43,6 +43,8 @@
                Style="{StaticResource MediumLabel}" />
 
         <Entry Keyboard="Numeric"
+               x:Name="WeigthEntry"
+               toolkit:SetFocusOnEntryCompletedBehavior.NextElement="{x:Reference HeightEntry}"
                Grid.Row="4"
                Grid.Column="2"
                Text="{Binding Weight}"
@@ -65,7 +67,9 @@
                Style="{StaticResource MediumLabel}"
                Grid.Row="5" />
 
-        <Entry Grid.Column="2"
+        <Entry x:Name="HeightEntry"
+               toolkit:SetFocusOnEntryCompletedBehavior.NextElement="{x:Reference BodyFatEntry}"
+               Grid.Column="2"
                Grid.Row="5"
                Text="{Binding Height}"
                TextChanged="Height_TextChanged"
@@ -82,7 +86,8 @@
 
         </Entry>
 
-        <Label Text="Body Fat (%)"
+        <Label x:Name="BodyFatEntry"
+               Text="Body Fat (%)"
                Style="{StaticResource MediumLabel}"
                Grid.Row="6" />
 

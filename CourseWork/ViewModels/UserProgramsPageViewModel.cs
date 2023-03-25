@@ -8,17 +8,17 @@ namespace CourseWork.ViewModels
     public partial class UserProgramsPageViewModel : BaseViewModel
     {
         [ObservableProperty]
-        ObservableCollection<Models.Program> _programs;
+        ObservableCollection<Models.WorkoutProgram> _programs;
 
         [ObservableProperty] 
         bool _isRefreshing;
 
-        private readonly IProgramDatabaseService _programDb;
+        private readonly IWorkoutProgramDatabaseService _workoutProgramDb;
        
-        public UserProgramsPageViewModel(IAppState appState, IUserDatabaseService userDb, IProgramDatabaseService programDb) : base(appState, userDb)
+        public UserProgramsPageViewModel(IAppState appState, IUserDatabaseService userDb, IWorkoutProgramDatabaseService workoutProgramDb) : base(appState, userDb)
         {
-            this._programDb = programDb;
-            Programs = new ObservableCollection<Models.Program>();
+            this._workoutProgramDb = workoutProgramDb;
+            Programs = new ObservableCollection<Models.WorkoutProgram>();
             LoadDataAsync();
         }
 
@@ -31,7 +31,7 @@ namespace CourseWork.ViewModels
         {
             //https://learn.microsoft.com/en-us/dotnet/maui/user-interface/controls/refreshview?view=net-maui-7.0
             IsRefreshing = true;
-            Programs = await _programDb.FetchAllByUser(AppState.CurrentUser);
+            Programs = await _workoutProgramDb.FetchAllByUser(AppState.CurrentUser);
             IsRefreshing = false;
         }
 
@@ -42,18 +42,18 @@ namespace CourseWork.ViewModels
         }
 
         [RelayCommand]
-        private async Task ProgramInfo(Models.Program program)
+        private async Task ProgramInfo(Models.WorkoutProgram workoutProgram)
         {
-            await Shell.Current.GoToAsync($"ProgramDetailsPage?workoutId={program.Id}");
+            await Shell.Current.GoToAsync($"ProgramDetailsPage?workoutId={workoutProgram.Id}");
         }
 
         [RelayCommand]
-        async void Delete(Models.Program program)
+        async void Delete(Models.WorkoutProgram workoutProgram)
         {
-            if(Programs.Contains(program))
+            if(Programs.Contains(workoutProgram))
             {
-                await _programDb.DeleteWorkout(program);
-                Programs.Remove(program);
+                await _workoutProgramDb.DeleteWorkout(workoutProgram);
+                Programs.Remove(workoutProgram);
             }
         }
     }

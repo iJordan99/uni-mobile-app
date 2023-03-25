@@ -13,22 +13,24 @@
           ColumnDefinitions="0.3*, 0.3*, 0.3*"
           RowDefinitions="20,40,20,40,40,0.3*,40">
 
-        <Label Text="Program Name"/>
+        <Label Text="Workout Program Name" />
 
-        <Entry Placeholder="Program Name"
+        <Entry x:Name="ProgramNameEntry"
+               toolkit:SetFocusOnEntryCompletedBehavior.NextElement="{x:Reference ExerciseEntry}"
+               Placeholder="Workout Program Name"
                Text="{Binding ProgramName}"
                Grid.ColumnSpan="3"
                Grid.Row="1"
                TextChanged="EntryName_TextChanged">
-            
+
             <Entry.Behaviors>
-                <toolkit:TextValidationBehavior 
+                <toolkit:TextValidationBehavior
                     InvalidStyle="{StaticResource InvalidEntryStyle}"
                     ValidStyle="{StaticResource ValidEntryStyle}"
                     Flags="ValidateOnValueChanged"
-                    MinimumLength="3"/>
+                    MinimumLength="3" />
             </Entry.Behaviors>
-            
+
         </Entry>
 
         <Label Text="Exercises"
@@ -42,28 +44,32 @@
                Grid.Row="2"
                Grid.Column="2" />
 
-        <Entry Placeholder="Exercise"
+        <Entry x:Name="ExerciseEntry"
+               toolkit:SetFocusOnEntryCompletedBehavior.NextElement="{x:Reference SetsEntry}"
+               Placeholder="Exercise"
                Grid.Row="3"
                Text="{Binding ExerciseName}">
 
             <Entry.Behaviors>
-                <toolkit:TextValidationBehavior 
+                <toolkit:TextValidationBehavior
                     InvalidStyle="{StaticResource InvalidEntryStyle}"
                     ValidStyle="{StaticResource ValidEntryStyle}"
                     Flags="ValidateOnValueChanged"
-                    MinimumLength="3"/>
+                    MinimumLength="3" />
             </Entry.Behaviors>
-            
+
         </Entry>
-        
-        
-        <Entry Placeholder="Sets"
+
+
+        <Entry x:Name="SetsEntry"
+               toolkit:SetFocusOnEntryCompletedBehavior.NextElement="{x:Reference RepsEntry}"
+               Placeholder="Sets"
                Grid.Row="3"
                Grid.Column="1"
                Text="{Binding Sets}">
-        
+
             <Entry.Behaviors>
-                <toolkit:NumericValidationBehavior 
+                <toolkit:NumericValidationBehavior
                     InvalidStyle="{StaticResource InvalidEntryStyle}"
                     ValidStyle="{StaticResource ValidEntryStyle}"
                     Flags="ValidateOnValueChanged"
@@ -71,16 +77,17 @@
                     MaximumValue="20"
                     MaximumDecimalPlaces="0" />
             </Entry.Behaviors>
-            
+
         </Entry>
 
-        <Entry Placeholder="Reps"
+        <Entry x:Name="RepsEntry"
+               Placeholder="Reps"
                Grid.Row="3"
                Grid.Column="2"
                Text="{Binding Reps}">
-            
+
             <Entry.Behaviors>
-                <toolkit:NumericValidationBehavior 
+                <toolkit:NumericValidationBehavior
                     InvalidStyle="{StaticResource InvalidEntryStyle}"
                     ValidStyle="{StaticResource ValidEntryStyle}"
                     Flags="ValidateOnValueChanged"
@@ -88,7 +95,7 @@
                     MaximumValue="20"
                     MaximumDecimalPlaces="0" />
             </Entry.Behaviors>
-            
+
         </Entry>
 
         <Button Text="Add Exercise"
@@ -127,7 +134,7 @@
 
         </CollectionView>
 
-        <Button Text="Create Program"
+        <Button Text="Create WorkoutProgram"
                 Grid.Row="6"
                 Grid.ColumnSpan="3"
                 Command="{Binding CreateWorkoutCommand}"

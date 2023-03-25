@@ -13,12 +13,12 @@ namespace CourseWork.ViewModels
         Guid _workoutId;
 
         [ObservableProperty]
-        Models.Program _program;
+        Models.WorkoutProgram _workoutProgram;
 
         [ObservableProperty]
         ObservableCollection<ProgramExercise> _workoutExercises;
 
-        private readonly IProgramDatabaseService _programDb;
+        private readonly IWorkoutProgramDatabaseService _workoutProgramDb;
 
         private readonly IProgramExerciseDatabaseService _programExerciseDb;
 
@@ -26,10 +26,10 @@ namespace CourseWork.ViewModels
 
         private readonly IWorkoutSessionExerciseDatabaseService _workoutSessionExerciseDb; 
 
-        public ProgramDetailsPageViewModel(IAppState appState, IUserDatabaseService userDb, IProgramDatabaseService programDb,
+        public ProgramDetailsPageViewModel(IAppState appState, IUserDatabaseService userDb, IWorkoutProgramDatabaseService workoutProgramDb,
             IProgramExerciseDatabaseService programExerciseDb, IWorkoutSessionDatabaseService workoutSessionDb, IWorkoutSessionExerciseDatabaseService workoutSessionExerciseDb) : base(appState, userDb)
 		{
-            this._programDb = programDb;
+            this._workoutProgramDb = workoutProgramDb;
             this._programExerciseDb = programExerciseDb;
             this._workoutSessionDb = workoutSessionDb;
             this._workoutSessionExerciseDb = workoutSessionExerciseDb;
@@ -44,8 +44,8 @@ namespace CourseWork.ViewModels
 
         private async void LoadData()
         {
-            Program = await _programDb.FetchById(WorkoutId);
-            WorkoutExercises = await _programExerciseDb.FetchWorkoutExercise(Program);
+            WorkoutProgram = await _workoutProgramDb.FetchById(WorkoutId);
+            WorkoutExercises = await _programExerciseDb.FetchWorkoutExercise(WorkoutProgram);
         }
 
         [RelayCommand]
@@ -71,6 +71,7 @@ namespace CourseWork.ViewModels
                     await Application.Current.MainPage.DisplayAlert("Success!", "Workout Session Saved", "OK");
                 }
                 
+                await Shell.Current.GoToAsync($"WorkoutSessionDetailsPage?sessionId={session.Id}");
             }
             catch (Exception e)
             {

@@ -10,7 +10,7 @@ namespace CourseWork.Models
         [PrimaryKey, Column("_Id")]
         public Guid Id { get; set; } = Guid.NewGuid();
 
-        [ForeignKey(typeof(Program))]
+        [ForeignKey(typeof(WorkoutProgram))]
         [NotNull]
         public Guid WorkoutId { get; set; }
 
@@ -19,9 +19,9 @@ namespace CourseWork.Models
         public int Reps { get; set; }
         public double Weight { get; set; }
 
-        public ProgramExercise(Program program, string exerciseName, int sets, int reps, double weight)
+        public ProgramExercise(WorkoutProgram workoutProgram, string exerciseName, int sets, int reps, double weight)
 		{
-            WorkoutId = program.Id;
+            WorkoutId = workoutProgram.Id;
             ExerciseName = exerciseName;
             Sets = sets;
             Reps = reps;
