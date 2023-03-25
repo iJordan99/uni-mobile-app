@@ -13,7 +13,14 @@ public class WorkoutSessionExerciseDatabaseService : BaseDatabaseService, IWorko
 
     public async Task<int> StoreWorkoutSessionExercise(WorkoutSessionExercise workoutSessionExercise)
     {
-        return await Database.InsertAsync(workoutSessionExercise);
+        try
+        {
+            return await Database.InsertAsync(workoutSessionExercise);
+        }
+        catch (Exception e)
+        {
+            throw new Exception($"Unable to store workout session exercise: {e.Message}");
+        }
     }
 
     public async Task<ObservableCollection<WorkoutSessionExercise>> FetchSessionExercises(WorkoutSession workoutSession)
@@ -29,8 +36,7 @@ public class WorkoutSessionExerciseDatabaseService : BaseDatabaseService, IWorko
 
         } catch(Exception e)
         {
-            Console.Write(e.Message);
-            return null;
+            throw new Exception($"Unable to fetch workout session {workoutSession.Id} exercises: {e.Message}");
         }
     }
 }

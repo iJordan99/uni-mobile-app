@@ -11,9 +11,7 @@
 
     <Grid Style="{StaticResource Grid}"
           ColumnDefinitions="0.3*, 0.3*, 0.3*"
-          RowDefinitions="20,40,20,40,40,0.3*,40"
-          ColumnSpacing="10"
-          RowSpacing="15">
+          RowDefinitions="20,40,20,40,40,0.3*,40">
 
         <Label Text="Program Name"/>
 
