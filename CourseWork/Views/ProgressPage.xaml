@@ -72,6 +72,6 @@
                                   IsVisible="{Binding HasMetric}"
                                   Title="{Binding Title}"
                                   Series="{Binding Path=Series}"
-                                  ZoomMode="X"/>
+                                  ZoomMode="X" />
        </Grid>
 </ContentPage>
