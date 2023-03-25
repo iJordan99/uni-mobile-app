@@ -19,8 +19,7 @@ namespace CourseWork.Services
             }
             catch (Exception e)
             {
-                Console.Write(e.Message);
-                return null;
+                throw new Exception($"Unable to store program in database: {e.Message}");
             }
         }
 
@@ -38,16 +37,20 @@ namespace CourseWork.Services
             }
             catch (Exception e)
             {
-                Console.Write(e.Message);
-                Console.Write(e.Source);
-                Console.Write(e.StackTrace);
-                return null;
+                throw new Exception($"Unable to fetch the user's programs: {e.Message}");
             }
         }
 
         public async Task<Models.Program>FetchById(Guid programId)
         {
-            return await Database.Table<Models.Program>().Where(m => m.Id == programId).FirstOrDefaultAsync();
+            var program =  await Database.Table<Models.Program>().Where(m => m.Id == programId).FirstOrDefaultAsync();
+
+            if (program != null)
+            {
+                return program;
+            }
+
+            throw new Exception($"Program with id {programId} not found: ");
         }
 
         public async Task<int>DeleteWorkout(Models.Program program)

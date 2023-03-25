@@ -27,10 +27,7 @@ namespace CourseWork.Services
             }
             catch (Exception e)
             {
-                Console.Write(e.Message);
-                Console.Write(e.Source);
-                Console.Write(e.StackTrace);
-                return null;
+                throw new Exception($"Unable to fetch metrics: {e.Message}");
             }
         }
         public async Task<int> StoreMetric(Metric metric)
@@ -52,8 +49,7 @@ namespace CourseWork.Services
             }
             catch (Exception e)
             {
-                Console.Write(e.Message);
-                return 0;
+                throw new Exception($"Unable to store metric: {e.Message}");
             }
         }
     }
