@@ -18,7 +18,7 @@ namespace CourseWork.Services
             
             {
                 List<Metric> metrics = await Database.Table<Metric>()
-                    .Where(m => m.UserId == user.Id &&m.Date >= dateFrom &&  m.Date <= dateTo)
+                    .Where(m => m.UserId == user.Id &&m.Date >= dateFrom &&  m.Date <= dateTo).OrderBy(m => m.Date)
                     .ToListAsync();
 
                 ObservableCollection<Metric> filteredMetrics = new ObservableCollection<Metric>(metrics);
