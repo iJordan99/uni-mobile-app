@@ -21,12 +21,12 @@ namespace CourseWork.Services
             }
         }
 
-        public async Task<ObservableCollection<ProgramExercise>> FetchWorkoutExercise(Models.Program program)
+        public async Task<ObservableCollection<ProgramExercise>> FetchWorkoutExercise(WorkoutProgram workoutProgram)
         {
             try
             {
 
-                List<ProgramExercise> programExercisesList = await Database.Table<ProgramExercise>().Where(m => m.WorkoutId == program.Id)
+                List<ProgramExercise> programExercisesList = await Database.Table<ProgramExercise>().Where(m => m.WorkoutId == workoutProgram.Id)
                             .ToListAsync();
 
                 ObservableCollection<ProgramExercise> programExercises = new ObservableCollection<ProgramExercise>(programExercisesList);

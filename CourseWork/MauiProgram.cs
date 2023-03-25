@@ -71,7 +71,7 @@ public static class MauiProgram
 
         mauiAppBuilder.Services.AddSingleton<IUserDatabaseService, UserDatabaseService>();
         mauiAppBuilder.Services.AddSingleton<IMetricDatabaseService, MetricDatabaseService>();
-        mauiAppBuilder.Services.AddSingleton<IProgramDatabaseService, ProgramDatabaseService>();
+        mauiAppBuilder.Services.AddSingleton<IWorkoutProgramDatabaseService, WorkoutProgramDatabaseService>();
         mauiAppBuilder.Services.AddSingleton<IProgramExerciseDatabaseService, ProgramExceriseDatabaseService>();
         mauiAppBuilder.Services.AddSingleton<IWorkoutSessionDatabaseService, WorkoutSessionDatabaseServiceDatabaseService>();
         mauiAppBuilder.Services.AddSingleton<IWorkoutSessionExerciseDatabaseService, WorkoutSessionExerciseDatabaseService>();

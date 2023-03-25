@@ -38,5 +38,13 @@ namespace CourseWork.Services
                 throw new Exception($"Unable to validate user: {e.Message}");
             }
         }
+
+        public async Task<bool> CheckIfUser(User user)
+        {
+            var existingUser = await Database.Table<User>().FirstOrDefaultAsync(m => m.Username == user.Username ||
+                m.Email == user.Email);
+
+            return existingUser != null;
+        }
     }
 }

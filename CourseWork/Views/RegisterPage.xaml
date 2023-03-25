@@ -1,8 +1,10 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
+
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CourseWork.Views.RegisterPage"
              xmlns:viewModel="clr-namespace:CourseWork.ViewModels"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:DataType="viewModel:RegisterPageViewModel">
 
     <StackLayout VerticalOptions="Start">
@@ -11,45 +13,78 @@
                      Spacing="10"
                      Margin="0,10,0,0">
 
-            <Label  Text="Register"
-                    Style="{StaticResource AuthHeading}"/>
+            <Label Text="Register"
+                   Style="{StaticResource AuthHeading}" />
 
             <Label Text="Username"
                    FontFamily="Consolas"
-                   FontAttributes="Bold"/>
+                   FontAttributes="Bold" />
 
-            <Entry Placeholder="Username"
-                   FontFamily="Consolas"
-                   TextChanged="Username_TextChanged"/>
+            <Entry  x:Name="UsernameEntry"
+                    toolkit:SetFocusOnEntryCompletedBehavior.NextElement="{x:Reference EmailEntry}"
+                    Placeholder="Username"
+                    FontFamily="Consolas"
+                    TextChanged="Username_TextChanged">
+                   
+                   <Entry.Behaviors>
+                          <toolkit:TextValidationBehavior 
+                                 InvalidStyle="{StaticResource InvalidEntryStyle}"
+                                 ValidStyle="{StaticResource ValidEntryStyle}"
+                                 Flags="ValidateOnValueChanged"
+                                 MinimumLength="3"
+                                 MaximumLength="20" />
+                   </Entry.Behaviors>
+            </Entry>
 
             <Label Text="Email"
                    FontFamily="Consolas"
-                   FontAttributes="Bold"/>
+                   FontAttributes="Bold" />
 
-            <Entry Placeholder="Email"
+            <Entry x:Name="EmailEntry"
+                   toolkit:SetFocusOnEntryCompletedBehavior.NextElement="{x:Reference PasswordEntry}"
+                   Placeholder="Email"
                    FontFamily="Consolas"
-                   TextChanged="Email_TextChanged"/>
+                   TextChanged="Email_TextChanged">
+
+                <Entry.Behaviors>
+                    <toolkit:EmailValidationBehavior
+                        InvalidStyle="{StaticResource InvalidEntryStyle}"
+                        ValidStyle="{StaticResource ValidEntryStyle}"
+                        Flags="ValidateOnValueChanged" />
+                </Entry.Behaviors>
+
+            </Entry>
 
             <Label Text="Password"
                    FontFamily="Consolas"
-                   FontAttributes="Bold"/>
+                   FontAttributes="Bold" />
 
-            <Entry Placeholder="Password"
+            <Entry x:Name="PasswordEntry"
+                   Placeholder="Password"
                    FontFamily="Consolas"
-                   TextChanged="Password_TextChanged"/>
+                   TextChanged="Password_TextChanged"
+                   IsPassword="True">
+                   
+                   <Entry.Behaviors>
+                          <toolkit:TextValidationBehavior 
+                                 InvalidStyle="{StaticResource InvalidEntryStyle}"
+                                 ValidStyle="{StaticResource ValidEntryStyle}"
+                                 Flags="ValidateOnValueChanged"
+                                 MinimumLength="3"
+                                 MaximumLength="20" />
+                   </Entry.Behaviors>
+                   
+            </Entry>
 
             <Button Grid.Row="4"
                     Text="Sign Up!"
                     Grid.ColumnSpan="3"
                     Style="{StaticResource Button}"
                     Command="{Binding RegisterCommand}"
-                    FontFamily="Consolas"/>
+                    FontFamily="Consolas" />
 
         </StackLayout>
     </StackLayout>
 
-
-
-        
 
 </ContentPage>

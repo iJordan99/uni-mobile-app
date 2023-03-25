@@ -58,6 +58,7 @@
         <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}"/>
         <Setter Property="Padding" Value="20"/>
         <Setter Property="RowSpacing" Value="10"/>
+        <Setter Property="ColumnSpacing" Value="5"/>
     </Style>
 
 

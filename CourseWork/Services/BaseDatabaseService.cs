@@ -12,9 +12,10 @@ namespace CourseWork.Services
         protected BaseDatabaseService(SQLiteAsyncConnection database)
         {
             this.Database = database;
+            
             database.CreateTableAsync<User>();
             database.CreateTableAsync<Metric>();
-            database.CreateTableAsync<Program>();
+            database.CreateTableAsync<WorkoutProgram>();
             database.CreateTableAsync<ProgramExercise>();
             database.CreateTableAsync<WorkoutSession>();
             database.CreateTableAsync<WorkoutSessionExercise>();
