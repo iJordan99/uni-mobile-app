@@ -5,8 +5,8 @@ using SQLite;
 
 namespace CourseWork.Services
 {
-	public class UserDatabaseService : BaseDatabaseService, IUserDatabaseService
-	{
+    public class UserDatabaseService : BaseDatabaseService, IUserDatabaseService
+    {
         public UserDatabaseService(SQLiteAsyncConnection database) : base(database)
         {
 
@@ -16,13 +16,11 @@ namespace CourseWork.Services
         {
             try
             {
-                var res = await Database.InsertAsync(user);
-                return res;
+                return await Database.InsertAsync(user);
             }
             catch (Exception e)
             {
-                Console.Write(e);
-                return 0;
+                throw new Exception($"Unable to register user: {e.Message}");
             }
 
         }
@@ -32,16 +30,13 @@ namespace CourseWork.Services
 
             try
             {
-                var res = await Database.Table<User>().FirstOrDefaultAsync(x =>
-                                            x.Username == user.Username && x.Password == user.Password);
-                return res;
+                return await Database.Table<User>().FirstOrDefaultAsync(x =>
+                    x.Username == user.Username && x.Password == user.Password);
             }
             catch (Exception e)
             {
-                Console.Write(e);
-                return null;
+                throw new Exception($"Unable to validate user: {e.Message}");
             }
         }
     }
 }
-

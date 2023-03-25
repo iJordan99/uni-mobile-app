@@ -13,8 +13,16 @@ public class WorkoutSessionDatabaseServiceDatabaseService: BaseDatabaseService, 
 
     public async Task<WorkoutSession> StoreWorkoutSession(WorkoutSession workoutSession)
     {
-        await Database.InsertAsync(workoutSession);
-        return await Database.Table<WorkoutSession>().Where(m => m.Id == workoutSession.Id).FirstOrDefaultAsync();
+        try
+        {
+            await Database.InsertAsync(workoutSession);
+            return await Database.Table<WorkoutSession>().Where(m => m.Id == workoutSession.Id).FirstOrDefaultAsync();
+        }
+        catch (Exception e)
+        {
+            throw new Exception($"Unable to store workout session {e.Message}");
+        }
+        
     }
 
     public async Task<ObservableCollection<WorkoutSession>> FetchSessions(User user)
@@ -30,13 +38,20 @@ public class WorkoutSessionDatabaseServiceDatabaseService: BaseDatabaseService, 
 
         } catch(Exception e)
         {
-            Console.Write(e.Message);
-            return null;
+            throw new Exception($"Unable to fetch workout sessions: {e.Message}");
         }
     }
 
     public async Task<WorkoutSession> FetchById(Guid sessionId)
     {
-        return await Database.Table<WorkoutSession>().Where(m => m.Id == sessionId).FirstOrDefaultAsync();
+        try
+        {
+            return await Database.Table<WorkoutSession>().Where(m => m.Id == sessionId).FirstOrDefaultAsync();
+        }
+        catch (Exception e)
+        {
+            throw new Exception($"Unable to fetch session {sessionId}: {e.Message}");
+        }
+        
     }
 }

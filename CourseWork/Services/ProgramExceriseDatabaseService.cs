@@ -11,7 +11,14 @@ namespace CourseWork.Services
 
         public async Task<int> StoreWorkoutExercise(ProgramExercise programExercise)
         {
-            return await Database.InsertAsync(programExercise);
+            try
+            {
+               return await Database.InsertAsync(programExercise);
+            }
+            catch (Exception e)
+            {
+                throw new Exception($"Unable to store workout exercise: {e.Message}");
+            }
         }
 
         public async Task<ObservableCollection<ProgramExercise>> FetchWorkoutExercise(Models.Program program)
@@ -28,8 +35,7 @@ namespace CourseWork.Services
 
             } catch(Exception e)
             {
-                Console.Write(e.Message);
-                return null;
+                throw new Exception($"Unable to fetch workout exercise: {e.Message}");
             }
         }
 
