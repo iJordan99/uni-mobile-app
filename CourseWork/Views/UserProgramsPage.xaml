@@ -10,7 +10,7 @@
     <RefreshView Command="{Binding RefreshDataCommand}"
                  IsRefreshing="{Binding IsRefreshing}">
         <Grid RowDefinitions="0.2*,0.05*,0.5*"
-              Style="{StaticResource Grid}">
+                                                                 Style="{StaticResource Grid}">
 
             <Image Source="fitness_guy.png" 
                         HeightRequest="260"
@@ -23,7 +23,7 @@
                         FontAttributes="Bold"/>
 
             <CollectionView Grid.Row="2"
-                ItemsSource="{Binding Programs}">
+                            ItemsSource="{Binding Programs}">
 
                 <CollectionView.ItemTemplate>
 
@@ -52,6 +52,11 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
+            <Label Grid.Row="2"
+                   IsVisible="{Binding HasNoPrograms}"
+                   HorizontalOptions="Center"
+                   Style="{StaticResource MediumLabel}"
+                   Text="No workout programs found"/>
         </Grid>
     </RefreshView>
 </ContentPage>

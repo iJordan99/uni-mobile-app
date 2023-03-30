@@ -13,6 +13,12 @@ namespace CourseWork.ViewModels
         [ObservableProperty] 
         bool _isRefreshing;
 
+        [ObservableProperty] 
+        bool _hasPrograms;
+
+        [ObservableProperty] 
+        bool _hasNoPrograms;
+
         private readonly IWorkoutProgramDatabaseService _workoutProgramDb;
        
         public UserProgramsPageViewModel(IAppState appState, IUserDatabaseService userDb, IWorkoutProgramDatabaseService workoutProgramDb) : base(appState, userDb)
@@ -33,6 +39,15 @@ namespace CourseWork.ViewModels
             IsRefreshing = true;
             Programs = await _workoutProgramDb.FetchAllByUser(AppState.CurrentUser);
             IsRefreshing = false;
+            if (!Programs.Any())
+            {
+                HasPrograms = false;
+                HasNoPrograms = true;
+                return;
+            }
+
+            HasPrograms = true;
+            HasNoPrograms = false;
         }
 
         [RelayCommand]
