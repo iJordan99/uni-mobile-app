@@ -30,5 +30,9 @@ develop the app.
 #### 📹 Demonstration Video
 
 
-#### 🌁 Usecase Diagrams
+#### 🌁 Usecase Diagram
+
+![Use case diagram](https://github.coventry.ac.uk/storage/user/5836/files/58fdd798-d2fb-472f-8001-c5476092c74b)
+
+
 

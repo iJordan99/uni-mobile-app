@@ -108,15 +108,15 @@ namespace CourseWork.ViewModels
             //need to check if total metrics = 2 as the for loop wont account for the 2nd metric
             if (metrics.Count == 2)
             {
-                totalWeightDiff = metrics[1].Weight - metrics[0].Weight;
-                totalBodyFatDiff = metrics[1].BodyFat - metrics[0].BodyFat;
+                totalWeightDiff = metrics[0].Weight - metrics[1].Weight;
+                totalBodyFatDiff = metrics[0].BodyFat - metrics[1].BodyFat;
             }
             else
             {
                 for (var i = 1; i < metrics.Count; i++)
                 {
-                    var weightDifference = metrics[i].Weight - metrics[i - 1].Weight;
-                    var bodyFatDifference = metrics[i].BodyFat - metrics[i - 1].BodyFat;
+                    var weightDifference = metrics[i - 1].Weight - metrics[i].Weight;
+                    var bodyFatDifference = metrics[i - 1].BodyFat - metrics[i].BodyFat;
 
                     totalWeightDiff = totalWeightDiff + weightDifference;
                     totalBodyFatDiff = totalBodyFatDiff + bodyFatDifference;
@@ -136,14 +136,14 @@ namespace CourseWork.ViewModels
         {
             if (progressWeight < 0)
             {
-                HasLost = true;
-                HasGained = false;
+                HasLost = false;
+                HasGained = true;
                 WeightDiff = Math.Round(progressWeight - (progressWeight * 2),2);
             }
             else
             {
-                HasLost = false;
-                HasGained = true;
+                HasLost = true;
+                HasGained = false;
                 WeightDiff = Math.Round(progressWeight,2);
             }
             
@@ -162,8 +162,6 @@ namespace CourseWork.ViewModels
             var chartValues = metrics.Select(metric => metric.Weight).ToList();
             return chartValues;
         }
-
-        
     }
 }
 
