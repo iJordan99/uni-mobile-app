@@ -9,7 +9,7 @@ The app is a workout tracking app called 'Amazing Workout App'. Its core feature
 develop the app.
 
 
-####  App Features
+####  📋 App Features
 
 - User authentication 
 - Daily metrics
